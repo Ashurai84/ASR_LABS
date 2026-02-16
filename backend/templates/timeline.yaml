@@ -1,0 +1,12 @@
+# manual timeline event template
+# This file should be placed in the project root if manual events are needed.
+
+events:
+  - id: "uuid-v4-here" # Manual UUID
+    date: "2023-10-27T10:00:00Z"
+    type: "decision" # decision | milestone | incident
+    title: "Chose SQLite over Postgres"
+    details:
+      rationale: "Single file portability aligns with the immutable snapshot architecture."
+      outcome: "Simplified deployment pipeline."
+    source: "manual"

@@ -1,0 +1,65 @@
+{
+  "meta": {
+    "generated_at": "2026-02-16T16:07:35.118Z",
+    "version": "1.0",
+    "system_health": "operational"
+  },
+  "derived": {
+    "current_focus_project_id": "asr-lab",
+    "global_health": 100
+  },
+  "projects": [
+    {
+      "id": "asr-lab",
+      "name": "asr-lab",
+      "description": "",
+      "status": "idea",
+      "repository_url": "",
+      "tags": [],
+      "timeline_event_ids": [
+        "51a764b4-7efb-53e7-9b0d-82553a30a715"
+      ],
+      "health": {
+        "score": 36,
+        "previous_score": 36,
+        "last_calculated_at": "2026-02-16T16:07:35.116Z",
+        "breakdown": {
+          "activity": 0,
+          "delivery": 0,
+          "stability": 80,
+          "decision_velocity": 100
+        },
+        "change_reason": "Routine update"
+      },
+      "derived": {
+        "focus_score": 30,
+        "activity_level": "low",
+        "last_decision_date": "2026-02-16T00:00:00.000Z",
+        "last_event_date": "2026-02-16T00:00:00.000Z"
+      }
+    }
+  ],
+  "timeline_index": [
+    "51a764b4-7efb-53e7-9b0d-82553a30a715"
+  ],
+  "timeline_events": {
+    "51a764b4-7efb-53e7-9b0d-82553a30a715": {
+      "id": "51a764b4-7efb-53e7-9b0d-82553a30a715",
+      "project_id": "asr-lab",
+      "type": "decision",
+      "date": "2026-02-16T00:00:00.000Z",
+      "title": "Backend Architecture Finalized",
+      "details": {
+        "rationale": "Selected single-file snapshot architecture for simplicity and robustness.",
+        "outcome": "Implemented ingestion pipeline and atomic writer."
+      },
+      "source": "manual",
+      "derived": {
+        "summary_text": "",
+        "impact_score": 50
+      }
+    }
+  },
+  "tools": [],
+  "notes": []
+}

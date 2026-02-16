@@ -1,0 +1,23 @@
+{
+    "name": "asr-lab-backend",
+    "version": "1.0.0",
+    "description": "Backend logic for ASR Lab Portfolio",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "npx tsc",
+        "ingest": "npx ts-node src/ingestion/run.ts"
+    },
+    "dependencies": {
+        "simple-git": "^3.27.0",
+        "js-yaml": "^4.1.0",
+        "uuid": "^11.0.2",
+        "date-fns": "^4.1.0"
+    },
+    "devDependencies": {
+        "typescript": "^5.7.2",
+        "@types/node": "^22.10.1",
+        "@types/js-yaml": "^4.0.9",
+        "@types/uuid": "^10.0.0",
+        "ts-node": "^10.9.1"
+    }
+}
