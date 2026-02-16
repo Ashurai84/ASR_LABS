@@ -10,19 +10,39 @@ import { PulseSummary } from './pulse-aggregator';
 import path from 'path';
 import { v4 as uuidv4, v5 as uuidv5 } from 'uuid';
 
+import { AdminAdapter } from './adapters/admin';
+import fs from 'fs';
+
 const TIMELINE_NAMESPACE = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
 
-// Configuration
+// Configuration & Discovery
+const PROJECTS_ROOT = path.resolve(__dirname, '../../../');
+const ADMIN_PROJECTS_DIR = path.resolve(__dirname, '../../../admin/content/projects');
+
+function getDiscoveredProjects(): IngestionConfig['projects'] {
+    const projects: IngestionConfig['projects'] = [
+        { id: 'asr-lab', path: PROJECTS_ROOT }
+    ];
+
+    if (fs.existsSync(ADMIN_PROJECTS_DIR)) {
+        const dirs = fs.readdirSync(ADMIN_PROJECTS_DIR).filter(f => fs.statSync(path.join(ADMIN_PROJECTS_DIR, f)).isDirectory());
+        dirs.forEach(id => {
+            if (id === 'asr-lab') return; // avoid duplicate
+            projects.push({
+                id,
+                path: path.join(ADMIN_PROJECTS_DIR, id)
+            });
+        });
+    }
+
+    return projects;
+}
+
 const CONFIG: IngestionConfig = {
-    projects: [
-        {
-            id: 'asr-lab',
-            path: path.resolve(__dirname, '../../../') // Points to /Users/ashutoshrai/Desktop/Portfolio
-        },
-    ]
+    projects: getDiscoveredProjects()
 };
 
-const STATE_FILE_PATH = path.resolve(__dirname, '../../state/lab-state.json');
+const STATE_FILE_PATH = path.resolve(__dirname, '../../../frontend/public/data/lab-state.json');
 
 async function main() {
     console.log('[Runner] Starting pipeline...');
@@ -136,12 +156,16 @@ async function main() {
             previousHealth: existingProject?.health
         });
 
+        // Initialize AdminAdapter for metadata
+        const adminAdapter = new AdminAdapter();
+        const meta = await adminAdapter.fetchProjectMetadata(pConfig.path);
+
         // Create Updated Project Object
         const projectObj: Project = {
             id: pConfig.id,
             name: existingProject?.name || pConfig.id, // Fallback name
-            description: existingProject?.description || '',
-            status: existingProject?.status || 'idea',
+            description: meta?.description || existingProject?.description || '',
+            status: (meta?.status as any) || existingProject?.status || 'build',
             repository_url: existingProject?.repository_url || '',
             tags: existingProject?.tags || [],
             timeline_event_ids: pTimeline.map(e => e.id),

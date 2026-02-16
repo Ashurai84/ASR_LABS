@@ -25,5 +25,5 @@ export function useLabState() {
         load();
     }, []);
 
-    return { data, loading, error };
+    return { labState: data, loading, error };
 }

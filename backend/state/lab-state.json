@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-02-16T16:11:30.195Z",
+    "generated_at": "2026-02-16T18:39:37.558Z",
     "version": "1.0",
     "system_health": "operational"
   },
@@ -21,21 +21,48 @@
       ],
       "health": {
         "score": 51,
-        "previous_score": 36,
-        "last_calculated_at": "2026-02-16T16:11:30.194Z",
+        "previous_score": 51,
+        "last_calculated_at": "2026-02-16T18:39:37.556Z",
         "breakdown": {
           "activity": 50,
           "delivery": 0,
           "stability": 80,
           "decision_velocity": 100
         },
-        "change_reason": "Increased development activity"
+        "change_reason": "Routine update"
       },
       "derived": {
-        "focus_score": 115,
-        "activity_level": "high",
+        "focus_score": 50,
+        "activity_level": "medium",
         "last_decision_date": "2026-02-16T00:00:00.000Z",
         "last_event_date": "2026-02-16T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "hello kitty",
+      "name": "hello kitty",
+      "description": "# hello kitty\n",
+      "status": "build",
+      "repository_url": "",
+      "tags": [],
+      "timeline_event_ids": [],
+      "health": {
+        "score": 31,
+        "previous_score": 31,
+        "last_calculated_at": "2026-02-16T18:39:37.557Z",
+        "breakdown": {
+          "activity": 50,
+          "delivery": 0,
+          "stability": 80,
+          "decision_velocity": 0
+        },
+        "change_reason": "Routine update"
+      },
+      "derived": {
+        "focus_score": 20,
+        "activity_level": "low",
+        "last_decision_date": "",
+        "last_event_date": ""
       }
     }
   ],

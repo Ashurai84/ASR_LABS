@@ -1,5 +1,6 @@
 import { GitAdapter } from './adapters/git';
 import { ManualAdapter } from './adapters/manual';
+import { AdminAdapter } from './adapters/admin';
 import { IngestionConfig, RawSignal, IngestionSourceAdapter } from './interfaces';
 
 export class IngestionEngine {
@@ -11,7 +12,7 @@ export class IngestionEngine {
         this.adapters = [
             new GitAdapter(),
             new ManualAdapter(),
-            // Add more adapters here
+            new AdminAdapter(),
         ];
     }
 
