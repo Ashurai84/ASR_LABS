@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@theme {
+  --font-mono: 'JetBrains Mono', 'Menlo', monospace;
+  --font-sans: 'Inter', sans-serif;
+}
+
+html {
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+  background-color: black;
+  color: white;
+}
