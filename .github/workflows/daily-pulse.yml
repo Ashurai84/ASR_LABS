@@ -1,0 +1,42 @@
+name: Daily Pulse Ingestion
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Run at midnight UTC
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update-lab-state:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch full history for git analysis
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Backend Dependencies
+        working-directory: ./backend
+        run: npm ci
+
+      - name: Run Ingestion Pipeline
+        working-directory: ./backend
+        # Note: In CI, we skip local file ingestion if configured, but here we want self-reflection
+        # We need to ensure the config points to the repo root
+        run: npm run ingest -- --ci
+
+      - name: Copy State to Frontend
+        run: cp backend/state/lab-state.json frontend/public/data/lab-state.json
+
+      - name: Commit and Push Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(pulse): Daily lab state update [skip ci]"
+          file_pattern: "frontend/public/data/lab-state.json backend/state/lab-state.json"
