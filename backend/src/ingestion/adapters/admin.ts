@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import yaml from 'js-yaml';
 import { v5 as uuidv5 } from 'uuid';
 import { IngestionSourceAdapter, RawSignal } from '../interfaces';
 
@@ -11,53 +10,72 @@ export class AdminAdapter implements IngestionSourceAdapter {
 
     async fetchSignals(projectRoot: string, projectId: string): Promise<RawSignal[]> {
         const timelinePath = path.join(projectRoot, 'timeline.md');
-
-        if (!fs.existsSync(timelinePath)) {
-            return [];
-        }
+        if (!fs.existsSync(timelinePath)) return [];
 
         try {
-            const fileContent = fs.readFileSync(timelinePath, 'utf8');
-            // Check if it's YAML or has frontmatter. For now assuming YAML list.
-            const doc = yaml.load(fileContent) as any;
+            const content = fs.readFileSync(timelinePath, 'utf8');
+            // Parse Markdown Timeline: ### YYYY-MM-DD • TYPE
+            const entries: RawSignal[] = [];
+            const sections = content.split('---');
 
-            if (!doc || !Array.isArray(doc.events)) {
-                return [];
-            }
+            for (const section of sections) {
+                const lines = section.trim().split('\n');
+                const headerLine = lines.find(l => l.startsWith('###'));
+                if (!headerLine) continue;
 
-            return doc.events.map((event: any) => {
-                const eventId = event.id || uuidv5(`${projectId}-${event.date}-${event.title}`, ADMIN_NAMESPACE);
+                const match = headerLine.match(/###\s+(\d{4}-\d{2}-\d{2})\s+•\s+(\w+)/);
+                if (!match) continue;
 
-                return {
+                const date = match[1];
+                const type = match[2].toLowerCase();
+                const titleLine = lines.find(l => l.startsWith('**')) || '';
+                const title = titleLine.replace(/\*\*/g, '').trim();
+                const body = lines.filter(l => !l.startsWith('###') && !l.startsWith('**')).join('\n').trim();
+
+                const eventId = uuidv5(`${projectId}-${date}-${title}`, ADMIN_NAMESPACE);
+
+                entries.push({
                     id: eventId,
                     projectId: projectId,
                     source: 'manual',
-                    timestamp: new Date(event.date || Date.now()).toISOString(),
-                    data: event,
+                    timestamp: new Date(date).toISOString(),
+                    data: {
+                        title,
+                        details: { description: body }
+                    },
                     metadata: {
-                        category: event.type || 'decision'
+                        category: type
                     }
-                };
-            });
+                });
+            }
+
+            return entries;
         } catch (e) {
             console.error(`Error parsing timeline.md in ${projectRoot}:`, e);
             return [];
         }
     }
 
-    /**
-     * Helper to read project metadata from project.md
-     */
     async fetchProjectMetadata(projectRoot: string): Promise<any> {
         const metaPath = path.join(projectRoot, 'project.md');
         if (!fs.existsSync(metaPath)) return null;
 
         try {
-            const content = fs.readFileSync(metaPath, 'utf8');
-            // Basic parsing: split by frontmatter or just take first header?
-            // For now, let's assume the user writes YAML in the editor or we add frontmatter later.
-            // Let's assume the content itself IS the description.
-            return { description: content.substring(0, 500) };
+            const text = fs.readFileSync(metaPath, 'utf8');
+            const regex = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/;
+            const match = text.match(regex);
+            if (!match) return null;
+
+            const yaml = match[1];
+            const data: any = {};
+            yaml.split('\n').forEach(line => {
+                const [key, ...val] = line.split(':');
+                if (key && val.length) {
+                    data[key.trim().toLowerCase()] = val.join(':').trim().replace(/^["']|["']$/g, '');
+                }
+            });
+
+            return data;
         } catch { return null; }
     }
 }

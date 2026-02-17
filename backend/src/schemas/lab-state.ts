@@ -14,6 +14,7 @@ export interface LabState {
   timeline_events: Record<UUID, TimelineEvent>;
   tools: Tool[];
   notes: Note[];
+  profile: any;
 }
 
 export interface Meta {
@@ -41,7 +42,7 @@ export interface Project {
   derived: ProjectDerived;
   // Note: projects contain timeline_event_ids for local rendering, but global timeline_index is authoritative for the feed.
   timeline_event_ids: UUID[];
-  
+
   // Health is stored in derived, or at top level? Architecture says "Each project stores this object".
   // Architecture "Derived Fields (Explicit List)" says:
   // For each project: focus_score, activity_level, last_decision_date, last_event_date, health.score, health.previous_score, health.change_reason.
@@ -109,6 +110,6 @@ export interface Note {
   id: string;
   title: string;
   date: ISODateString;
-  content_markdown: string;
+  content: string;
   related_project_id?: ProjectID;
 }

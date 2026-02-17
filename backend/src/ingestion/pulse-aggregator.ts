@@ -13,6 +13,7 @@ export interface PulseSummary {
     commitCount: number;
     linesChanged: number; // Approximate
     fileCount: number;
+    messages: string[];
 }
 
 const PULSE_NAMESPACE = '6ba7b811-9dad-11d1-80b4-00c04fd430c8';
@@ -41,12 +42,16 @@ export class PulseAggregator {
                     date: date,
                     commitCount: 0,
                     linesChanged: 0,
-                    fileCount: 0
+                    fileCount: 0,
+                    messages: []
                 };
             }
 
             const summary = pulses[key];
             summary.commitCount++;
+            if (signal.data.message) {
+                summary.messages.push(signal.data.message);
+            }
 
             // Lines changed approximation (if available in raw data)
             // simple-git log sometimes gives diff stats, sometimes need separate call per commit

@@ -14,6 +14,7 @@ export interface LabState {
     timeline_events: Record<UUID, TimelineEvent>;
     tools: Tool[];
     notes: Note[];
+    profile: Profile;
 }
 
 export interface Meta {
@@ -98,6 +99,15 @@ export interface Note {
     id: string;
     title: string;
     date: ISODateString;
-    content_markdown: string;
+    content: string;
     related_project_id?: ProjectID;
+}
+
+export interface Profile {
+    name: string;
+    bio: string;
+    github?: string;
+    linkedin?: string;
+    twitter?: string;
+    email?: string;
 }

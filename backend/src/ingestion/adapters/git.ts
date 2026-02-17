@@ -14,9 +14,9 @@ export class GitAdapter implements IngestionSourceAdapter {
             return [];
         }
 
-        // Fetch log
-        // We fetch everything. filtering happens later in the normalization/aggregation phase.
-        const log = await git.log();
+        // Fetch log for the specific directory to isolate project activity
+        // We look for everything from the current directory downwards
+        const log = await git.log({ file: '.' });
 
         return log.all.map(commit => ({
             id: commit.hash,

@@ -103,7 +103,7 @@ async function main() {
     // Generate Pulse Events for Timeline (if significant enough)
     for (const p of pulses) {
         // Pulse activity for Timeline (Architecture 6.1: Pulse events generated if thresholds met)
-        if (p.commitCount > 5) {
+        if (p.commitCount > 0) {
             if (!timelineEvents[p.id]) {
                 timelineEvents[p.id] = {
                     id: p.id,
@@ -114,7 +114,8 @@ async function main() {
                     source: 'system',
                     details: {
                         commit_count: p.commitCount,
-                        lines_changed: p.linesChanged
+                        lines_changed: p.linesChanged,
+                        messages: p.messages
                     },
                     derived: {
                         summary_text: `${p.commitCount} commits on ${p.date}`,
@@ -127,26 +128,48 @@ async function main() {
 
     // 6. Compute Health & Prepare Focus Input
     const projectsForFocus: ProjectWithPulses[] = [];
-
-    // Assuming we have a master list of projects defined in Config or State.
-    // If Config defines project X, we process X. New projects might need auto-discovery.
-    // For now, iterate Config projects.
-
     const updatedProjects: Project[] = [];
+    const adminAdapter = new AdminAdapter();
 
     for (const pConfig of CONFIG.projects) {
+        const meta = await adminAdapter.fetchProjectMetadata(pConfig.path);
+
+        // Skip projects not explicitly published (unless they are system projects like 'asr-lab')
+        if (pConfig.id !== 'asr-lab' && meta?.published !== 'true') {
+            console.log(`[Runner] Skipping unpublished project: ${pConfig.id}`);
+            continue;
+        }
+
         const existingProject = currentProjects.find(p => p.id === pConfig.id);
-        const pPulses = projectPulses[pConfig.id] || [];
 
-        // Compute Health
-        // We need lastShip/lastDecision date. 
-        // Heuristic: check timelineEvents for this project
+        // Moderation: Load project-specific visibility rules
+        let hiddenDates: string[] = [];
+        const moderationPath = path.join(pConfig.path, 'pulse-moderation.json');
+        if (fs.existsSync(moderationPath)) {
+            try {
+                const moderation = JSON.parse(fs.readFileSync(moderationPath, 'utf8'));
+                hiddenDates = moderation.hiddenDates || [];
+            } catch (e) {
+                console.warn(`[Runner] Failed to read moderation for ${pConfig.id}`);
+            }
+        }
+
+        // 1. Filter pulses (affects health metrics)
+        let pPulses = (projectPulses[pConfig.id] || []).filter(p => !hiddenDates.includes(p.date));
+        if (pPulses.length < (projectPulses[pConfig.id]?.length || 0)) {
+            console.log(`[Runner] Moderation applied to ${pConfig.id}: filtered ${projectPulses[pConfig.id].length - pPulses.length} pulses.`);
+        }
+
+        // 2. Filter timeline events (affects journal display)
         const pTimeline = Object.values(timelineEvents).filter(e => e.project_id === pConfig.id);
-        // Sort desc date
-        pTimeline.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        const filteredTimeline = pTimeline.filter(e => {
+            if (e.type !== 'pulse') return true;
+            return !hiddenDates.includes(e.date);
+        });
+        filteredTimeline.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-        const lastShip = pTimeline.find(e => e.type === 'ship')?.date;
-        const lastDecision = pTimeline.find(e => e.type === 'decision')?.date;
+        const lastShip = filteredTimeline.find(e => e.type === 'ship')?.date;
+        const lastDecision = filteredTimeline.find(e => e.type === 'decision')?.date;
 
         const health = healthCalc.compute({
             projectId: pConfig.id,
@@ -156,25 +179,20 @@ async function main() {
             previousHealth: existingProject?.health
         });
 
-        // Initialize AdminAdapter for metadata
-        const adminAdapter = new AdminAdapter();
-        const meta = await adminAdapter.fetchProjectMetadata(pConfig.path);
-
-        // Create Updated Project Object
         const projectObj: Project = {
             id: pConfig.id,
-            name: existingProject?.name || pConfig.id, // Fallback name
+            name: meta?.name || existingProject?.name || pConfig.id,
             description: meta?.description || existingProject?.description || '',
             status: (meta?.status as any) || existingProject?.status || 'build',
-            repository_url: existingProject?.repository_url || '',
-            tags: existingProject?.tags || [],
-            timeline_event_ids: pTimeline.map(e => e.id),
+            repository_url: meta?.github || existingProject?.repository_url || '',
+            tags: meta?.tags || existingProject?.tags || [],
+            timeline_event_ids: filteredTimeline.map(e => e.id),
             health: health,
             derived: {
-                focus_score: 0, // placeholder, computed next
+                focus_score: 0,
                 activity_level: 'idle',
                 last_decision_date: lastDecision || '',
-                last_event_date: pTimeline[0]?.date || ''
+                last_event_date: filteredTimeline[0]?.date || ''
             }
         };
 
@@ -184,14 +202,11 @@ async function main() {
 
     // 7. Compute Focus
     console.log('[Runner] Computing focus...');
-
     const focusResult = focusCalc.compute({
         projects: projectsForFocus,
         previousState: prevState?.derived,
-        // manualOverrideProjectId -- could pass from CLI arg if we had one
     });
 
-    // Apply Results back to Projects
     for (const p of updatedProjects) {
         const res = focusResult[p.id];
         if (res) {
@@ -201,26 +216,74 @@ async function main() {
     }
 
     // 8. Final Assembly
-    // Collect all event IDs for global index
     const timelineIndex = Object.keys(timelineEvents).sort((a, b) => {
         return new Date(timelineEvents[b].date).getTime() - new Date(timelineEvents[a].date).getTime();
     });
 
+    // Load Admin Data (Tools, Profile, Published Notes)
+    const ADMIN_CONTENT_DIR = path.resolve(__dirname, '../../../admin/content');
+    const tools = JSON.parse(fs.readFileSync(path.join(ADMIN_CONTENT_DIR, 'tools.json'), 'utf8') || '[]');
+
+    let profile = {};
+    const profilePath = path.join(ADMIN_CONTENT_DIR, 'profile.md');
+    if (fs.existsSync(profilePath)) {
+        const profileContent = fs.readFileSync(profilePath, 'utf8');
+        const match = profileContent.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+        if (match) {
+            const lines = match[1].split('\n');
+            const data: any = {};
+            lines.forEach(l => {
+                const [k, ...v] = l.split(':');
+                if (k && v.length) data[k.trim().toLowerCase()] = v.join(':').trim().replace(/^["']|["']$/g, '');
+            });
+            profile = { ...data, bio: data.bio || match[2].trim() };
+        }
+    }
+
+    // Ingest Notes
+    const notes: any[] = [];
+    const notesDir = path.join(ADMIN_CONTENT_DIR, 'notes');
+    if (fs.existsSync(notesDir)) {
+        const noteFiles = fs.readdirSync(notesDir).filter(f => f.endsWith('.md'));
+        for (const file of noteFiles) {
+            const content = fs.readFileSync(path.join(notesDir, file), 'utf8');
+            const metaMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+            if (!metaMatch) continue;
+
+            const metaLines = metaMatch[1].split('\n');
+            const meta: any = {};
+            metaLines.forEach(l => {
+                const [k, ...v] = l.split(':');
+                if (k && v.length) meta[k.trim().toLowerCase()] = v.join(':').trim().replace(/^["']|["']$/g, '');
+            });
+
+            if (meta.published === 'true') {
+                notes.push({
+                    id: file.replace('.md', ''),
+                    title: meta.title || file,
+                    date: meta.date || '',
+                    content: metaMatch[2].trim()
+                });
+            }
+        }
+    }
+
     const newState: LabState = {
         meta: {
             generated_at: new Date().toISOString(),
-            version: '1.0',
+            version: '1.1',
             system_health: 'operational'
         },
         derived: {
             current_focus_project_id: focusResult.global.currentFocusId,
-            global_health: 100 // Placeholder logic, could average project healths
+            global_health: 100
         },
         projects: updatedProjects,
         timeline_index: timelineIndex,
         timeline_events: timelineEvents,
-        tools: prevState?.tools || [], // Keep manual tools list if any
-        notes: prevState?.notes || []
+        tools: tools,
+        notes: notes,
+        profile: profile
     };
 
     // 9. Write Snapshot
