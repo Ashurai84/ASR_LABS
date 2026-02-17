@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-02-16T18:40:00.554Z",
+    "generated_at": "2026-02-16T18:39:37.558Z",
     "version": "1.0",
     "system_health": "operational"
   },
@@ -22,7 +22,7 @@
       "health": {
         "score": 51,
         "previous_score": 51,
-        "last_calculated_at": "2026-02-16T18:40:00.553Z",
+        "last_calculated_at": "2026-02-16T18:39:37.556Z",
         "breakdown": {
           "activity": 50,
           "delivery": 0,
@@ -49,7 +49,7 @@
       "health": {
         "score": 31,
         "previous_score": 31,
-        "last_calculated_at": "2026-02-16T18:40:00.554Z",
+        "last_calculated_at": "2026-02-16T18:39:37.557Z",
         "breakdown": {
           "activity": 50,
           "delivery": 0,
