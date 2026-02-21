@@ -20,9 +20,9 @@ const getTypeIcon = (type?: string) => {
 
 const getStatusColor = (status: string) => {
     switch (status?.toUpperCase()) {
-        case 'ACTIVE': return 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20';
-        case 'EXPERIMENTAL': return 'bg-amber-500/10 text-amber-500 border-amber-500/20 shadow-sm';
-        case 'DEPRECATED': return 'bg-red-500/10 text-red-500 border-red-500/20';
+        case 'ACTIVE': return 'bg-[#18181b] text-emerald-500 border-zinc-800';
+        case 'EXPERIMENTAL': return 'bg-[#18181b] text-[#f97316] border-[#3f3f46] shadow-sm';
+        case 'DEPRECATED': return 'bg-[#18181b] text-red-500 border-zinc-800';
         default: return 'bg-zinc-800 text-zinc-400 border-zinc-700';
     }
 };
@@ -30,7 +30,7 @@ const getStatusColor = (status: string) => {
 export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
     const statusColor = getStatusColor(tool.status);
     
-    // Safely aggregate max 3 tags from the nested tech_stack object or fallback tags
+    // Safely aggregate tags and limit to exactly 3 or less
     let displayTags: string[] = [];
     if (tool.tech_stack) {
         Object.values(tool.tech_stack).forEach(arr => {
@@ -43,111 +43,106 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
     const hiddenCount = displayTags.length > 3 ? displayTags.length - 3 : 0;
 
     return (
-        <div className="group block no-underline transition-all h-full min-h-[380px]">
-            <div className="relative h-full p-6 sm:p-8 bg-[#0a0a0a] border border-zinc-900 group-hover:border-zinc-800 rounded-2xl transition-all duration-300 group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.8)] flex flex-col justify-between overflow-hidden cursor-default group-hover:-translate-y-1">
-                
-                {/* 1. Header (Icon Top Left, Pills Top Right) */}
-                <div className="flex items-start justify-between mb-8">
-                    <div className="p-3 bg-[#111] rounded-xl border border-zinc-800/80 shadow-inner">
+        <div className="group transition-all h-full bg-[#18181b] border border-[#27272a] rounded-lg p-6 hover:-translate-y-1 hover:shadow-elevated hover:bg-[#18181b]/90 duration-200 cursor-pointer min-h-[360px] flex flex-col relative overflow-hidden">
+            
+            {/* 1. Header (Icon, Title, Version) */}
+            <div className="flex items-start justify-between min-h-[48px] mb-4 relative z-10">
+                <div className="flex gap-3 items-center">
+                    <div className="p-2 bg-[#000000] border border-[#27272a] rounded-md shrink-0">
                         {getTypeIcon(tool.type)}
                     </div>
-                    <div className="flex flex-col items-end gap-2 text-right">
-                        <span className={`px-2.5 py-1 text-[9px] font-mono font-bold tracking-[0.2em] uppercase rounded-md border ${statusColor}`}>
-                            {tool.status}
-                        </span>
-                        {tool.version && (
-                            <span className="text-[10px] font-mono text-zinc-600 bg-zinc-900/50 px-2 py-0.5 rounded">
-                                {tool.version}
-                            </span>
-                        )}
-                    </div>
-                </div>
-
-                {/* 2. Body (Title, Context, Description) */}
-                <div className="space-y-4 mb-4 flex-grow z-10">
-                    <h3 className="text-2xl font-sans font-bold text-zinc-200 tracking-tight leading-tight group-hover:text-white transition-colors">
+                    <h3 className="text-[18px] font-bold text-[#ffffff] font-sans tracking-tight leading-none group-hover:text-white max-w-[150px] sm:max-w-full truncate">
                         {tool.name}
                     </h3>
-                    
-                    {/* The Work Context Line */}
-                    {tool.work_context && (tool.work_context.company || tool.work_context.timeline) && (
-                        <div className="flex flex-wrap items-center gap-2 text-[11px] font-mono text-zinc-500 tracking-wide uppercase">
-                            {tool.work_context.company && (
-                                <span className="text-zinc-400 bg-zinc-900 px-2 py-1 rounded-sm border border-zinc-800/50">
-                                    @ {tool.work_context.company}
-                                </span>
-                            )}
-                            {tool.work_context.timeline && (
-                                <span className="text-zinc-600 border-l border-zinc-800 pl-2">
-                                    {tool.work_context.timeline}
-                                </span>
-                            )}
+                </div>
+                
+                {/* Meta Badge Top Right */}
+                <div className="flex shrink-0">
+                    <span className={`px-2 py-0.5 text-[10px] font-mono tracking-widest uppercase rounded border whitespace-nowrap ${statusColor}`}>
+                        {tool.status}
+                    </span>
+                </div>
+            </div>
+            
+            {/* Context Line underneath header */}
+            {tool.work_context && (tool.work_context.company || tool.work_context.timeline || tool.version) && (
+                <div className="flex items-center flex-wrap gap-1 text-[11px] font-mono text-zinc-500 mb-6 border-b border-[#27272a]/50 pb-4 relative z-10">
+                   {tool.work_context.company && (
+                        <span>@ {tool.work_context.company}</span>
+                    )}
+                    {(tool.work_context.company && tool.work_context.timeline) && (
+                        <span>·</span>
+                    )}
+                    {tool.work_context.timeline && (
+                        <span>{tool.work_context.timeline}</span>
+                    )}
+                     {(tool.version) && (
+                         <>
+                            <span>·</span>
+                            <span className="text-[#a1a1aa] bg-[#27272a] px-1 py-0.5 rounded text-[9px] leading-none">{tool.version}</span>
+                         </>
+                    )}
+                </div>
+            )}
+
+            {/* 2. Text Content container */}
+            <div className="flex-grow z-10 relative">
+                {/* Fixed height box showing 3 lines max originally */}
+                <p className="text-[14px] text-[#e5e5e5] font-sans leading-relaxed line-clamp-3 group-hover:line-clamp-none transition-all duration-[400ms] w-full">
+                    {tool.description}
+                </p>
+
+                {/* Secret expanding compartment for Contributions */}
+                <div className="max-h-0 opacity-0 group-hover:max-h-[300px] group-hover:opacity-100 group-hover:mt-6 overflow-hidden transition-all duration-[400ms] ease-in-out">
+                    {tool.my_role?.contributions && tool.my_role.contributions.length > 0 && (
+                        <div className="bg-[#000000]/40 rounded p-4 border border-[#27272a]/30 mt-2">
+                            <h4 className="text-[10px] font-mono text-[#a1a1aa] uppercase tracking-widest mb-3 pb-2 border-b border-[#27272a]/50">
+                                {tool.my_role.title ? `Role: ${tool.my_role.title}` : 'Contributions'}
+                            </h4>
+                            <ul className="space-y-1.5 list-none m-0 p-0 text-[12px] text-zinc-400 font-sans">
+                                {tool.my_role.contributions.map((contribution, idx) => (
+                                    <li key={idx} className="flex gap-2">
+                                        <span className="text-[#a1a1aa] shrink-0 mt-[1px]">•</span> 
+                                        <span className="leading-snug">{contribution}</span>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     )}
-
-                    {/* Smooth fading text block */}
-                    <div className="relative mt-4 group-hover:h-auto h-[75px] overflow-hidden transition-all duration-500 ease-in-out">
-                        <p className="text-sm text-zinc-400 font-sans leading-relaxed group-hover:text-zinc-300 transition-colors">
-                            {tool.description || "No description provided."}
-                        </p>
-                        {/* Gradient map to hide cutoff text gently when not hovering */}
-                        <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300" />
-                    </div>
-                    
-                    {/* Hidden Roles/Contributions expanding on hover */}
-                    <div className="max-h-0 opacity-0 group-hover:max-h-[300px] group-hover:opacity-100 group-hover:mt-2 overflow-hidden transition-all duration-500 ease-in-out">
-                        {tool.my_role?.contributions && tool.my_role.contributions.length > 0 && (
-                            <div className="pt-2">
-                                <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase block mb-3 border-t border-zinc-800/50 pt-4">Contributions</span>
-                                <ul className="space-y-2 pb-2">
-                                    {tool.my_role.contributions.map((cont, i) => (
-                                        <li key={i} className="text-xs text-zinc-400 flex items-start gap-2">
-                                            <span className="text-orange-500/70 mt-0.5 text-[10px]">▶</span> 
-                                            <span className="leading-snug">{cont}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
-                    </div>
                 </div>
-
-                {/* 3. Footer (Tags, Links) */}
-                <div className="mt-8 flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-6 border-t border-zinc-900 group-hover:border-zinc-800 transition-colors z-10 relative">
-                    
-                    {/* Clean Tech stack Pills */}
-                    <div className="flex flex-wrap gap-1.5 max-w-[70%]">
-                        {visibleTags.map((tech, i) => (
-                            <span key={i} className="px-2 py-1 text-[10px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 rounded-md">
-                                {tech}
-                            </span>
-                        ))}
-                        {hiddenCount > 0 && (
-                            <span className="px-2 py-1 text-[10px] font-mono text-zinc-600 bg-transparent rounded-md border border-dashed border-zinc-800 hidden sm:inline-flex">
-                                +{hiddenCount}
-                            </span>
-                        )}
-                    </div>
-
-                    {/* Highly polished minimal buttons */}
-                    <div className="flex items-center gap-2">
-                        {tool.links?.github && (
-                            <a href={tool.links.github} target="_blank" rel="noreferrer" className="p-2 text-zinc-500 hover:text-white bg-zinc-900 border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800 rounded-lg transition-all shadow-sm">
-                                <Github className="w-3.5 h-3.5" />
-                            </a>
-                        )}
-                        {tool.links?.demo && (
-                            <a href={tool.links.demo} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 px-3 py-2 text-[11px] font-mono font-bold text-black bg-zinc-200 hover:bg-white rounded-lg transition-all shadow-sm">
-                                Demo <ArrowUpRight className="w-3 h-3" />
-                            </a>
-                        )}
-                    </div>
-                </div>
-
-                {/* Lighting effects */}
-                <div className="absolute inset-0 z-[1] bg-gradient-to-b from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none" />
-                <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-white/[0.015] blur-3xl rounded-full group-hover:bg-white/[0.04] transition-all duration-700 pointer-events-none z-[0]" />
             </div>
+
+            {/* 3. Footer pinned to bottom (links + stack) */}
+            <div className="mt-8 flex justify-between items-center gap-4 pt-4 border-t border-[#27272a]/50 relative z-10 shrink-0">
+                <div className="flex gap-2">
+                    {visibleTags.map((tech, i) => (
+                        <span key={i} className="px-2 py-0.5 text-[10px] font-mono text-[#85858b] bg-[#18181b] border border-[#27272a] rounded whitespace-nowrap">
+                            {tech}
+                        </span>
+                    ))}
+                    {hiddenCount > 0 && (
+                        <span className="px-1.5 py-0.5 text-[10px] font-mono text-[#6b7280] flex items-center bg-transparent">
+                            +{hiddenCount}
+                        </span>
+                    )}
+                </div>
+
+                <div className="flex items-center gap-2 shrink-0">
+                   {tool.links?.github && (
+                        <a href={tool.links.github} target="_blank" rel="noreferrer" className="text-[11px] font-mono px-2 py-1.5 bg-[#000000] border border-[#27272a] rounded hover:border-[#3f3f46] hover:text-[#ededed] transition-colors text-zinc-500 flex items-center gap-1.5 shadow-sm">
+                            <Github className="w-3.5 h-3.5" /> Code
+                        </a>
+                    )}
+                    {tool.links?.demo && (
+                        <a href={tool.links.demo} target="_blank" rel="noreferrer" className="text-[11px] font-mono px-3 py-1.5 bg-[#ffffff] text-[#000000] border border-[#ffffff] rounded hover:bg-zinc-200 transition-colors flex items-center justify-center gap-1.5 font-bold shadow-sm">
+                            Demo <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                    )}
+                </div>
+            </div>
+
+            {/* Subtle decorative mesh gradient on hover so card isn't completely flat */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/[0.015] rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0 mix-blend-screen transform translate-x-1/3 -translate-y-1/3" />
         </div>
     );
 };
