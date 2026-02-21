@@ -89,17 +89,72 @@ export interface EventDerived {
 
 // --- Other Entities ---
 
-export type ToolStatus = 'active' | 'experimental' | 'deprecated' | string;
+export type ToolStatus = 'ACTIVE' | 'EXPERIMENTAL' | 'DEPRECATED' | 'ARCHIVED' | string;
+export type ToolType = 'BACKEND' | 'FRONTEND' | 'FULLSTACK' | 'DEVOPS' | 'MOBILE' | 'AI_ML' | string;
 
 export interface Tool {
     id: string;
     name: string;
     slug?: string;
+
+    // Classification
+    type?: ToolType;
     status: ToolStatus;
+    version?: string;
+
+    // Work context
+    work_context?: {
+        company?: string;
+        team?: string;
+        timeline?: string;
+    };
+
+    // Description
     description: string;
-    tags?: string[];
-    tech_stack?: string[];
-    url?: string;
+
+    // Your role
+    my_role?: {
+        title?: string;
+        contributions?: string[];
+    };
+
+    // Technical details
+    tech_stack?: {
+        frontend?: string[];
+        backend?: string[];
+        devops?: string[];
+        other?: string[];
+    };
+    tags?: string[]; // Legacy support
+
+    // Metrics
+    metrics?: {
+        lines_of_code?: number;
+        users?: string;
+        performance?: string;
+        team_size?: number;
+    };
+
+    // Links
+    links?: {
+        github?: string;
+        demo?: string;
+        docs?: string;
+        case_study?: string;
+    };
+    url?: string; // Legacy support
+
+    // Deprecation info
+    deprecation?: {
+        reason: string;
+        date: string;
+        replacement?: string;
+        lessons_learned?: string;
+    };
+
+    // Timestamps
+    created_at?: string;
+    updated_at?: string;
 }
 
 export interface Note {

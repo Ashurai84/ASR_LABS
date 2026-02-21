@@ -1,8 +1,195 @@
 [
   {
-    "name": "node.js , api call ",
-    "category": "backend",
-    "version": "",
-    "status": "active"
+    "id": "gateway-x",
+    "name": "REST API Gateway",
+    "slug": "rest-api-gateway",
+    "type": "BACKEND",
+    "status": "ACTIVE",
+    "version": "v2.3.1",
+    "work_context": {
+      "company": "Startup XYZ",
+      "team": "Backend Team",
+      "timeline": "2024-Present"
+    },
+    "description": "Built a high-performance API gateway handling 50K req/s for microservices architecture. Implemented rate limiting, JWT auth, request routing, and service discovery.",
+    "my_role": {
+      "title": "Lead Backend Engineer",
+      "contributions": [
+        "Architected the routing system",
+        "Implemented caching layer (Redis)",
+        "Set up monitoring and alerting"
+      ]
+    },
+    "tech_stack": {
+      "backend": [
+        "Node.js",
+        "Express",
+        "TypeScript"
+      ],
+      "other": [
+        "Redis",
+        "Docker"
+      ]
+    },
+    "metrics": {
+      "lines_of_code": 15000,
+      "performance": "50K requests/sec"
+    },
+    "links": {
+      "github": "https://github.com/Ashurai84",
+      "demo": "https://example.com/demo"
+    },
+    "updated_at": "2026-02-18T10:00:00.000Z",
+    "created_at": "2024-01-10T00:00:00.000Z"
+  },
+  {
+    "id": "mongo-user-service",
+    "name": "MongoDB User Service",
+    "slug": "mongo-user-service",
+    "type": "BACKEND",
+    "status": "DEPRECATED",
+    "version": "v1.0.0",
+    "work_context": {
+      "company": "Previous Company",
+      "team": "Backend",
+      "timeline": "2022-2023"
+    },
+    "description": "User authentication and profile management service. Handled 10K daily active users with MongoDB backend.",
+    "deprecation": {
+      "reason": "Migrated to PostgreSQL for better transaction support and data consistency.",
+      "date": "Jan 2024",
+      "replacement": "postgres-auth-service"
+    },
+    "tech_stack": {
+      "backend": [
+        "Node.js",
+        "MongoDB",
+        "Passport.js"
+      ]
+    },
+    "metrics": {
+      "users": "10K daily users"
+    },
+    "updated_at": "2024-01-20T00:00:00.000Z",
+    "created_at": "2022-05-10T00:00:00.000Z"
+  },
+  {
+    "id": "rt-dashboard",
+    "name": "Real-time Dashboard",
+    "slug": "rt-dashboard",
+    "type": "FULLSTACK",
+    "status": "ACTIVE",
+    "version": "v3.1.0",
+    "work_context": {
+      "company": "Client Project",
+      "team": "Full-Stack",
+      "timeline": "2025-Present"
+    },
+    "description": "Real-time analytics dashboard for e-commerce platform. Shows live sales, inventory, and customer metrics with WebSocket updates. Serves 500+ concurrent users.",
+    "my_role": {
+      "contributions": [
+        "Built React frontend with Chart.js visualizations",
+        "Implemented WebSocket backend with Socket.io",
+        "Optimized database queries (reduced load by 60%)"
+      ]
+    },
+    "tech_stack": {
+      "frontend": [
+        "React",
+        "TypeScript",
+        "Tailwind",
+        "Chart.js"
+      ],
+      "backend": [
+        "Node.js",
+        "Socket.io",
+        "PostgreSQL"
+      ],
+      "other": [
+        "Redis"
+      ]
+    },
+    "metrics": {
+      "lines_of_code": 28000,
+      "users": "500+ concurrent users"
+    },
+    "links": {
+      "demo": "https://example.com/dashboard",
+      "case_study": "https://example.com/blog/realtime"
+    },
+    "updated_at": "2026-02-20T14:30:00.000Z",
+    "created_at": "2025-02-01T00:00:00.000Z"
+  },
+  {
+    "id": "ai-code-reviewer",
+    "name": "AI Code Reviewer",
+    "slug": "ai-code-reviewer",
+    "type": "AI_ML",
+    "status": "EXPERIMENTAL",
+    "version": "v0.2.0",
+    "work_context": {
+      "company": "Personal Project",
+      "team": "DevOps / AI",
+      "timeline": "2026"
+    },
+    "description": "Automated code review tool using Claude API to analyze pull requests and suggest improvements. Early prototype testing with small team.",
+    "my_role": {
+      "title": "Creator",
+      "contributions": [
+        "Experiment with LLM integration in CI/CD",
+        "Build GitHub Actions workflows",
+        "Practice prompt engineering"
+      ]
+    },
+    "tech_stack": {
+      "backend": [
+        "Python",
+        "FastAPI"
+      ],
+      "devops": [
+        "GitHub Actions"
+      ],
+      "other": [
+        "Claude API"
+      ]
+    },
+    "metrics": {
+      "lines_of_code": 3000
+    },
+    "links": {
+      "github": "https://github.com/Ashurai84",
+      "docs": "https://example.com/docs"
+    },
+    "updated_at": "2026-02-16T09:12:00.000Z",
+    "created_at": "2026-01-15T00:00:00.000Z"
+  },
+  {
+    "id": "auto-deploy-cli",
+    "name": "Auto Deploy CLI",
+    "slug": "auto-deploy-cli",
+    "type": "DEVOPS",
+    "status": "ARCHIVED",
+    "version": "v1.5.2",
+    "work_context": {
+      "company": "Open Source",
+      "timeline": "2021-2023"
+    },
+    "description": "A node CLI tool for streamlining deployments to VPS instances using SSH and rsync.",
+    "tech_stack": {
+      "devops": [
+        "Bash",
+        "Linux"
+      ],
+      "other": [
+        "Node.js",
+        "Commander.js"
+      ]
+    },
+    "deprecation": {
+      "reason": "Containerization became standard. Migrated to Docker and GitHub Actions.",
+      "date": "Aug 2023"
+    },
+    "updated_at": "2023-08-01T00:00:00.000Z",
+    "created_at": "2021-04-10T00:00:00.000Z"
   }
 ]
