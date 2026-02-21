@@ -101,9 +101,23 @@ export interface PulseDetails {
 // --- Other Entities ---
 
 export interface Tool {
+  id: string;
   name: string;
-  category: string;
-  proficiency: number; // 0-10
+  slug?: string;
+  type?: string;
+  status: string;
+  version?: string;
+  work_context?: any;
+  description: string;
+  my_role?: any;
+  tech_stack?: any;
+  tags?: string[];
+  metrics?: any;
+  links?: any;
+  url?: string;
+  deprecation?: any;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface Note {
