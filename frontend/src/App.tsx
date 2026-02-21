@@ -174,7 +174,8 @@ function App() {
       <main className="flex-1 md:ml-64 relative min-h-screen">
         <div
           key={viewKey}
-          className="max-w-3xl mx-auto px-6 md:px-12 w-full transition-opacity duration-300 animate-[fadeIn_0.3s_ease-out]"
+          className={`mx-auto px-6 md:px-12 w-full transition-opacity duration-300 animate-[fadeIn_0.3s_ease-out] ${view === 'tools' ? 'max-w-6xl' : 'max-w-3xl'
+            }`}
         >
           {view === 'journal' && (
             <JournalStream

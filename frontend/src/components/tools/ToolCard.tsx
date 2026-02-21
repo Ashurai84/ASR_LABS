@@ -18,18 +18,18 @@ const getTypeIcon = (type?: string, className?: string) => {
     }
 };
 
-const getStatusColor = (status: string) => {
+const getStatusInfo = (status: string) => {
     switch (status?.toUpperCase()) {
-        case 'ACTIVE': return 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20';
-        case 'EXPERIMENTAL': return 'text-amber-500 bg-amber-500/10 border-amber-500/20';
-        case 'DEPRECATED': return 'text-red-500 bg-red-500/10 border-red-500/20';
-        default: return 'text-zinc-400 bg-zinc-800/50 border-zinc-700/50';
+        case 'ACTIVE': return { color: 'text-emerald-500', dot: 'bg-emerald-500' };
+        case 'EXPERIMENTAL': return { color: 'text-amber-500', dot: 'bg-amber-500' };
+        case 'DEPRECATED': return { color: 'text-red-500', dot: 'bg-red-500' };
+        default: return { color: 'text-zinc-500', dot: 'bg-zinc-600' };
     }
 };
 
 export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const statusColor = getStatusColor(tool.status);
+    const statusInfo = getStatusInfo(tool.status);
 
     // Lock body scroll when modal is open
     useEffect(() => {
@@ -43,7 +43,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
         };
     }, [isModalOpen]);
 
-    // Aggregate Tags
+    // Aggregate Tags into a clean string
     let displayTags: string[] = [];
     if (tool.tech_stack) {
         Object.values(tool.tech_stack).forEach(arr => {
@@ -52,86 +52,70 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
     } else if (Array.isArray(tool.tags)) {
         displayTags = [...tool.tags];
     }
-    const visibleTags = displayTags.slice(0, 3);
-    const hiddenCount = displayTags.length > 3 ? displayTags.length - 3 : 0;
+    const tagsString = displayTags.slice(0, 4).join(' • ') + (displayTags.length > 4 ? ` • +${displayTags.length - 4}` : '');
 
     return (
         <>
-            {/* The Card */}
+            {/* The Card - Ultra Premium Minimalist */}
             <div
                 onClick={() => setIsModalOpen(true)}
-                className="group block no-underline h-[280px] w-full bg-[#111] border border-zinc-800/80 rounded-2xl p-6 transition-all duration-300 hover:border-zinc-700 hover:bg-[#141414] relative overflow-hidden flex flex-col cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:-translate-y-1"
+                className="group block relative h-[260px] w-full bg-[#050505] border border-white/5 rounded-2xl p-6 transition-all duration-500 hover:border-white/10 hover:bg-[#0a0a0a] cursor-pointer flex flex-col justify-between hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.4)]"
             >
-
-                <div className="flex-grow z-10 flex flex-col justify-start pointer-events-none">
-
-                    {/* 1. Ultra-Clean Header Row */}
-                    <div className="flex items-center gap-4 mb-4">
-                        <div className="p-3 bg-black/40 rounded-xl border border-zinc-800/50 shadow-inner shrink-0 group-hover:bg-zinc-900 group-hover:border-zinc-700/50 transition-colors">
-                            {getTypeIcon(tool.type, "w-5 h-5 text-zinc-500 group-hover:text-zinc-300 transition-colors")}
-                        </div>
-                        <div className="flex flex-col">
-                            <h3 className="text-[19px] sm:text-[21px] font-medium font-sans text-zinc-200 tracking-tight leading-none group-hover:text-white transition-colors mb-1.5 line-clamp-1">
-                                {tool.name}
-                            </h3>
+                <div className="flex flex-col gap-4 pointer-events-none">
+                    {/* Header Sequence */}
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                            <div className="flex items-center justify-center w-8 h-8 bg-white/[0.02] rounded-lg border border-white/5 text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                                {getTypeIcon(tool.type, "w-4 h-4")}
+                            </div>
                             <div className="flex items-center gap-2">
-                                <span className={`px-2 py-[2px] text-[9px] font-mono tracking-widest uppercase rounded flex items-center border ${statusColor}`}>
-                                    {tool.status}
-                                </span>
-                                {tool.work_context?.company && (
-                                    <>
-                                        <span className="text-zinc-600 font-mono text-[10px]">·</span>
-                                        <span className="text-zinc-500 font-mono text-[10px] tracking-wide uppercase truncate max-w-[120px]">
-                                            @ {tool.work_context.company}
-                                        </span>
-                                    </>
-                                )}
+                                <div className={`w-1.5 h-1.5 rounded-full ${statusInfo.dot} shadow-[0_0_8px_currentColor]`} />
+                                <span className="text-[10px] font-mono tracking-widest uppercase text-zinc-500 group-hover:text-zinc-400 transition-colors">{tool.status}</span>
                             </div>
                         </div>
                     </div>
 
-                    {/* 2. Text Content  */}
-                    <div className="flex-grow z-10 flex flex-col mt-2">
-                        <p className="text-[14px] text-zinc-400 font-sans leading-[1.6] line-clamp-3 group-hover:text-zinc-300 transition-colors">
+                    {/* Title and Context */}
+                    <div className="mt-2 text-left">
+                        <h3 className="text-[20px] font-medium font-sans text-[#ededed] tracking-tight leading-tight mb-2 line-clamp-1 group-hover:text-white transition-colors">
+                            {tool.name}
+                        </h3>
+                        <p className="text-[13px] text-zinc-500 font-sans leading-[1.6] line-clamp-3 group-hover:text-zinc-400 transition-colors pr-2">
                             {tool.description || "No description provided."}
                         </p>
                     </div>
-
                 </div>
 
-                {/* 3. Footer Bar - Pinned to bottom */}
-                <div className="flex flex-wrap items-center justify-between gap-4 pt-5 border-t border-zinc-800/50 shrink-0 group-hover:border-zinc-700/50 transition-colors mt-auto z-10 relative pointer-events-auto">
-
-                    {/* Tags Container */}
-                    <div className="flex gap-1.5 shrink-1 overflow-hidden">
-                        {visibleTags.map((tech, i) => (
-                            <span key={i} className="px-2 py-1 text-[10px] font-mono text-zinc-400 bg-black/40 border border-zinc-800/50 rounded-md shrink-0 whitespace-nowrap group-hover:border-zinc-700/50 transition-colors pointer-events-none">
-                                {tech}
-                            </span>
-                        ))}
-                        {hiddenCount > 0 && (
-                            <span className="px-1.5 py-1 text-[10px] font-mono text-zinc-600 font-medium tracking-wide pointer-events-none">
-                                +{hiddenCount}
-                            </span>
+                {/* Footer Sequence */}
+                <div className="flex flex-col gap-3 pointer-events-none mt-auto">
+                    <div className="flex items-center gap-2 text-[10px] font-mono text-zinc-600 uppercase tracking-widest truncate">
+                        {tool.type && <span>{tool.type}</span>}
+                        {tool.work_context?.company && (
+                            <>
+                                <span>·</span>
+                                <span className="text-zinc-500">@ {tool.work_context.company}</span>
+                            </>
+                        )}
+                        {tool.version && (
+                            <>
+                                <span>·</span>
+                                <span>v{tool.version}</span>
+                            </>
                         )}
                     </div>
 
-                    {/* Links */}
-                    <div className="flex items-center gap-2 shrink-0">
-                        {tool.links?.github && (
-                            <a href={tool.links.github} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="p-2 bg-black/40 border border-zinc-800/50 hover:border-zinc-600  rounded-lg transition-all text-zinc-500 hover:text-white shadow-sm z-10">
-                                <Github className="w-3.5 h-3.5" />
-                            </a>
-                        )}
-                        {tool.links?.demo && (
-                            <a href={tool.links.demo} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="px-3 py-1.5 text-[11px] font-mono font-bold text-black bg-zinc-200 hover:bg-white rounded-lg transition-all shadow-sm flex items-center gap-1.5 z-10">
-                                Demo <ExternalLink className="w-3.5 h-3.5" />
-                            </a>
-                        )}
+                    <div className="w-full h-px bg-white/5 group-hover:bg-white/10 transition-colors" />
+
+                    <div className="text-[10px] font-mono text-zinc-500 truncate group-hover:text-zinc-400 transition-colors">
+                        {tagsString || 'NO ARCHITECTURE DEFINED'}
                     </div>
                 </div>
 
-                <div className="absolute -top-12 -right-12 w-48 h-48 bg-white/[0.015] rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0 mix-blend-screen" />
+                {/* Lighting effects */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-2xl pointer-events-none" />
+                <div className="absolute top-6 right-6 text-zinc-800 group-hover:text-zinc-600 transition-colors duration-500">
+                    <ExternalLink className="w-4 h-4 opacity-0 -translate-x-2 translate-y-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-300" />
+                </div>
             </div>
 
             {/* Modal Overlay */}
