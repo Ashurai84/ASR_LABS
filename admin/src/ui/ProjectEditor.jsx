@@ -60,6 +60,8 @@ export const ProjectEditor = ({ project, onSave, onCancel, onDelete }) => {
         outcome: ''
     });
 
+    const [tagsInput, setTagsInput] = useState('');
+
     useEffect(() => {
         if (project) {
             const { data } = parseFrontmatter(project.meta);
@@ -73,6 +75,7 @@ export const ProjectEditor = ({ project, onSave, onCancel, onDelete }) => {
                 description: data.description || '',
                 published: data.published || 'false'
             });
+            setTagsInput((data.tags || []).join(', '));
             setTimelineMarkdown(project.timeline || '');
             fetchRemoteActivity(project.id, data.github);
         }
@@ -120,6 +123,8 @@ export const ProjectEditor = ({ project, onSave, onCancel, onDelete }) => {
 
     const handleSave = (publishedOverride) => {
         const finalMeta = publishedOverride ? { ...meta, published: publishedOverride } : meta;
+        // Clean up tags on save
+        finalMeta.tags = tagsInput.split(',').map(t => t.trim()).filter(Boolean);
         const metaMarkdown = stringifyFrontmatter(finalMeta, '');
         onSave(meta.slug, metaMarkdown, timelineMarkdown);
     };
@@ -264,8 +269,10 @@ ${newEntry.outcome ? `\n> Outcome: ${newEntry.outcome}` : ''}
                                 <label className="text-[10px] font-mono text-zinc-600 uppercase">Tags (comma separated)</label>
                                 <input
                                     type="text"
-                                    value={meta.tags.join(', ')}
-                                    onChange={e => setMeta({ ...meta, tags: e.target.value.split(',').map(t => t.trim()).filter(Boolean) })}
+                                    value={tagsInput}
+                                    onChange={e => {
+                                        setTagsInput(e.target.value);
+                                    }}
                                     className="w-full bg-zinc-900/50 border border-zinc-900 px-3 py-2 rounded text-zinc-400 focus:border-zinc-700 outline-none font-mono text-xs"
                                     placeholder="react, typescript, rust..."
                                 />
