@@ -216,6 +216,15 @@ async function main() {
     }
 
     // 8. Final Assembly
+
+    // CLEANUP: Drop orphaned timeline events for deleted projects
+    const validProjectIds = new Set(updatedProjects.map(p => p.id));
+    for (const eventId of Object.keys(timelineEvents)) {
+        if (!validProjectIds.has(timelineEvents[eventId].project_id)) {
+            delete timelineEvents[eventId];
+        }
+    }
+
     const timelineIndex = Object.keys(timelineEvents).sort((a, b) => {
         return new Date(timelineEvents[b].date).getTime() - new Date(timelineEvents[a].date).getTime();
     });
