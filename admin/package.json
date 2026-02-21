@@ -4,10 +4,11 @@
     "type": "module",
     "private": true,
     "scripts": {
-        "dev": "vite",
-        "start": "concurrently \"npm run serve\" \"npm run dev\"",
+        "dev": "concurrently \"npm run serve:dev\" \"vite\"",
+        "start": "npm run dev",
         "build": "vite build",
-        "serve": "node src/server.js"
+        "serve": "node src/server.js",
+        "serve:dev": "nodemon src/server.js"
     },
     "dependencies": {
         "dotenv": "^16.4.5",
@@ -22,6 +23,7 @@
         "@vitejs/plugin-react": "^4.0.0",
         "autoprefixer": "^10.4.24",
         "concurrently": "^9.2.1",
+        "nodemon": "^3.1.14",
         "postcss": "^8.5.6",
         "tailwindcss": "^3.4.19",
         "vite": "^4.3.9"
