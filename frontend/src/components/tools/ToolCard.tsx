@@ -27,9 +27,19 @@ const getStatusInfo = (status: string) => {
     }
 };
 
+const getModalStatusColor = (status: string) => {
+    switch (status?.toUpperCase()) {
+        case 'ACTIVE': return 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20';
+        case 'EXPERIMENTAL': return 'text-amber-500 bg-amber-500/10 border-amber-500/20';
+        case 'DEPRECATED': return 'text-red-500 bg-red-500/10 border-red-500/20';
+        default: return 'text-zinc-400 bg-zinc-800/50 border-zinc-700/50';
+    }
+};
+
 export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const statusInfo = getStatusInfo(tool.status);
+    const statusColor = getModalStatusColor(tool.status);
 
     // Lock body scroll when modal is open
     useEffect(() => {
