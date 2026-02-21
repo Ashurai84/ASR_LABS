@@ -8,22 +8,22 @@ interface ToolCardProps {
 
 const getTypeIcon = (type?: string) => {
     switch (type?.toUpperCase()) {
-        case 'BACKEND': return <Database className="w-5 h-5 text-[#85858b] group-hover:text-white transition-colors" />;
-        case 'FRONTEND': return <Globe className="w-5 h-5 text-[#85858b] group-hover:text-white transition-colors" />;
-        case 'FULLSTACK': return <Network className="w-5 h-5 text-[#85858b] group-hover:text-white transition-colors" />;
-        case 'MOBILE': return <Smartphone className="w-5 h-5 text-[#85858b] group-hover:text-white transition-colors" />;
-        case 'AI_ML': return <BrainCircuit className="w-5 h-5 text-[#85858b] group-hover:text-white transition-colors" />;
-        case 'DEVOPS': return <Terminal className="w-5 h-5 text-[#85858b] group-hover:text-white transition-colors" />;
-        default: return <Code2 className="w-5 h-5 text-[#85858b] group-hover:text-white transition-colors" />;
+        case 'BACKEND': return <Database className="w-5 h-5 text-zinc-500 group-hover:text-zinc-300 transition-colors" />;
+        case 'FRONTEND': return <Globe className="w-5 h-5 text-zinc-500 group-hover:text-zinc-300 transition-colors" />;
+        case 'FULLSTACK': return <Network className="w-5 h-5 text-zinc-500 group-hover:text-zinc-300 transition-colors" />;
+        case 'MOBILE': return <Smartphone className="w-5 h-5 text-zinc-500 group-hover:text-zinc-300 transition-colors" />;
+        case 'AI_ML': return <BrainCircuit className="w-5 h-5 text-zinc-500 group-hover:text-zinc-300 transition-colors" />;
+        case 'DEVOPS': return <Terminal className="w-5 h-5 text-zinc-500 group-hover:text-zinc-300 transition-colors" />;
+        default: return <Code2 className="w-5 h-5 text-zinc-500 group-hover:text-zinc-300 transition-colors" />;
     }
 };
 
 const getStatusColor = (status: string) => {
     switch (status?.toUpperCase()) {
-        case 'ACTIVE': return 'text-[#22c55e] border-[#22c55e]/20 bg-[#22c55e]/5';
-        case 'EXPERIMENTAL': return 'text-[#f97316] border-[#f97316]/20 bg-[#f97316]/5';
-        case 'DEPRECATED': return 'text-[#ef4444] border-[#ef4444]/20 bg-[#ef4444]/5';
-        default: return 'text-[#a1a1aa] border-[#27272a] bg-[#18181b]';
+        case 'ACTIVE': return 'text-emerald-500/80 bg-emerald-500/10 border-emerald-500/20';
+        case 'EXPERIMENTAL': return 'text-amber-500/80 bg-amber-500/10 border-amber-500/20';
+        case 'DEPRECATED': return 'text-red-500/80 bg-red-500/10 border-red-500/20';
+        default: return 'text-zinc-400 bg-zinc-800/50 border-zinc-700/50';
     }
 };
 
@@ -43,81 +43,81 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
     const hiddenCount = displayTags.length > 3 ? displayTags.length - 3 : 0;
     
     return (
-        <div className="group flex flex-col h-[320px] w-full bg-[#0a0a0a] border border-[#27272a]/50 rounded-2xl p-6 transition-all duration-300 hover:border-[#3f3f46] hover:bg-[#111] cursor-pointer relative shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:-translate-y-1 overflow-hidden">
+        <div className="group block no-underline h-[340px] w-full bg-[#111] border border-zinc-800/80 rounded-2xl p-6 transition-all duration-300 hover:border-zinc-700 hover:bg-[#141414] relative overflow-hidden">
             
-            {/* Ambient Background Mesh on hover */}
-            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-white/[0.015] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-
-            {/* 1. Header Area */}
-            <div className="flex flex-col gap-4 w-full z-10 relative">
-                
-                {/* Top Row: Icon + Meta */}
-                <div className="flex justify-between items-center w-full">
-                    <div className="p-3 bg-[#18181b] rounded-xl border border-[#27272a] shadow-inner shrink-0 group-hover:bg-[#27272a] transition-colors">
-                        {getTypeIcon(tool.type)}
-                    </div>
-                    <div className="flex flex-col items-end gap-1 text-right mt-1">
-                        <span className={`px-2 py-0.5 text-[9px] font-mono tracking-widest uppercase rounded border ${statusColor}`}>
-                            {tool.status}
-                        </span>
+            {/* Ambient Lighting Map */}
+            <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            <div className="absolute -inset-x-6 top-1/2 -bottom-6 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 z-0 pointer-events-none" />
+            
+            <div className="flex flex-col h-full relative z-10">
+                {/* 1. Ultra-Clean Header Row */}
+                <div className="flex justify-between items-start mb-6">
+                    <div className="flex items-center gap-4">
+                        <div className="p-3 bg-black/40 rounded-xl border border-zinc-800/50 shadow-inner shrink-0 group-hover:bg-zinc-900 group-hover:border-zinc-700/50 transition-colors">
+                            {getTypeIcon(tool.type)}
+                        </div>
+                        <div className="flex flex-col">
+                            <h3 className="text-[19px] sm:text-[21px] font-medium font-sans text-zinc-200 tracking-tight leading-none group-hover:text-white transition-colors mb-1.5 line-clamp-1">
+                                {tool.name}
+                            </h3>
+                            <div className="flex items-center gap-2">
+                                <span className={`px-2 py-[2px] text-[9px] font-mono tracking-widest uppercase rounded flex items-center border ${statusColor}`}>
+                                    {tool.status}
+                                </span>
+                                {tool.work_context?.company && (
+                                    <>
+                                        <span className="text-zinc-600 font-mono text-[10px]">·</span>
+                                        <span className="text-zinc-500 font-mono text-[10px] tracking-wide uppercase">
+                                            @ {tool.work_context.company}
+                                        </span>
+                                    </>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                {/* Middle Row: Title + Context */}
-                <div>
-                    <h3 className="text-[20px] sm:text-[22px] font-bold font-serif text-[#ffffff] tracking-tight leading-none group-hover:text-white transition-colors mb-2.5 truncate">
-                        {tool.name}
-                    </h3>
-                    <div className="text-[11px] font-mono text-[#6b7280] flex items-center gap-1.5 flex-wrap">
-                        {tool.type && <span className="text-[#a1a1aa] uppercase tracking-wide">{tool.type}</span>}
-                        {(tool.work_context?.company) && (
-                            <>
-                                <span>·</span>
-                                <span className="truncate max-w-[150px]">@ {tool.work_context.company}</span>
-                            </>
+                {/* 2. Text Content  */}
+                <div className="flex-grow z-10 flex flex-col pt-2">
+                    <p className="text-[14px] text-zinc-400 font-sans leading-[1.6] line-clamp-3 group-hover:text-zinc-300 transition-colors">
+                        {tool.description || "No description provided."}
+                    </p>
+                </div>
+
+                {/* 3. Footer Bar */}
+                <div className="flex flex-wrap items-center justify-between gap-4 pt-5 border-t border-zinc-800/50 mt-auto shrink-0 group-hover:border-zinc-700/50 transition-colors">
+                    
+                    {/* Tags Container */}
+                    <div className="flex gap-1.5 shrink-1 overflow-hidden">
+                        {visibleTags.map((tech, i) => (
+                            <span key={i} className="px-2 py-1 text-[10px] font-mono text-zinc-400 bg-black/40 border border-zinc-800/50 rounded-md shrink-0 whitespace-nowrap group-hover:border-zinc-700/50 transition-colors">
+                                {tech}
+                            </span>
+                        ))}
+                        {hiddenCount > 0 && (
+                            <span className="px-1.5 py-1 text-[10px] font-mono text-zinc-600 font-medium tracking-wide">
+                                +{hiddenCount}
+                            </span>
                         )}
                     </div>
-                </div>
-            </div>
 
-            {/* 2. Text Content (takes up empty center space) */}
-            <div className="flex-grow z-10 relative flex flex-col justify-center my-4">
-                <p className="text-[14px] text-[#a1a1aa] font-sans leading-relaxed line-clamp-3 group-hover:text-[#d4d4d8] transition-colors">
-                    {tool.description || "No description provided."}
-                </p>
-            </div>
-
-            {/* 3. Bottom Action Row pinned to bottom */}
-            <div className="flex flex-wrap items-center justify-between gap-4 pt-5 border-t border-[#27272a]/60 relative z-10 shrink-0 mt-auto bg-transparent transition-colors">
-                {/* Tech Pills */}
-                <div className="flex gap-1.5 shrink-1 overflow-hidden">
-                    {visibleTags.map((tech, i) => (
-                        <span key={i} className="px-2 py-0.5 text-[10px] font-mono text-[#85858b] bg-[#18181b] border border-[#27272a] rounded shrink-0 whitespace-nowrap">
-                            {tech}
-                        </span>
-                    ))}
-                    {hiddenCount > 0 && (
-                        <span className="px-1.5 py-0.5 text-[10px] font-mono text-[#6b7280] font-medium tracking-wide">
-                            +{hiddenCount}
-                        </span>
-                    )}
-                </div>
-
-                <div className="flex items-center gap-2 shrink-0">
-                     {tool.links?.github && (
-                        <a href={tool.links.github} target="_blank" rel="noreferrer" className="text-[10px] font-mono p-1.5 bg-[#18181b] border border-[#27272a] hover:border-[#3f3f46] hover:bg-[#27272a] rounded transition-all text-[#85858b] hover:text-[#e5e5e5] shadow-sm z-10">
-                            <Github className="w-4 h-4" />
-                        </a>
-                     )}
-                     {tool.links?.demo && (
-                        <a href={tool.links.demo} target="_blank" rel="noreferrer" className="text-[11px] font-mono px-3 py-1.5 bg-[#e5e5e5] hover:bg-[#ffffff] text-[#111] hover:text-black rounded transition-all shadow-sm font-bold flex items-center gap-1.5 z-10">
-                            Demo <ExternalLink className="w-3.5 h-3.5" />
-                        </a>
-                     )}
+                    {/* Links */}
+                    <div className="flex items-center gap-2 shrink-0">
+                         {tool.links?.github && (
+                            <a href={tool.links.github} target="_blank" rel="noreferrer" className="p-2 bg-black/40 border border-zinc-800/50 hover:border-zinc-600  rounded-lg transition-all text-zinc-500 hover:text-white shadow-sm z-10">
+                                <Github className="w-3.5 h-3.5" />
+                            </a>
+                         )}
+                         {tool.links?.demo && (
+                            <a href={tool.links.demo} target="_blank" rel="noreferrer" className="px-3 py-1.5 text-[11px] font-mono font-bold text-black bg-zinc-200 hover:bg-white rounded-lg transition-all shadow-sm flex items-center gap-1.5 z-10">
+                                Demo <ExternalLink className="w-3.5 h-3.5" />
+                            </a>
+                         )}
+                    </div>
                 </div>
             </div>
             
-             <div className="absolute top-0 right-0 w-64 h-64 bg-[#ffffff]/[0.012] rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0 transform translate-x-1/3 -translate-y-1/3" />
+             <div className="absolute -top-12 -right-12 w-48 h-48 bg-white/[0.015] rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0 mix-blend-screen" />
         </div>
     );
 };
