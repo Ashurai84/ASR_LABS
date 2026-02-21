@@ -313,4 +313,3 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
         </>
     );
 };
-EOF
