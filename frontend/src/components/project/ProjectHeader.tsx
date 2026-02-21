@@ -47,7 +47,7 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project }) => {
                 </div>
             </div>
 
-            {project.tags?.length > 0 && (
+            {Array.isArray(project.tags) && project.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 pt-2">
                     {project.tags.map(tag => (
                         <div key={tag} className="flex items-center gap-1 text-[9px] font-mono text-zinc-600 uppercase tracking-widest">

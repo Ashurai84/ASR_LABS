@@ -24,14 +24,14 @@
       "tunderclient"
     ],
     "links": {
-      "github": "",
-      "demo": ""
+      "github": "https://github.com/Ashurai84/smart-home-iot-frontend",
+      "demo": "https://smart-home-frontend-three.vercel.app/"
     },
     "deprecation": {
       "reason": ""
     },
     "slug": "smart-home-",
-    "updated_at": "2026-02-21T18:39:15.534Z",
+    "updated_at": "2026-02-21T20:49:54.937Z",
     "created_at": "2026-02-21T18:39:15.534Z"
   }
 ]
