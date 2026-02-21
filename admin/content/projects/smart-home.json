@@ -1,0 +1,62 @@
+{
+    "id": "smart-home",
+    "cover_image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=1200&q=80",
+    "images": [
+        {
+            "url": "https://images.unsplash.com/photo-1558002038-1055907df827?w=800&q=80",
+            "caption": "Main dashboard showing device controls",
+            "type": "screenshot"
+        },
+        {
+            "url": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=800&q=80",
+            "caption": "IoT sensor real-time data feed",
+            "type": "screenshot"
+        },
+        {
+            "url": "https://images.unsplash.com/photo-1609592806596-b85baf60dfb8?w=800&q=80",
+            "caption": "Mobile app companion interface",
+            "type": "screenshot"
+        },
+        {
+            "url": "https://images.unsplash.com/photo-1551269901-5c5e14c25df7?w=800&q=80",
+            "caption": "Hardware prototype and circuit design",
+            "type": "photo"
+        },
+        {
+            "url": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+            "caption": "System architecture diagram",
+            "type": "diagram"
+        }
+    ],
+    "my_role": "Lead Fullstack Engineer & IoT Architect",
+    "contributions": [
+        "Designed and built the real-time MQTT message broker using Node.js for fan/device state management",
+        "Developed the React frontend dashboard with live WebSocket state updates",
+        "Integrated the ESP32 microcontroller with a REST API for remote device switching",
+        "Built a mobile-responsive UI with React Native companion app"
+    ],
+    "tech_stack": {
+        "frontend": [
+            "React",
+            "React Native",
+            "WebSocket"
+        ],
+        "backend": [
+            "Node.js",
+            "MQTT",
+            "Express",
+            "REST API"
+        ],
+        "devops": [
+            "ESP32",
+            "Raspberry Pi",
+            "Docker"
+        ]
+    },
+    "links": {
+        "github": "https://github.com/Ashurai84",
+        "demo": "",
+        "docs": ""
+    },
+    "outcome": "Built a working smart home system allowing real-time fan/device monitoring and control from any device on the local network."
+}

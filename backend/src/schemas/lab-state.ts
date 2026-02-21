@@ -32,6 +32,12 @@ export interface GlobalDerived {
 
 export type ProjectStatus = 'idea' | 'build' | 'shipped' | 'paused';
 
+export interface ProjectImage {
+  url: string;
+  caption?: string;
+  type?: 'screenshot' | 'diagram' | 'photo';
+}
+
 export interface Project {
   id: ProjectID;
   name: string;
@@ -40,14 +46,26 @@ export interface Project {
   repository_url?: string;
   tags: string[];
   derived: ProjectDerived;
-  // Note: projects contain timeline_event_ids for local rendering, but global timeline_index is authoritative for the feed.
   timeline_event_ids: UUID[];
-
-  // Health is stored in derived, or at top level? Architecture says "Each project stores this object".
-  // Architecture "Derived Fields (Explicit List)" says:
-  // For each project: focus_score, activity_level, last_decision_date, last_event_date, health.score, health.previous_score, health.change_reason.
-  // Health "Structured Object" section says: "Each project stores this object."
   health: HealthScore;
+
+  // === Case Study Fields (optional) ===
+  cover_image?: string;         // Hero banner URL
+  images?: ProjectImage[];      // Gallery (up to 5+)
+  my_role?: string;             // e.g. "Lead Fullstack Engineer"
+  contributions?: string[];     // Bullet point list
+  tech_stack?: {
+    frontend?: string[];
+    backend?: string[];
+    devops?: string[];
+    other?: string[];
+  };
+  links?: {
+    github?: string;
+    demo?: string;
+    docs?: string;
+  };
+  outcome?: string;             // One-line impact/result
 }
 
 export interface ProjectDerived {

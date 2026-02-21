@@ -32,6 +32,12 @@ export interface GlobalDerived {
 
 export type ProjectStatus = 'idea' | 'build' | 'shipped' | 'paused';
 
+export interface ProjectImage {
+    url: string;
+    caption?: string;
+    type?: 'screenshot' | 'diagram' | 'photo';
+}
+
 export interface Project {
     id: ProjectID;
     name: string;
@@ -42,6 +48,24 @@ export interface Project {
     derived: ProjectDerived;
     timeline_event_ids: UUID[];
     health: HealthScore;
+
+    // === Case Study Fields (optional) ===
+    cover_image?: string;
+    images?: ProjectImage[];
+    my_role?: string;
+    contributions?: string[];
+    tech_stack?: {
+        frontend?: string[];
+        backend?: string[];
+        devops?: string[];
+        other?: string[];
+    };
+    links?: {
+        github?: string;
+        demo?: string;
+        docs?: string;
+    };
+    outcome?: string;
 }
 
 export interface ProjectDerived {

@@ -47,6 +47,9 @@ const STATE_FILE_PATH = path.resolve(__dirname, '../../../frontend/public/data/l
 async function main() {
     console.log('[Runner] Starting pipeline...');
 
+    // Define content directory up-front (used in project loop and final assembly)
+    const ADMIN_CONTENT_DIR = path.resolve(__dirname, '../../../admin/content');
+
     // 1. Initialize Components
     const ingestion = new IngestionEngine(CONFIG);
     const pulseAggregator = new PulseAggregator();
@@ -196,6 +199,24 @@ async function main() {
             }
         };
 
+        // Merge case study data from admin/content/projects/<id>.json if present
+        const caseStudyPath = path.join(ADMIN_CONTENT_DIR, 'projects', `${pConfig.id}.json`);
+        if (fs.existsSync(caseStudyPath)) {
+            try {
+                const caseStudyData = JSON.parse(fs.readFileSync(caseStudyPath, 'utf8'));
+                if (caseStudyData.cover_image) projectObj.cover_image = caseStudyData.cover_image;
+                if (caseStudyData.images) projectObj.images = caseStudyData.images;
+                if (caseStudyData.my_role) projectObj.my_role = caseStudyData.my_role;
+                if (caseStudyData.contributions) projectObj.contributions = caseStudyData.contributions;
+                if (caseStudyData.tech_stack) projectObj.tech_stack = caseStudyData.tech_stack;
+                if (caseStudyData.links) projectObj.links = caseStudyData.links;
+                if (caseStudyData.outcome) projectObj.outcome = caseStudyData.outcome;
+                console.log(`[Runner] Merged case study data for project: ${pConfig.id}`);
+            } catch (e) {
+                console.warn(`[Runner] Failed to merge case study data for ${pConfig.id}:`, e);
+            }
+        }
+
         projectsForFocus.push({ ...projectObj, recentPulses: pPulses });
         updatedProjects.push(projectObj);
     }
@@ -230,7 +251,7 @@ async function main() {
     });
 
     // Load Admin Data (Tools, Profile, Published Notes)
-    const ADMIN_CONTENT_DIR = path.resolve(__dirname, '../../../admin/content');
+    // ADMIN_CONTENT_DIR already declared above
     const tools = JSON.parse(fs.readFileSync(path.join(ADMIN_CONTENT_DIR, 'tools.json'), 'utf8') || '[]');
 
     let profile = {};
