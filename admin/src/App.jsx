@@ -71,17 +71,17 @@ function App() {
     /* --- Projects --- */
     const loadProject = async (slug) => {
         const res = await fetch(`/api/project/${slug}`);
-        const { meta, timeline } = await res.json();
-        setActiveFile({ type: 'project', id: slug, meta, timeline });
+        const { meta, timeline, caseStudy } = await res.json();
+        setActiveFile({ type: 'project', id: slug, meta, timeline, caseStudy });
         setView('editor');
     };
 
-    const saveProject = async (slug, meta, timeline) => {
+    const saveProject = async (slug, meta, timeline, caseStudy) => {
         try {
             await fetch('/api/project', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ slug, meta, timeline })
+                body: JSON.stringify({ slug, meta, timeline, caseStudy })
             });
             await fetchStructure();
             setView('projects');

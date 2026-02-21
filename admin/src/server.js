@@ -74,7 +74,12 @@ app.get('/api/project/:slug', (req, res) => {
         ? fs.readFileSync(path.join(dir, 'timeline.md'), 'utf8')
         : '';
 
-    res.json({ meta, timeline });
+    const caseStudyPath = path.join(PROJECTS_DIR, `${slug}.json`);
+    const caseStudy = fs.existsSync(caseStudyPath)
+        ? readJson(caseStudyPath, {})
+        : {};
+
+    res.json({ meta, timeline, caseStudy });
 });
 
 // Fetch Remote Activity for Moderation
@@ -146,12 +151,15 @@ app.post('/api/project/:slug/moderation', (req, res) => {
 });
 
 app.post('/api/project', (req, res) => {
-    const { slug, meta, timeline } = req.body;
+    const { slug, meta, timeline, caseStudy } = req.body;
     const dir = path.join(PROJECTS_DIR, slug);
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
     if (meta !== undefined) fs.writeFileSync(path.join(dir, 'project.md'), meta);
     if (timeline !== undefined) fs.writeFileSync(path.join(dir, 'timeline.md'), timeline);
+    if (caseStudy !== undefined) {
+        fs.writeFileSync(path.join(PROJECTS_DIR, `${slug}.json`), JSON.stringify(caseStudy, null, 2));
+    }
 
     res.json({ success: true });
 });
@@ -161,6 +169,10 @@ app.delete('/api/project/:slug', (req, res) => {
     const dir = path.join(PROJECTS_DIR, slug);
     if (fs.existsSync(dir)) {
         fs.rmSync(dir, { recursive: true, force: true });
+
+        const caseStudyPath = path.join(PROJECTS_DIR, `${slug}.json`);
+        if (fs.existsSync(caseStudyPath)) fs.unlinkSync(caseStudyPath);
+
         res.json({ success: true });
     } else {
         res.status(404).json({ error: 'Project not found' });

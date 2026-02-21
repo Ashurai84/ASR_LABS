@@ -61,6 +61,15 @@ export const ProjectEditor = ({ project, onSave, onCancel, onDelete }) => {
     });
 
     const [tagsInput, setTagsInput] = useState('');
+    const [caseStudy, setCaseStudy] = useState({
+        cover_image: '',
+        my_role: '',
+        outcome: '',
+        links: { github: '', demo: '', docs: '' },
+        tech_stack: { frontend: '', backend: '', devops: '' },
+        contributions: '',
+        images: []
+    });
 
     useEffect(() => {
         if (project) {
@@ -77,9 +86,42 @@ export const ProjectEditor = ({ project, onSave, onCancel, onDelete }) => {
             });
             setTagsInput((data.tags || []).join(', '));
             setTimelineMarkdown(project.timeline || '');
+
+            setCaseStudy({
+                cover_image: project.caseStudy?.cover_image || '',
+                my_role: project.caseStudy?.my_role || '',
+                outcome: project.caseStudy?.outcome || '',
+                links: {
+                    github: project.caseStudy?.links?.github || '',
+                    demo: project.caseStudy?.links?.demo || '',
+                    docs: project.caseStudy?.links?.docs || ''
+                },
+                tech_stack: {
+                    frontend: project.caseStudy?.tech_stack?.frontend?.join(', ') || '',
+                    backend: project.caseStudy?.tech_stack?.backend?.join(', ') || '',
+                    devops: project.caseStudy?.tech_stack?.devops?.join(', ') || ''
+                },
+                contributions: project.caseStudy?.contributions?.join('\n') || '',
+                images: project.caseStudy?.images || []
+            });
+
             fetchRemoteActivity(project.id, data.github);
         }
     }, [project]);
+
+    const handleAddImage = () => {
+        setCaseStudy(prev => ({ ...prev, images: [...prev.images, { url: '', caption: '', type: 'screenshot' }] }));
+    };
+
+    const handleUpdateImage = (index, field, value) => {
+        const newImages = [...caseStudy.images];
+        newImages[index][field] = value;
+        setCaseStudy({ ...caseStudy, images: newImages });
+    };
+
+    const handleRemoveImage = (index) => {
+        setCaseStudy(prev => ({ ...prev, images: prev.images.filter((_, i) => i !== index) }));
+    };
 
     const fetchRemoteActivity = async (projectId = project?.id, githubUrl = meta.github) => {
         setIsScanning(true);
@@ -126,7 +168,22 @@ export const ProjectEditor = ({ project, onSave, onCancel, onDelete }) => {
         // Clean up tags on save
         finalMeta.tags = tagsInput.split(',').map(t => t.trim()).filter(Boolean);
         const metaMarkdown = stringifyFrontmatter(finalMeta, '');
-        onSave(meta.slug, metaMarkdown, timelineMarkdown);
+
+        const finalCaseStudy = {
+            cover_image: caseStudy.cover_image,
+            my_role: caseStudy.my_role,
+            outcome: caseStudy.outcome,
+            links: caseStudy.links,
+            tech_stack: {
+                frontend: caseStudy.tech_stack.frontend.split(',').map(s => s.trim()).filter(Boolean),
+                backend: caseStudy.tech_stack.backend.split(',').map(s => s.trim()).filter(Boolean),
+                devops: caseStudy.tech_stack.devops.split(',').map(s => s.trim()).filter(Boolean)
+            },
+            contributions: caseStudy.contributions.split('\n').map(s => s.trim()).filter(Boolean),
+            images: caseStudy.images.filter(img => img.url)
+        };
+
+        onSave(meta.slug, metaMarkdown, timelineMarkdown, finalCaseStudy);
     };
 
     const addTimelineEntry = () => {
@@ -276,6 +333,82 @@ ${newEntry.outcome ? `\n> Outcome: ${newEntry.outcome}` : ''}
                                     className="w-full bg-zinc-900/50 border border-zinc-900 px-3 py-2 rounded text-zinc-400 focus:border-zinc-700 outline-none font-mono text-xs"
                                     placeholder="react, typescript, rust..."
                                 />
+                            </div>
+                        </div>
+
+                        {/* Extended Case Study Section */}
+                        <div className="pt-6 border-t border-zinc-900 space-y-6">
+                            <h2 className="text-xs font-mono text-emerald-500 uppercase tracking-[0.3em]">Case Study Media & Architecture</h2>
+
+                            <div className="space-y-4">
+                                <div className="space-y-1">
+                                    <label className="text-[10px] font-mono text-zinc-600 uppercase">Hero Cover Image URL</label>
+                                    <input
+                                        type="text"
+                                        value={caseStudy.cover_image}
+                                        onChange={e => setCaseStudy({ ...caseStudy, cover_image: e.target.value })}
+                                        className="w-full bg-zinc-900/30 border border-zinc-900 px-3 py-2 rounded text-zinc-400 focus:border-zinc-700 outline-none font-mono text-xs"
+                                    />
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-1">
+                                        <label className="text-[10px] font-mono text-zinc-600 uppercase">My Role</label>
+                                        <input
+                                            type="text"
+                                            value={caseStudy.my_role}
+                                            onChange={e => setCaseStudy({ ...caseStudy, my_role: e.target.value })}
+                                            className="w-full bg-zinc-900/30 border border-zinc-900 px-3 py-2 rounded text-zinc-400 focus:border-zinc-700 outline-none font-mono text-xs"
+                                        />
+                                    </div>
+                                    <div className="space-y-1">
+                                        <label className="text-[10px] font-mono text-zinc-600 uppercase">Outcome / Value Delivered</label>
+                                        <input
+                                            type="text"
+                                            value={caseStudy.outcome}
+                                            onChange={e => setCaseStudy({ ...caseStudy, outcome: e.target.value })}
+                                            className="w-full bg-zinc-900/30 border border-zinc-900 px-3 py-2 rounded text-zinc-400 focus:border-zinc-700 outline-none font-mono text-xs"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="space-y-1">
+                                    <label className="text-[10px] font-mono text-zinc-600 uppercase">Contributions (One per line)</label>
+                                    <textarea
+                                        value={caseStudy.contributions}
+                                        onChange={e => setCaseStudy({ ...caseStudy, contributions: e.target.value })}
+                                        className="w-full bg-zinc-900/30 border border-zinc-900 rounded p-3 text-sm leading-relaxed text-zinc-400 focus:border-zinc-800 outline-none h-24 resize-none font-serif"
+                                    />
+                                </div>
+
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-mono text-zinc-600 uppercase">Tech Stack (Comma Separated)</label>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <input type="text" placeholder="Frontend..." value={caseStudy.tech_stack.frontend} onChange={e => setCaseStudy({ ...caseStudy, tech_stack: { ...caseStudy.tech_stack, frontend: e.target.value } })} className="w-full bg-zinc-900/30 border border-zinc-900 px-3 py-2 rounded text-zinc-400 focus:border-zinc-700 outline-none font-mono text-xs" />
+                                        <input type="text" placeholder="Backend..." value={caseStudy.tech_stack.backend} onChange={e => setCaseStudy({ ...caseStudy, tech_stack: { ...caseStudy.tech_stack, backend: e.target.value } })} className="w-full bg-zinc-900/30 border border-zinc-900 px-3 py-2 rounded text-zinc-400 focus:border-zinc-700 outline-none font-mono text-xs" />
+                                        <input type="text" placeholder="DevOps..." value={caseStudy.tech_stack.devops} onChange={e => setCaseStudy({ ...caseStudy, tech_stack: { ...caseStudy.tech_stack, devops: e.target.value } })} className="w-full bg-zinc-900/30 border border-zinc-900 px-3 py-2 rounded text-zinc-400 focus:border-zinc-700 outline-none font-mono text-xs" />
+                                    </div>
+                                </div>
+
+                                <div className="space-y-3 pt-2">
+                                    <div className="flex items-center justify-between">
+                                        <label className="text-[10px] font-mono text-zinc-600 uppercase">Image Gallery ({caseStudy.images.length})</label>
+                                        <button onClick={handleAddImage} className="text-[10px] font-mono uppercase bg-emerald-500/10 text-emerald-500 px-2 py-1 rounded hover:bg-emerald-500/20">
+                                            + Add Image
+                                        </button>
+                                    </div>
+                                    <div className="space-y-3">
+                                        {caseStudy.images.map((img, i) => (
+                                            <div key={i} className="flex flex-col gap-2 p-3 bg-zinc-900/20 border border-zinc-900 rounded relative group">
+                                                <button onClick={() => handleRemoveImage(i)} className="absolute top-2 right-2 p-1 bg-red-950/40 text-red-500 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                                                    <Trash2 className="w-3 h-3" />
+                                                </button>
+                                                <input type="text" placeholder="Image URL" value={img.url} onChange={e => handleUpdateImage(i, 'url', e.target.value)} className="w-full bg-zinc-900/30 border border-zinc-900 px-3 py-1.5 rounded text-zinc-400 focus:border-zinc-700 outline-none font-mono text-xs pr-8" />
+                                                <input type="text" placeholder="Caption (optional)" value={img.caption} onChange={e => handleUpdateImage(i, 'caption', e.target.value)} className="w-full bg-zinc-900/30 border border-zinc-900 px-3 py-1.5 rounded text-zinc-400 focus:border-zinc-700 outline-none font-sans text-xs" />
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
