@@ -37,71 +37,58 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
             if (Array.isArray(arr)) displayTags = [...displayTags, ...arr];
         });
     } else if (Array.isArray(tool.tags)) {
-        displayTags = [...displayTags];
+        displayTags = [...tool.tags];
     }
     const visibleTags = displayTags.slice(0, 3);
     const hiddenCount = displayTags.length > 3 ? displayTags.length - 3 : 0;
     
     return (
-        <div className="group flex flex-col h-[320px] w-full bg-[#0a0a0a] border border-[#27272a]/50 rounded-2xl p-6 transition-all duration-[400ms] hover:border-[#3f3f46] hover:bg-[#111] cursor-pointer relative shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:-translate-y-1">
+        <div className="group flex flex-col h-[320px] w-full bg-[#0a0a0a] border border-[#27272a]/50 rounded-2xl p-6 transition-all duration-300 hover:border-[#3f3f46] hover:bg-[#111] cursor-pointer relative shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:-translate-y-1 overflow-hidden">
             
             {/* Ambient Background Mesh on hover */}
             <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-white/[0.015] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
-            {/* 1. Header Array */}
-            <div className="flex justify-between items-start z-10 relative w-full pt-1">
-                <div className="flex flex-col gap-4 w-full">
-                    
-                    {/* Top Row: Icon + Meta */}
-                    <div className="flex justify-between items-center w-full">
-                        <div className="p-3 bg-[#18181b] rounded-xl border border-[#27272a] shadow-inner shrink-0 group-hover:bg-[#27272a] transition-colors">
-                            {getTypeIcon(tool.type)}
-                        </div>
-                        <div className="flex flex-col items-end gap-1 text-right mt-1">
-                            <span className={`px-2 py-0.5 text-[9px] font-mono tracking-widest uppercase rounded border ${statusColor}`}>
-                                {tool.status}
-                            </span>
-                        </div>
+            {/* 1. Header Area */}
+            <div className="flex flex-col gap-4 w-full z-10 relative">
+                
+                {/* Top Row: Icon + Meta */}
+                <div className="flex justify-between items-center w-full">
+                    <div className="p-3 bg-[#18181b] rounded-xl border border-[#27272a] shadow-inner shrink-0 group-hover:bg-[#27272a] transition-colors">
+                        {getTypeIcon(tool.type)}
                     </div>
+                    <div className="flex flex-col items-end gap-1 text-right mt-1">
+                        <span className={`px-2 py-0.5 text-[9px] font-mono tracking-widest uppercase rounded border ${statusColor}`}>
+                            {tool.status}
+                        </span>
+                    </div>
+                </div>
 
-                    {/* Middle Row: Title + Context */}
-                    <div>
-                        <h3 className="text-xl font-bold font-serif text-[#ffffff] tracking-tight leading-none group-hover:text-white transition-colors mb-2.5 truncate">
-                            {tool.name}
-                        </h3>
-                        <div className="text-[11px] font-mono text-[#6b7280] flex items-center gap-1.5 flex-wrap">
-                            {tool.type && <span className="text-[#a1a1aa] uppercase tracking-wide">{tool.type}</span>}
-                            {(tool.work_context?.company) && (
-                                <>
-                                    <span>·</span>
-                                    <span className="truncate max-w-[150px]">@ {tool.work_context.company}</span>
-                                </>
-                            )}
-                        </div>
+                {/* Middle Row: Title + Context */}
+                <div>
+                    <h3 className="text-[20px] sm:text-[22px] font-bold font-serif text-[#ffffff] tracking-tight leading-none group-hover:text-white transition-colors mb-2.5 truncate">
+                        {tool.name}
+                    </h3>
+                    <div className="text-[11px] font-mono text-[#6b7280] flex items-center gap-1.5 flex-wrap">
+                        {tool.type && <span className="text-[#a1a1aa] uppercase tracking-wide">{tool.type}</span>}
+                        {(tool.work_context?.company) && (
+                            <>
+                                <span>·</span>
+                                <span className="truncate max-w-[150px]">@ {tool.work_context.company}</span>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
 
             {/* 2. Text Content (takes up empty center space) */}
-            <div className="flex-grow z-10 relative flex flex-col justify-center my-4 overflow-hidden mask-bottom-fade">
-                <p className="text-[13px] text-[#a1a1aa] font-sans leading-relaxed line-clamp-3 group-hover:text-[#d4d4d8] transition-colors">
+            <div className="flex-grow z-10 relative flex flex-col justify-center my-4">
+                <p className="text-[14px] text-[#a1a1aa] font-sans leading-relaxed line-clamp-3 group-hover:text-[#d4d4d8] transition-colors">
                     {tool.description || "No description provided."}
                 </p>
-                {/* Expandable Role Area triggers purely on hover CSS */}
-                <div className="h-0 opacity-0 group-hover:h-[80px] group-hover:opacity-100 group-hover:mt-3 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]">
-                    <ul className="space-y-1.5 border-t border-[#27272a]/50 pt-3">
-                         {tool.my_role?.contributions?.slice(0, 2).map((cont, i) => (
-                             <li key={i} className="text-[12px] text-[#a1a1aa] font-sans flex items-start gap-2 max-w-full">
-                                 <span className="text-orange-500/80 mt-[2px] text-[8px] shrink-0">▶</span> 
-                                 <span className="leading-snug line-clamp-1">{cont}</span>
-                             </li>
-                         ))}
-                     </ul>
-                </div>
             </div>
 
             {/* 3. Bottom Action Row pinned to bottom */}
-            <div className="flex flex-wrap items-center justify-between gap-4 pt-5 border-t border-[#27272a]/60 relative z-10 shrink-0 mt-auto bg-[#0a0a0a] group-hover:bg-[#111] transition-colors">
+            <div className="flex flex-wrap items-center justify-between gap-4 pt-5 border-t border-[#27272a]/60 relative z-10 shrink-0 mt-auto bg-transparent transition-colors">
                 {/* Tech Pills */}
                 <div className="flex gap-1.5 shrink-1 overflow-hidden">
                     {visibleTags.map((tech, i) => (
@@ -123,14 +110,14 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
                         </a>
                      )}
                      {tool.links?.demo && (
-                        <a href={tool.links.demo} target="_blank" rel="noreferrer" className="text-[11px] font-mono px-3 py-1.5 bg-[#e5e5e5] hover:bg-[#ffffff] text-[#111] hover:text-black rounded transition-all shadow-[0_2px_8px_rgba(255,255,255,0.1)] font-bold flex items-center gap-1.5 z-10">
+                        <a href={tool.links.demo} target="_blank" rel="noreferrer" className="text-[11px] font-mono px-3 py-1.5 bg-[#e5e5e5] hover:bg-[#ffffff] text-[#111] hover:text-black rounded transition-all shadow-sm font-bold flex items-center gap-1.5 z-10">
                             Demo <ExternalLink className="w-3.5 h-3.5" />
                         </a>
                      )}
                 </div>
             </div>
             
-             <div className="absolute top-0 right-0 w-64 h-64 bg-[#ffffff]/[0.015] rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0 transform translate-x-1/3 -translate-y-1/3" />
+             <div className="absolute top-0 right-0 w-64 h-64 bg-[#ffffff]/[0.012] rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0 transform translate-x-1/3 -translate-y-1/3" />
         </div>
     );
 };
