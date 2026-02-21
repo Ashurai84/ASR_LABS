@@ -207,7 +207,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, events })
                         <span className="text-[11px] font-mono text-zinc-600">
                             Health <span className={project.health.score > 70 ? 'text-emerald-500' : 'text-yellow-500'}>{project.health.score}/100</span>
                         </span>
-                        {project.tags?.slice(0, 3).map(tag => (
+                        {(Array.isArray(project.tags) ? project.tags : []).slice(0, 3).map(tag => (
                             <span key={tag} className="px-2 py-0.5 text-[10px] font-mono text-zinc-500 bg-zinc-900 border border-zinc-800 rounded-md">
                                 {tag}
                             </span>
