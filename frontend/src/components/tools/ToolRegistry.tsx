@@ -1,68 +1,96 @@
 import React from 'react';
-import type { Project } from '../../types/lab-state';
-import { Github, Terminal } from 'lucide-react';
+import type { Tool } from '../../types/lab-state';
+import { Database, ExternalLink, Code2 } from 'lucide-react';
 
 interface ToolRegistryProps {
-    projects: Project[];
-    onSelectProject: (id: string) => void;
+    tools: Tool[];
 }
 
-const getStatusColor = (score: number) => {
-    if (score > 80) return 'bg-emerald-500/50';
-    if (score > 50) return 'bg-orange-500/50';
-    return 'bg-zinc-700';
+const getStatusColor = (status: string) => {
+    switch (status?.toLowerCase()) {
+        case 'active':
+            return 'bg-[#22c55e]/10 border-[#22c55e]/20 text-[#22c55e]';
+        case 'experimental':
+            return 'bg-[#f97316]/10 border-[#f97316]/20 text-[#f97316]';
+        case 'deprecated':
+            return 'bg-[#3f3f46]/20 border-[#27272a] text-[#85858b]';
+        default:
+            return 'bg-[#18181b] border-[#27272a] text-[#a1a1aa]';
+    }
 };
 
-export const ToolRegistry: React.FC<ToolRegistryProps> = ({ projects, onSelectProject }) => {
+export const ToolRegistry: React.FC<ToolRegistryProps> = ({ tools = [] }) => {
+    if (tools.length === 0) {
+        return (
+            <div className="pt-32 pb-32 flex flex-col items-center justify-center text-[#6b7280] space-y-4 animate-fade-in">
+                <div className="p-4 bg-zinc-900/50 rounded-full border border-zinc-800/50">
+                    <Database className="w-8 h-8 opacity-20" />
+                </div>
+                <p className="font-mono text-sm tracking-widest uppercase text-[#a1a1aa]">No tools built yet.</p>
+                <p className="text-[13px] font-sans max-w-sm text-center text-[#6b7280]">
+                    Start experimenting. Artifacts, scripts, and internal systems will appear here.
+                </p>
+            </div>
+        );
+    }
+
     return (
-        <div className="space-y-12 pb-32">
+        <div className="space-y-12 pb-32 animate-fade-in">
             {/* Header */}
-            <div className="pt-12 pb-6 border-b border-zinc-800/50">
-                <h1 className="text-2xl md:text-3xl font-serif text-zinc-100 tracking-tight mb-2">
-                    Tool Registry
+            <div className="pt-4 pb-4 border-b border-[#27272a]">
+                <h1 className="text-xl md:text-2xl font-serif text-[#ffffff] tracking-tight mb-2">
+                    Artifacts & Tools
                 </h1>
-                <p className="text-base text-zinc-500 font-light max-w-2xl leading-relaxed">
-                    A catalog of engineering artifacts, experiments, and systems built in the lab.
+                <p className="text-[13px] md:text-[14px] text-[#85858b] max-w-2xl leading-relaxed font-sans">
+                    A registry of internal engineering tools, custom scripts, and experimental prototypes built for the lab.
                 </p>
             </div>
 
-            {/* Project Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {projects.map(project => (
-                    <div key={project.id} className="group relative border border-zinc-900 bg-zinc-950/50 p-6 hover:bg-zinc-900 transition-colors">
+            {/* Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-slide-up">
+                {tools.map((tool) => (
+                    <div
+                        key={tool.id || tool.name}
+                        className="group relative flex flex-col bg-[#18181b] border border-[#27272a] rounded-md p-5 hover:-translate-y-1 hover:shadow-elevated hover:bg-[#18181b]/80 hover:border-[#3f3f46] transition-all duration-300 ease-out"
+                    >
                         <div className="flex justify-between items-start mb-4">
-                            <div className="flex items-center gap-3">
-                                <Terminal className="w-5 h-5 text-zinc-600 group-hover:text-zinc-400 transition-colors" />
-                                <h3 className="text-lg font-bold text-zinc-200 font-mono tracking-tight group-hover:text-white">
-                                    {project.name}
-                                </h3>
-                            </div>
-                            <div className={`w-2 h-2 rounded-full ${getStatusColor(project.health.score)}`} />
+                            <h3 className="text-[16px] font-bold text-[#ffffff] font-sans tracking-tight leading-tight pr-4">
+                                {tool.name}
+                            </h3>
+                            {tool.status && (
+                                <span className={`text-[9px] font-mono uppercase tracking-widest px-2 py-0.5 rounded border whitespace-nowrap ${getStatusColor(tool.status)}`}>
+                                    {tool.status}
+                                </span>
+                            )}
                         </div>
 
-                        <p className="text-sm text-zinc-400 leading-relaxed mb-6 font-serif opacity-80 h-10 line-clamp-2">
-                            {project.description}
+                        <p className="text-[14px] text-[#a1a1aa] font-sans leading-relaxed line-clamp-3 mb-6 flex-1">
+                            {tool.description}
                         </p>
 
-                        <div className="flex items-center justify-between mt-auto pt-4 border-t border-zinc-900">
-                            <div className="flex gap-2 text-[10px] font-mono uppercase tracking-widest text-zinc-600">
-                                {/* Tags could go here if we had them */}
-                                <span>v{project.health.breakdown.decision_velocity > 0 ? 'Active' : 'Stable'}</span>
+                        <div className="mt-auto pt-4 border-t border-[#27272a]/50 flex items-center justify-between gap-4">
+                            <div className="flex flex-wrap gap-2 truncate">
+                                {tool.tech_stack?.slice(0, 3).map(tech => (
+                                    <span key={tech} className="flex items-center gap-1 text-[10px] font-mono text-[#6b7280] bg-[#000000] px-1.5 py-0.5 border border-[#27272a] rounded">
+                                        <Code2 className="w-3 h-3 opacity-50" />
+                                        {tech}
+                                    </span>
+                                ))}
+                                {tool.tech_stack && tool.tech_stack.length > 3 && (
+                                    <span className="text-[10px] font-mono text-[#6b7280] px-1.5 py-0.5 border border-[#27272a] rounded bg-[#000000]">+{tool.tech_stack.length - 3}</span>
+                                )}
                             </div>
 
-                            <div className="flex items-center gap-4">
-                                {project.repository_url && (
-                                    <a href={project.repository_url} target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-white transition-colors">
-                                        <Github className="w-4 h-4" />
-                                    </a>
-                                )}
-                                <button
-                                    onClick={() => onSelectProject(project.id)}
-                                    className="text-xs font-mono text-zinc-500 hover:text-orange-400 transition-colors flex items-center gap-1"
+                            {tool.url && (
+                                <a
+                                    href={tool.url}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="p-1.5 text-[#6b7280] hover:text-[#ededed] bg-[#000000] border border-[#27272a] rounded shadow-subtle hover:border-[#3f3f46] transition-all duration-200"
                                 >
-                                    Journal <ArrowRight className="w-3 h-3" />
-                                </button>
-                            </div>
+                                    <ExternalLink className="w-3.5 h-3.5" />
+                                </a>
+                            )}
                         </div>
                     </div>
                 ))}
@@ -70,7 +98,3 @@ export const ToolRegistry: React.FC<ToolRegistryProps> = ({ projects, onSelectPr
         </div>
     );
 };
-
-const ArrowRight = ({ className }: { className?: string }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
-);

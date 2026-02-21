@@ -89,17 +89,27 @@ export interface EventDerived {
 
 // --- Other Entities ---
 
+export type ToolStatus = 'active' | 'experimental' | 'deprecated' | string;
+
 export interface Tool {
+    id: string;
     name: string;
-    category: string;
-    proficiency: number;
+    slug?: string;
+    status: ToolStatus;
+    description: string;
+    tags?: string[];
+    tech_stack?: string[];
+    url?: string;
 }
 
 export interface Note {
     id: string;
+    slug?: string;
     title: string;
     date: ISODateString;
     content: string;
+    excerpt?: string;
+    tags?: string[];
     related_project_id?: ProjectID;
 }
 

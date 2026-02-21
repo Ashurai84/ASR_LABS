@@ -74,15 +74,16 @@ export const ProjectEditor = ({ project, onSave, onCancel, onDelete }) => {
                 published: data.published || 'false'
             });
             setTimelineMarkdown(project.timeline || '');
-            fetchRemoteActivity();
+            fetchRemoteActivity(project.id, data.github);
         }
     }, [project]);
 
-    const fetchRemoteActivity = async () => {
-        if (!project) return;
+    const fetchRemoteActivity = async (projectId = project?.id, githubUrl = meta.github) => {
         setIsScanning(true);
         try {
-            const res = await fetch(`/api/project/${project.id}/activity`);
+            // Include github URL in query if avaliable so new projects can preview
+            const urlQuery = githubUrl ? `?url=${encodeURIComponent(githubUrl)}` : '';
+            const res = await fetch(`/api/project/${projectId || 'new'}/activity${urlQuery}`);
             const data = await res.json();
             setRemoteActivity(data);
         } catch (e) {
@@ -93,6 +94,11 @@ export const ProjectEditor = ({ project, onSave, onCancel, onDelete }) => {
     };
 
     const togglePulse = async (date) => {
+        if (!project) {
+            alert("Please save the project first before moderating activity.");
+            return;
+        }
+
         const currentHidden = remoteActivity.moderation?.hiddenDates || [];
         const nextHidden = currentHidden.includes(date)
             ? currentHidden.filter(d => d !== date)
@@ -338,7 +344,7 @@ ${newEntry.outcome ? `\n> Outcome: ${newEntry.outcome}` : ''}
                             <div className="flex justify-between items-center mb-4">
                                 <h3 className="text-xs font-mono text-zinc-500 uppercase tracking-[0.3em]">Automated Activity</h3>
                                 <button
-                                    onClick={fetchRemoteActivity}
+                                    onClick={() => fetchRemoteActivity()}
                                     className={`text-[10px] font-mono text-zinc-600 hover:text-white flex items-center gap-2 ${isScanning ? 'animate-pulse' : ''}`}
                                 >
                                     <RefreshCw className={`w-3 h-3 ${isScanning ? 'animate-spin' : ''}`} /> SCAN

@@ -8,17 +8,17 @@ interface ProjectHeaderProps {
 
 export const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project }) => {
     return (
-        <div className="pt-8 pb-6 border-b border-zinc-900/50">
-            <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-6">
-                <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                        <Terminal className="w-5 h-5 text-orange-500/50" />
-                        <h1 className="text-2xl md:text-3xl font-bold text-white tracking-tight font-sans">
+        <div className="pt-4 pb-4 border-b border-[#27272a] animate-fade-in">
+            <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-4">
+                <div className="space-y-3">
+                    <div className="flex items-center gap-2">
+                        <Terminal className="w-4 h-4 text-orange-500/50" />
+                        <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight font-serif">
                             {project.name}
                         </h1>
                     </div>
 
-                    <p className="text-zinc-400 text-sm md:text-base leading-relaxed font-serif italic max-w-2xl">
+                    <p className="text-[#6b7280] text-[13px] md:text-[14px] leading-relaxed font-sans max-w-2xl">
                         {project.description || "A deep dive into the project's evolution and technical decisions."}
                     </p>
 
@@ -33,14 +33,13 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project }) => {
                                 href={project.repository_url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-1.5 text-[10px] font-mono text-zinc-500 hover:text-zinc-300 transition-colors bg-zinc-900/40 px-2 py-0.5 rounded border border-zinc-800/50"
-                            >
+                                className="flex items-center gap-1.5 text-[10px] font-mono text-[#a1a1aa] hover:text-[#ededed] hover:bg-[#18181b] transition-all duration-200 ease-out bg-[#18181b]/40 px-2 py-0.5 rounded border border-[#27272a]/50 hover:border-[#3f3f46]">
                                 <Github className="w-3 h-3" />
                                 REPOSITORY
                             </a>
                         )}
 
-                        <div className="flex items-center gap-1.5 text-[10px] font-mono text-zinc-500 bg-zinc-900/40 px-2 py-0.5 rounded border border-zinc-800/50">
+                        <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#a1a1aa] bg-[#18181b]/40 px-2 py-0.5 rounded border border-[#27272a]/50">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/50" />
                             HEALTH {project.health.score}%
                         </div>

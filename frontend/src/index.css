@@ -1,13 +1,32 @@
 @import "tailwindcss";
 
 @theme {
-  --font-mono: 'JetBrains Mono', 'Menlo', monospace;
-  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
+  --font-sans: 'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', sans-serif;
+
+  --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-elevated: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 15px 0 rgba(255, 255, 255, 0.05);
+
+  --animate-fade-in: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-slide-up: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-pulse-subtle: pulseSubtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
 
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translateY(4px);
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
     }
 
     to {
@@ -15,11 +34,28 @@
       transform: translateY(0);
     }
   }
+
+  @keyframes pulseSubtle {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.5;
+    }
+  }
 }
 
 html {
   font-feature-settings: "cv11", "ss01";
   -webkit-font-smoothing: antialiased;
-  background-color: black;
-  color: white;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #000;
+  color: #ededed;
+}
+
+body {
+  scroll-behavior: smooth;
 }

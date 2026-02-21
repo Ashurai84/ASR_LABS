@@ -80,18 +80,33 @@ app.get('/api/project/:slug', (req, res) => {
 // Fetch Remote Activity for Moderation
 app.get('/api/project/:slug/activity', async (req, res) => {
     const { slug } = req.params;
+    const { url } = req.query; // Expecting ?url=...
     const projectDir = path.join(PROJECTS_DIR, slug);
     const metaPath = path.join(projectDir, 'project.md');
     const moderationPath = path.join(projectDir, 'pulse-moderation.json');
 
-    if (!fs.existsSync(metaPath)) return res.json({ pulses: [] });
+    let githubUrl = url; // Prefer query param
+
+    // Fall back to reading from project.md if url is not provided or empty
+    if (!githubUrl && fs.existsSync(metaPath)) {
+        try {
+            const content = fs.readFileSync(metaPath, 'utf8');
+            const githubMatch = content.match(/github:\s*["']?(https:\/\/github\.com\/([^"'\s]+))["']?/i);
+            if (githubMatch) {
+                githubUrl = githubMatch[1];
+            }
+        } catch (e) {
+            console.error("Failed parsing project.md for github url", e);
+        }
+    }
+
+    if (!githubUrl) return res.json({ pulses: [] });
 
     try {
-        const content = fs.readFileSync(metaPath, 'utf8');
-        const githubMatch = content.match(/github:\s*["']?(https:\/\/github\.com\/([^"'\s]+))["']?/i);
-        if (!githubMatch) return res.json({ pulses: [] });
+        const repoPathMatch = githubUrl.match(/github\.com\/([^"'\s]+)/i);
+        if (!repoPathMatch) return res.json({ pulses: [] });
 
-        const repoPath = githubMatch[2].replace(/\.git$/, '').replace(/\/$/, '');
+        const repoPath = repoPathMatch[1].replace(/\.git$/, '').replace(/\/$/, '');
 
         // Fetch from GitHub
         const ghRes = await fetch(`https://api.github.com/repos/${repoPath}/commits?per_page=50`, {

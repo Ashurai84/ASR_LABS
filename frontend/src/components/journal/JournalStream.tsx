@@ -52,11 +52,11 @@ export const JournalStream: React.FC<JournalStreamProps> = ({ events, projects, 
             {selectedProjectId && currentProject ? (
                 <ProjectHeader project={currentProject} />
             ) : (
-                <div className="pt-8 pb-6 border-b border-zinc-900/50">
+                <div className="pt-4 pb-4 border-b border-[#27272a] animate-fade-in">
                     <h1 className="text-xl md:text-2xl font-serif text-white tracking-tight leading-tight mb-2">
                         Engineering Log
                     </h1>
-                    <p className="text-sm text-zinc-500 font-light max-w-2xl leading-relaxed font-serif italic">
+                    <p className="text-[13px] md:text-[14px] text-[#85858b] max-w-2xl leading-relaxed font-sans">
                         A living record of architectural decisions, technical failures, and shipped code.
                     </p>
                 </div>
@@ -64,11 +64,11 @@ export const JournalStream: React.FC<JournalStreamProps> = ({ events, projects, 
 
             {/* Timeline Stream - Compressed Rhythm */}
             {groupedEvents.length > 0 ? (
-                <div className="relative border-l border-zinc-900 ml-2 md:ml-2 pl-6 md:pl-8 space-y-10">
+                <div className="relative border-l border-[#27272a] ml-4 md:ml-4 pl-4 md:pl-5 space-y-8 animate-slide-up">
                     {groupedEvents.map((group, groupIdx) => (
-                        <div key={groupIdx} className="relative">
+                        <div key={groupIdx} className="relative group/day">
                             {/* Day Marker - Centered on Spine */}
-                            <div className="absolute left-0 translate-x-[-50%] top-0 flex items-center justify-center h-5 px-2 bg-zinc-950 border border-zinc-800 rounded-full z-10 text-[9px] font-mono text-zinc-500 shadow-sm shadow-black uppercase tracking-wider">
+                            <div className="absolute left-0 translate-x-[-50%] top-0 flex items-center justify-center h-5 px-2 bg-[#18181b] border border-[#27272a] rounded-md z-10 text-[9px] font-mono text-[#a1a1aa] shadow-subtle uppercase tracking-wider transition-colors duration-300 group-hover/day:border-[#3f3f46] group-hover/day:text-[#ededed]">
                                 {format(group.date, 'MMM d')}
                             </div>
 

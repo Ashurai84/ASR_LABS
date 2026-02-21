@@ -21,6 +21,11 @@ export interface FocusResult {
     tenureStart?: string; // Return the start date to persist it
 }
 
+export interface FocusComputeResponse {
+    projects: Record<string, ProjectResult>;
+    global: FocusResult;
+}
+
 const CONSTANTS = {
     WEIGHT_COMMIT: 10,
     WEIGHT_DEPLOY: 50,
@@ -36,7 +41,7 @@ const CONSTANTS = {
 
 export class FocusCalculator {
 
-    compute(input: FocusInput): Record<string, ProjectResult> & { global: FocusResult } {
+    compute(input: FocusInput): FocusComputeResponse {
         const projectResults: Record<string, ProjectResult> = {};
         let maxScore = -1;
         let maxProjectId: string | null = null;
@@ -109,7 +114,7 @@ export class FocusCalculator {
         }
 
         return {
-            ...projectResults,
+            projects: projectResults,
             global: {
                 currentFocusId,
                 focusScore: currentFocusId ? projectResults[currentFocusId].score : 0,

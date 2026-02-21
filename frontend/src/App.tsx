@@ -1,8 +1,9 @@
 import { useState, useRef, useLayoutEffect } from 'react';
 import { useLabState } from './hooks/useLabState';
 import { JournalStream } from './components/journal/JournalStream';
-import { Book, PenTool, Database } from 'lucide-react';
+import { Book, PenTool, Database, Github, Linkedin, Mail } from 'lucide-react';
 import { ToolRegistry } from './components/tools/ToolRegistry';
+import { NotesList } from './components/notes/NotesList';
 
 function App() {
   const { labState, loading, error } = useLabState();
@@ -44,7 +45,7 @@ function App() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-black text-zinc-500 font-mono text-sm animate-pulse tracking-widest">
+      <div className="flex items-center justify-center min-h-screen bg-black text-[#6b7280] font-mono text-sm tracking-widest animate-pulse-subtle">
         INITIALIZING SEQUENCE...
       </div>
     );
@@ -78,9 +79,12 @@ function App() {
           <div className="space-y-1">
             <button
               onClick={() => { setView('journal'); setSelectedProjectId(null); }}
-              className={`w-full text-left px-3 py-2 rounded-md text-sm transition-all duration-200 flex items-center gap-3 font-medium tracking-wide ${view === 'journal' && !selectedProjectId ? 'text-white bg-zinc-900/50 shadow-sm shadow-black' : 'text-zinc-500 hover:text-zinc-300 hover:bg-zinc-900/30'}`}
+              className={`w-full text-left px-3 py-2 rounded-md text-[13px] transition-all duration-200 ease-out flex items-center gap-3 font-medium tracking-wide border border-transparent 
+                ${view === 'journal' && !selectedProjectId
+                  ? 'text-white bg-[#18181b] shadow-subtle border-[#27272a]'
+                  : 'text-[#a1a1aa] hover:text-[#ededed] hover:bg-[#18181b]/50'}`}
             >
-              <Book className="w-4 h-4 opacity-70" />
+              <Book className={`w-4 h-4 transition-opacity duration-200 ${view === 'journal' && !selectedProjectId ? 'opacity-100' : 'opacity-50'}`} />
               Journal
             </button>
             <div className="pt-6 pb-2 px-3 text-[10px] font-mono uppercase tracking-[0.2em] text-zinc-600 select-none">Chapters</div>
@@ -88,54 +92,61 @@ function App() {
               <button
                 key={p.id}
                 onClick={() => enterProject(p.id)}
-                className={`w-full text-left px-3 py-1.5 rounded-md text-sm transition-all duration-200 flex items-center gap-3 ${selectedProjectId === p.id ? 'text-orange-400 bg-orange-950/10' : 'text-zinc-500 hover:text-zinc-300'}`}
+                className={`w-full text-left px-3 py-1.5 rounded-md text-[13px] transition-all duration-200 ease-out flex items-center gap-3 group border border-transparent
+                  ${selectedProjectId === p.id
+                    ? 'text-white bg-[#18181b] shadow-subtle border-[#27272a]'
+                    : 'text-[#85858b] hover:text-[#ededed] hover:bg-[#18181b]/30'}`}
               >
-                <span className={`w-1.5 h-1.5 rounded-full transition-transform duration-300 ${selectedProjectId === p.id ? 'scale-125 bg-orange-500' : p.health.score > 80 ? 'bg-emerald-500/50' : 'bg-zinc-700'}`} />
-                {p.name}
+                <span className={`w-[6px] h-[6px] rounded-full transition-all duration-300 shadow-glow
+                  ${selectedProjectId === p.id
+                    ? 'scale-110 bg-[#ededed]'
+                    : p.health.score > 80 ? 'bg-[#22c55e]/50 group-hover:bg-[#22c55e]' : 'bg-[#52525b] group-hover:bg-[#a1a1aa]'}`} />
+                <span className="truncate">{p.name}</span>
               </button>
             ))}
           </div>
 
           {/* Secondary Links */}
-          <div className="mt-8 space-y-1 border-t border-zinc-900/50 pt-6">
+          <div className="mt-8 space-y-1 border-t border-[#27272a] pt-6">
             <button
-              onClick={() => setView('notes')}
-              className={`w-full text-left px-3 py-2 text-sm transition-colors flex items-center gap-3 ${view === 'notes' ? 'text-white' : 'text-zinc-600 hover:text-zinc-400'}`}
+              onClick={() => { setView('notes'); setSelectedProjectId(null); }}
+              className={`w-full text-left px-3 py-2 rounded-md text-[13px] transition-all duration-200 ease-out flex items-center gap-3 border border-transparent
+                ${view === 'notes' ? 'text-white bg-[#18181b] shadow-subtle border-[#27272a]' : 'text-[#85858b] hover:text-[#ededed] hover:bg-[#18181b]/30'}`}
             >
-              <PenTool className="w-4 h-4 opacity-50" />
+              <PenTool className={`w-4 h-4 transition-opacity duration-200 ${view === 'notes' ? 'opacity-100' : 'opacity-40'}`} />
               Notes
             </button>
             <button
-              onClick={() => setView('tools')}
-              className={`w-full text-left px-3 py-2 text-sm transition-colors flex items-center gap-3 ${view === 'tools' ? 'text-white' : 'text-zinc-600 hover:text-zinc-400'}`}
+              onClick={() => { setView('tools'); setSelectedProjectId(null); }}
+              className={`w-full text-left px-3 py-2 rounded-md text-[13px] transition-all duration-200 ease-out flex items-center gap-3 border border-transparent
+                ${view === 'tools' ? 'text-white bg-[#18181b] shadow-subtle border-[#27272a]' : 'text-[#85858b] hover:text-[#ededed] hover:bg-[#18181b]/30'}`}
             >
-              <Database className="w-4 h-4 opacity-50" />
+              <Database className={`w-4 h-4 transition-opacity duration-200 ${view === 'tools' ? 'opacity-100' : 'opacity-40'}`} />
               Artifacts
             </button>
           </div>
 
           {/* Vitals / Contact */}
           {(labState.profile?.github || labState.profile?.linkedin || labState.profile?.email) && (
-            <div className="mt-8 space-y-1">
-              <div className="px-3 pb-2 text-[10px] font-mono uppercase tracking-[0.2em] text-zinc-600 select-none">Vitals</div>
-              {labState.profile.github && (
-                <a href={labState.profile.github} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-3 py-1.5 text-xs text-zinc-500 hover:text-zinc-300 transition-colors">
-                  <div className="w-4 flex justify-center"><span className="text-[8px] font-mono opacity-40">GH</span></div>
-                  GitHub
-                </a>
-              )}
-              {labState.profile.linkedin && (
-                <a href={labState.profile.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-3 py-1.5 text-xs text-zinc-500 hover:text-zinc-300 transition-colors">
-                  <div className="w-4 flex justify-center"><span className="text-[8px] font-mono opacity-40">LI</span></div>
-                  LinkedIn
-                </a>
-              )}
-              {labState.profile.email && (
-                <a href={`mailto:${labState.profile.email}`} className="flex items-center gap-3 px-3 py-1.5 text-xs text-zinc-500 hover:text-zinc-300 transition-colors">
-                  <div className="w-4 flex justify-center"><span className="text-[8px] font-mono opacity-40">EM</span></div>
-                  Email
-                </a>
-              )}
+            <div className="mt-8 space-y-3">
+              <div className="px-3 text-[10px] font-mono uppercase tracking-[0.2em] text-[#6b7280] select-none">Vitals</div>
+              <div className="flex items-center gap-4 px-3">
+                {labState.profile.github && (
+                  <a href={labState.profile.github} target="_blank" title="GitHub" rel="noreferrer" className="text-[#3f3f46] hover:text-[#ffffff] transition-colors">
+                    <Github className="w-4 h-4" />
+                  </a>
+                )}
+                {labState.profile.linkedin && (
+                  <a href={labState.profile.linkedin} target="_blank" title="LinkedIn" rel="noreferrer" className="text-[#3f3f46] hover:text-[#ffffff] transition-colors">
+                    <Linkedin className="w-4 h-4" />
+                  </a>
+                )}
+                {labState.profile.email && (
+                  <a href={`mailto:${labState.profile.email}`} title="Email" className="text-[#3f3f46] hover:text-[#ffffff] transition-colors">
+                    <Mail className="w-4 h-4" />
+                  </a>
+                )}
+              </div>
             </div>
           )}
         </div>
@@ -175,16 +186,12 @@ function App() {
 
           {view === 'tools' && (
             <ToolRegistry
-              projects={labState.projects}
-              onSelectProject={enterProject}
+              tools={labState.tools || []}
             />
           )}
 
           {view === 'notes' && (
-            <div className="pt-32 pb-32 flex flex-col items-center justify-center text-zinc-600 space-y-4">
-              <PenTool className="w-12 h-12 opacity-20" />
-              <p className="font-mono text-sm uppercase tracking-widest opacity-50">Notes Module Coming Soon</p>
-            </div>
+            <NotesList notes={labState.notes || []} />
           )}
         </div>
       </main>

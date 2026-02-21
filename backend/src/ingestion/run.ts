@@ -208,7 +208,7 @@ async function main() {
     });
 
     for (const p of updatedProjects) {
-        const res = focusResult[p.id];
+        const res = focusResult.projects[p.id];
         if (res) {
             p.derived.focus_score = res.score;
             p.derived.activity_level = res.activityLevel;
