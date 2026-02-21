@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-02-21T20:52:33.075Z",
+    "generated_at": "2026-02-21T21:04:22.170Z",
     "version": "1.1",
     "system_health": "operational"
   },
@@ -25,7 +25,7 @@
       "health": {
         "score": 59,
         "previous_score": 59,
-        "last_calculated_at": "2026-02-21T20:52:33.071Z",
+        "last_calculated_at": "2026-02-21T21:04:22.165Z",
         "breakdown": {
           "activity": 75,
           "delivery": 0,
@@ -35,7 +35,7 @@
         "change_reason": "Routine update"
       },
       "derived": {
-        "focus_score": 129,
+        "focus_score": 134,
         "activity_level": "high",
         "last_decision_date": "2026-02-16T00:00:00.000Z",
         "last_event_date": "2026-02-21"
@@ -49,6 +49,7 @@
       "repository_url": "https://github.com/Ashurai84/smart-home-iot-frontend",
       "tags": "[\"react\", \"typescript\", \"node.js\", \"mern\", \"mongodp\", \"thunderclient\"]",
       "timeline_event_ids": [
+        "60f3c7fd-874c-50ed-876c-e8dc78785d0a",
         "393fd122-4e21-5f53-b972-0ab0800bea26",
         "d0857255-aabf-5d04-bf63-c003d5722c19",
         "40fafb23-671a-5d24-a023-1b01e034a0ae",
@@ -57,7 +58,7 @@
       "health": {
         "score": 16,
         "previous_score": 16,
-        "last_calculated_at": "2026-02-21T20:52:33.073Z",
+        "last_calculated_at": "2026-02-21T21:04:22.167Z",
         "breakdown": {
           "activity": 0,
           "delivery": 0,
@@ -70,12 +71,43 @@
         "focus_score": 0,
         "activity_level": "idle",
         "last_decision_date": "",
-        "last_event_date": "2025-12-19"
-      }
+        "last_event_date": "2026-02-21T00:00:00.000Z"
+      },
+      "cover_image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=1200&q=80",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1558002038-1055907df827?w=800&q=80",
+          "caption": "Smart Home API Architecture",
+          "type": "screenshot"
+        }
+      ],
+      "my_role": "Backend Engineer",
+      "contributions": [
+        "Designed RESTful architecture using Node.js and Express",
+        "Implemented MongoDB schemas for user and device management"
+      ],
+      "tech_stack": {
+        "backend": [
+          "Node.js",
+          "Express",
+          "MongoDB",
+          "Thunderclient"
+        ],
+        "frontend": [
+          "React",
+          "TypeScript"
+        ]
+      },
+      "links": {
+        "github": "https://github.com/Ashurai84/smart-home-iot",
+        "demo": "https://smart-home-frontend-three.vercel.app/"
+      },
+      "outcome": "Successfully built and deployed scalable backend API for smart home automation."
     }
   ],
   "timeline_index": [
     "a6393b7d-d8ad-5c33-a6a9-a7d75483518c",
+    "60f3c7fd-874c-50ed-876c-e8dc78785d0a",
     "f5ca935f-6080-5002-a7dc-055306c21728",
     "51a764b4-7efb-53e7-9b0d-82553a30a715",
     "7d304b6f-aac5-5bfe-864a-bf4a897b8435",
@@ -247,6 +279,21 @@
       "derived": {
         "summary_text": "1 commits on 2025-01-01",
         "impact_score": 1
+      }
+    },
+    "60f3c7fd-874c-50ed-876c-e8dc78785d0a": {
+      "id": "60f3c7fd-874c-50ed-876c-e8dc78785d0a",
+      "project_id": "smart-home-iot-api",
+      "type": "pulse",
+      "date": "2026-02-21T00:00:00.000Z",
+      "title": "Shipped the REST API",
+      "details": {
+        "description": "just push to the render"
+      },
+      "source": "manual",
+      "derived": {
+        "summary_text": "just push to the render",
+        "impact_score": 50
       }
     }
   },

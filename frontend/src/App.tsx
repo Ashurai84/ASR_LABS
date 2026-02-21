@@ -4,6 +4,7 @@ import { JournalStream } from './components/journal/JournalStream';
 import { Book, PenTool, Database, Github, Linkedin, Mail } from 'lucide-react';
 import { ToolRegistry } from './components/tools/ToolRegistry';
 import { NotesList } from './components/notes/NotesList';
+import { ProjectDetail } from './components/project/ProjectDetail';
 
 function App() {
   const { labState, loading, error } = useLabState();
@@ -174,14 +175,21 @@ function App() {
       <main className="flex-1 md:ml-64 relative min-h-screen">
         <div
           key={viewKey}
-          className={`mx-auto px-6 md:px-12 w-full transition-opacity duration-300 animate-[fadeIn_0.3s_ease-out] ${view === 'tools' ? 'max-w-6xl' : 'max-w-3xl'
+          className={`mx-auto px-6 md:px-12 w-full transition-opacity duration-300 animate-[fadeIn_0.3s_ease-out] ${view === 'tools' ? 'max-w-6xl' : (view === 'journal' && selectedProjectId) ? 'max-w-4xl' : 'max-w-3xl'
             }`}
         >
-          {view === 'journal' && (
+          {view === 'journal' && !selectedProjectId && (
             <JournalStream
               events={Object.values(labState.timeline_events)}
               projects={labState.projects}
-              selectedProjectId={selectedProjectId}
+              selectedProjectId={null}
+            />
+          )}
+
+          {view === 'journal' && selectedProjectId && (
+            <ProjectDetail
+              project={labState.projects.find(p => p.id === selectedProjectId)!}
+              events={Object.values(labState.timeline_events).filter(e => e.project_id === selectedProjectId)}
             />
           )}
 
