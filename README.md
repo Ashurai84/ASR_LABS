@@ -7,6 +7,7 @@ ASR Lab is not a traditional portfolio. It is a **living digital laboratory** th
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Status](https://img.shields.io/badge/status-operational-emerald)
 ![Stack](https://img.shields.io/badge/stack-TypeScript%20%7C%20React%20%7C%20Node.js-black)
+[![Live](https://img.shields.io/badge/Live-asr--labs.vercel.app-purple?style=flat&logo=vercel)](https://asr-labs.vercel.app/)
 
 ---
 
