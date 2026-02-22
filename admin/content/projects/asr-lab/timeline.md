@@ -1,9 +1,4 @@
 
-### 2026-02-22 • DECISION
-**New notes**
-
-
----
 ### 2025-12-01 • SHIP
 **Initial Commit**
 Booted the ASR Lab core engine and unified workspace layout.

@@ -142,12 +142,20 @@ app.get('/api/project/:slug/activity', async (req, res) => {
 });
 
 app.post('/api/project/:slug/moderation', (req, res) => {
-    const { slug } = req.params;
-    const projectDir = path.join(PROJECTS_DIR, slug);
-    const moderationPath = path.join(projectDir, 'pulse-moderation.json');
+    try {
+        const { slug } = req.params;
+        const projectDir = path.join(PROJECTS_DIR, slug);
+        if (!fs.existsSync(projectDir)) {
+            fs.mkdirSync(projectDir, { recursive: true });
+        }
+        const moderationPath = path.join(projectDir, 'pulse-moderation.json');
 
-    fs.writeFileSync(moderationPath, JSON.stringify(req.body, null, 2));
-    res.json({ success: true });
+        fs.writeFileSync(moderationPath, JSON.stringify(req.body, null, 2));
+        res.json({ success: true });
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ error: e.message });
+    }
 });
 
 app.post('/api/project', (req, res) => {
@@ -219,11 +227,12 @@ app.post('/api/data/:type', (req, res) => {
 
 // 5. Publish: Run Ingestion Script
 app.post('/api/publish', (req, res) => {
-    const runnerPath = path.resolve(__dirname, '../../backend/src/ingestion/run.ts');
-    // Using npx tsx to run the typescript runner
-    exec(`npx tsx ${runnerPath}`, (error, stdout, stderr) => {
+    const backendDir = path.resolve(__dirname, '../../backend');
+    exec('npm run ingest', { cwd: backendDir }, (error, stdout, stderr) => {
         if (error) {
             console.error(`Publish error: ${error}`);
+            // Log full stderr to catch build/syntax issues
+            console.error(stderr);
             return res.status(500).json({ error: error.message, details: stderr });
         }
         res.json({ success: true, log: stdout });
