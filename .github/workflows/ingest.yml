@@ -1,0 +1,46 @@
+name: Data Ingestion Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Run when you push code
+  schedule:
+    - cron: '0 0 * * *'  # Run automatically every day at midnight (UTC)
+  workflow_dispatch:  # Allow manual trigger from GitHub Actions tab
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history so git log works for all commits
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Or whatever your preferred LTS is
+
+      - name: Install Backend Dependencies
+        working-directory: ./backend
+        run: npm ci || npm install
+
+      - name: Run Ingestion Engine
+        working-directory: ./backend
+        run: npm run ingest
+        
+      - name: Check for modified files
+        id: git-check
+        run: |
+          git diff --exit-code frontend/public/data/lab-state.json || echo "modified=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and Push Changes
+        if: steps.git-check.outputs.modified == 'true'
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add frontend/public/data/lab-state.json
+          git commit -m "chore: automated ingestion data update [skip ci]"
+          git push
