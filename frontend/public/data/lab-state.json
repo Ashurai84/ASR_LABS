@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated_at": "2026-02-21T21:04:22.170Z",
-    "version": "1.1",
+    "generated_at": "2026-02-16T18:39:37.558Z",
+    "version": "1.0",
     "system_health": "operational"
   },
   "derived": {
@@ -17,17 +17,14 @@
       "repository_url": "",
       "tags": [],
       "timeline_event_ids": [
-        "a6393b7d-d8ad-5c33-a6a9-a7d75483518c",
-        "f5ca935f-6080-5002-a7dc-055306c21728",
-        "51a764b4-7efb-53e7-9b0d-82553a30a715",
-        "7d304b6f-aac5-5bfe-864a-bf4a897b8435"
+        "51a764b4-7efb-53e7-9b0d-82553a30a715"
       ],
       "health": {
-        "score": 59,
-        "previous_score": 59,
-        "last_calculated_at": "2026-02-21T21:04:22.165Z",
+        "score": 51,
+        "previous_score": 51,
+        "last_calculated_at": "2026-02-16T18:39:37.556Z",
         "breakdown": {
-          "activity": 75,
+          "activity": 50,
           "delivery": 0,
           "stability": 80,
           "decision_velocity": 100
@@ -35,32 +32,26 @@
         "change_reason": "Routine update"
       },
       "derived": {
-        "focus_score": 134,
-        "activity_level": "high",
+        "focus_score": 50,
+        "activity_level": "medium",
         "last_decision_date": "2026-02-16T00:00:00.000Z",
-        "last_event_date": "2026-02-21"
+        "last_event_date": "2026-02-16T00:00:00.000Z"
       }
     },
     {
-      "id": "smart-home-iot-api",
-      "name": "Smart-Home",
-      "description": "This is a Smart Home IoT Server built using Node.js and Express.js framework. The server provides a RESTful API for managing smart home devices like lights, fans, air conditioners, TVs, sensors, and door locks. Users can register, login, add devices, control them remotely, and view activity logs.",
-      "status": "archived",
-      "repository_url": "https://github.com/Ashurai84/smart-home-iot-frontend",
-      "tags": "[\"react\", \"typescript\", \"node.js\", \"mern\", \"mongodp\", \"thunderclient\"]",
-      "timeline_event_ids": [
-        "60f3c7fd-874c-50ed-876c-e8dc78785d0a",
-        "393fd122-4e21-5f53-b972-0ab0800bea26",
-        "d0857255-aabf-5d04-bf63-c003d5722c19",
-        "40fafb23-671a-5d24-a023-1b01e034a0ae",
-        "cca78ebe-aaa5-564c-849a-797cb74ae466"
-      ],
+      "id": "hello kitty",
+      "name": "hello kitty",
+      "description": "# hello kitty\n",
+      "status": "build",
+      "repository_url": "",
+      "tags": [],
+      "timeline_event_ids": [],
       "health": {
-        "score": 16,
-        "previous_score": 16,
-        "last_calculated_at": "2026-02-21T21:04:22.167Z",
+        "score": 31,
+        "previous_score": 31,
+        "last_calculated_at": "2026-02-16T18:39:37.557Z",
         "breakdown": {
-          "activity": 0,
+          "activity": 50,
           "delivery": 0,
           "stability": 80,
           "decision_velocity": 0
@@ -68,53 +59,15 @@
         "change_reason": "Routine update"
       },
       "derived": {
-        "focus_score": 0,
-        "activity_level": "idle",
+        "focus_score": 20,
+        "activity_level": "low",
         "last_decision_date": "",
-        "last_event_date": "2026-02-21T00:00:00.000Z"
-      },
-      "cover_image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=1200&q=80",
-      "images": [
-        {
-          "url": "https://images.unsplash.com/photo-1558002038-1055907df827?w=800&q=80",
-          "caption": "Smart Home API Architecture",
-          "type": "screenshot"
-        }
-      ],
-      "my_role": "Backend Engineer",
-      "contributions": [
-        "Designed RESTful architecture using Node.js and Express",
-        "Implemented MongoDB schemas for user and device management"
-      ],
-      "tech_stack": {
-        "backend": [
-          "Node.js",
-          "Express",
-          "MongoDB",
-          "Thunderclient"
-        ],
-        "frontend": [
-          "React",
-          "TypeScript"
-        ]
-      },
-      "links": {
-        "github": "https://github.com/Ashurai84/smart-home-iot",
-        "demo": "https://smart-home-frontend-three.vercel.app/"
-      },
-      "outcome": "Successfully built and deployed scalable backend API for smart home automation."
+        "last_event_date": ""
+      }
     }
   ],
   "timeline_index": [
-    "a6393b7d-d8ad-5c33-a6a9-a7d75483518c",
-    "60f3c7fd-874c-50ed-876c-e8dc78785d0a",
-    "f5ca935f-6080-5002-a7dc-055306c21728",
-    "51a764b4-7efb-53e7-9b0d-82553a30a715",
-    "7d304b6f-aac5-5bfe-864a-bf4a897b8435",
-    "393fd122-4e21-5f53-b972-0ab0800bea26",
-    "d0857255-aabf-5d04-bf63-c003d5722c19",
-    "40fafb23-671a-5d24-a023-1b01e034a0ae",
-    "cca78ebe-aaa5-564c-849a-797cb74ae466"
+    "51a764b4-7efb-53e7-9b0d-82553a30a715"
   ],
   "timeline_events": {
     "51a764b4-7efb-53e7-9b0d-82553a30a715": {
@@ -132,222 +85,8 @@
         "summary_text": "",
         "impact_score": 50
       }
-    },
-    "a6393b7d-d8ad-5c33-a6a9-a7d75483518c": {
-      "id": "a6393b7d-d8ad-5c33-a6a9-a7d75483518c",
-      "project_id": "asr-lab",
-      "type": "pulse",
-      "date": "2026-02-21",
-      "title": "Active Day: 4 commits",
-      "source": "system",
-      "details": {
-        "commit_count": 4,
-        "lines_changed": 0,
-        "messages": [
-          "fix(admin): implement raw JSON editor for tools to protect deep portfolio metric shapes",
-          "feat(frontend): implement comprehensive professional artifact showcase with css grid and robust tech filtering",
-          "fix(backend): automatically wipe orphaned timeline events for deleted projects from state payload",
-          "feat: implement aesthetic notes module registry and list component"
-        ]
-      },
-      "derived": {
-        "summary_text": "4 commits on 2026-02-21",
-        "impact_score": 4
-      }
-    },
-    "f5ca935f-6080-5002-a7dc-055306c21728": {
-      "id": "f5ca935f-6080-5002-a7dc-055306c21728",
-      "project_id": "asr-lab",
-      "type": "pulse",
-      "date": "2026-02-17",
-      "title": "Active Day: 1 commits",
-      "source": "system",
-      "details": {
-        "commit_count": 1,
-        "lines_changed": 0,
-        "messages": [
-          "feat: integrate github activity moderation, markdown profile editor, and publishing improvements"
-        ]
-      },
-      "derived": {
-        "summary_text": "1 commits on 2026-02-17",
-        "impact_score": 1
-      }
-    },
-    "7d304b6f-aac5-5bfe-864a-bf4a897b8435": {
-      "id": "7d304b6f-aac5-5bfe-864a-bf4a897b8435",
-      "project_id": "asr-lab",
-      "type": "pulse",
-      "date": "2026-02-16",
-      "title": "Active Day: 5 commits",
-      "source": "system",
-      "details": {
-        "commit_count": 5,
-        "lines_changed": 0,
-        "messages": [
-          "feat: implement private admin workspace and unified tool registry",
-          "ci: Add daily pulse workflow",
-          "Update: Beautiful documentation for ASR Lab",
-          "Version 1: Initial ASR Lab Setup",
-          "Initial ASR Lab state"
-        ]
-      },
-      "derived": {
-        "summary_text": "5 commits on 2026-02-16",
-        "impact_score": 5
-      }
-    },
-    "393fd122-4e21-5f53-b972-0ab0800bea26": {
-      "id": "393fd122-4e21-5f53-b972-0ab0800bea26",
-      "project_id": "smart-home-iot-api",
-      "type": "pulse",
-      "date": "2025-12-19",
-      "title": "Active Day: 3 commits",
-      "source": "system",
-      "details": {
-        "commit_count": 3,
-        "lines_changed": 0,
-        "messages": [
-          "Update README.md",
-          "Revise image formatting in README\n\nUpdated image link to a more structured HTML format.",
-          "Change Smart Home Hub image link\n\nUpdated image link for Smart Home Hub in README."
-        ]
-      },
-      "derived": {
-        "summary_text": "3 commits on 2025-12-19",
-        "impact_score": 3
-      }
-    },
-    "d0857255-aabf-5d04-bf63-c003d5722c19": {
-      "id": "d0857255-aabf-5d04-bf63-c003d5722c19",
-      "project_id": "smart-home-iot-api",
-      "type": "pulse",
-      "date": "2025-12-17",
-      "title": "Active Day: 6 commits",
-      "source": "system",
-      "details": {
-        "commit_count": 6,
-        "lines_changed": 0,
-        "messages": [
-          "Revise README for clarity and improved formatting\n\nUpdated the README to enhance descriptions, improve formatting, and clarify instructions.",
-          "Update README with new live demo and backend repo links",
-          "Fix AC settings payload and improve error handling",
-          "Enhance README and update repository details",
-          "Fix AC settings payload and remove unnecessary comments",
-          "Update deployment link"
-        ]
-      },
-      "derived": {
-        "summary_text": "6 commits on 2025-12-17",
-        "impact_score": 6
-      }
-    },
-    "40fafb23-671a-5d24-a023-1b01e034a0ae": {
-      "id": "40fafb23-671a-5d24-a023-1b01e034a0ae",
-      "project_id": "smart-home-iot-api",
-      "type": "pulse",
-      "date": "2025-12-10",
-      "title": "Active Day: 2 commits",
-      "source": "system",
-      "details": {
-        "commit_count": 2,
-        "lines_changed": 0,
-        "messages": [
-          "Build SmartHome Hub frontend\n\nAdd a beginner-friendly, responsive React + Tailwind frontend\n- Introduces folder structure and core components (Navbar, DeviceCard, ACModal, AddDeviceModal)\n- Adds AuthContext, ProtectedRoute, and API client with token handling\n- Implements Landing/Home page, Login/Register pages, Dashboard with device grid, Logs\n- Wiring for REST API endpoints and Protected routes\n- Mobile-first, SaaS-style UI with Indigo accents and clean UX\n\nX-Lovable-Edit-ID: edt-0df1c1d8-ce19-4f46-8daf-4a0379c3d66b",
-          "Changes"
-        ]
-      },
-      "derived": {
-        "summary_text": "2 commits on 2025-12-10",
-        "impact_score": 2
-      }
-    },
-    "cca78ebe-aaa5-564c-849a-797cb74ae466": {
-      "id": "cca78ebe-aaa5-564c-849a-797cb74ae466",
-      "project_id": "smart-home-iot-api",
-      "type": "pulse",
-      "date": "2025-01-01",
-      "title": "Active Day: 1 commits",
-      "source": "system",
-      "details": {
-        "commit_count": 1,
-        "lines_changed": 0,
-        "messages": [
-          "template: new_style_vite_react_shadcn_ts"
-        ]
-      },
-      "derived": {
-        "summary_text": "1 commits on 2025-01-01",
-        "impact_score": 1
-      }
-    },
-    "60f3c7fd-874c-50ed-876c-e8dc78785d0a": {
-      "id": "60f3c7fd-874c-50ed-876c-e8dc78785d0a",
-      "project_id": "smart-home-iot-api",
-      "type": "pulse",
-      "date": "2026-02-21T00:00:00.000Z",
-      "title": "Shipped the REST API",
-      "details": {
-        "description": "just push to the render"
-      },
-      "source": "manual",
-      "derived": {
-        "summary_text": "just push to the render",
-        "impact_score": 50
-      }
     }
   },
-  "tools": [
-    {
-      "id": "smart-home-",
-      "name": "Smart home ",
-      "type": "BACKEND",
-      "status": "EXPERIMENTAL",
-      "version": "1",
-      "work_context": {
-        "company": "college project",
-        "team": "kri",
-        "timeline": "2025"
-      },
-      "description": "it helps u to see that your fan is off or on ",
-      "my_role": {
-        "title": "backend",
-        "contributions": [
-          "i done all the bckend part "
-        ]
-      },
-      "tags": [
-        "node js",
-        "react",
-        "api calling",
-        "tunderclient"
-      ],
-      "links": {
-        "github": "https://github.com/Ashurai84/smart-home-iot-frontend",
-        "demo": "https://smart-home-frontend-three.vercel.app/"
-      },
-      "deprecation": {
-        "reason": ""
-      },
-      "slug": "smart-home-",
-      "updated_at": "2026-02-21T20:49:54.937Z",
-      "created_at": "2026-02-21T18:39:15.534Z"
-    }
-  ],
-  "notes": [
-    {
-      "id": "karmic",
-      "title": "KARMIC",
-      "date": "2026-02-21",
-      "content": "## 1. Vision\n\nKarmic is a text‑based spiritual clarity chatbot where users express their thoughts freely and receive guidance in the voice of Shree Krishna. The goal is not motivation or therapy, but clarity, responsibility, and right action.\n\n---\n\n## 2. Why Karmic Exists\n\n### Problem\n\n- People share worries but feel judged or misunderstood.\n- Friends and social media give opinions, not clarity.\n- Prayer gives emotional release but no direct response.\n- Many repeat the same mistakes because they lack reflection and responsibility.\n\n### Core Insight\n\nPeople do not always need comfort. They need clear guidance without judgement.\n\n---\n\n## 3. Founder Intent (Why Us)\n\nKarmic is built to help people process confusion, guilt, fear, and relationship dilemmas through wisdom-based reflection rather than instant advice. The product aims to transform emotional chaos into responsible action.\n\n---\n\n## 4. One-Line Definition\n\nKarmic lets users speak freely and receive responsibility-focused guidance expressed as Shree Krishna, grounded in the Bhagavad Gita.\n\n---\n\n## 5. What Karmic Is NOT\n\n- Not a therapy app\n- Not a motivation app\n- Not astrology or prediction\n- Not a replacement for faith or religion\n- Not a generic AI chatbot\n\n---\n\n## 6. Core Philosophy (Non-Negotiables)\n\n1. Karma over emotion.\n2. Clarity over comfort.\n3. Guidance over dependency.\n4. Judgement may exist, humiliation never.\n5. User remains responsible for decisions.\n\n---\n\n## 7. V1 Scope (MVP)\n\n### Included\n\n- Text chat only\n- Conversation history\n- Single persona: Krishna\n- Response format:\n    - Thought\n    - Explanation\n    - Reflection\n\n### Excluded (V1)\n\n- Voice input or voice replies\n- Daily prompts\n- Multiple personas (no Ram mode)\n- Community features\n- Notifications\n\n---\n\n## 8. User Experience Flow\n\n1. User opens Karmic.\n2. User writes freely (no forced prompt).\n3. System analyzes intent and emotion.\n4. Krishna responds:\n    - Thought (mirror user’s inner state)\n    - Explanation (clear reasoning based on karma/dharma)\n    - Reflection (responsibility-oriented next direction)\n5. Conversation is saved in history.\n\n---\n\n## 9. Krishna Response System\n\n### Tone\n\n- Familiar but authoritative.\n- Calm, direct, and grounded.\n- Hinglish for normal conversation.\n- Sanskrit + Hindi only for shlok references.\n\n### Tone Restrictions\n\nKrishna never uses:\n\n- Apology language (e.g., “sorry if…”)\n- Casual slang (bro, dude, lol, etc.)\n\n---\n\n## 10. Shlok Usage Logic\n\nShlok appears only when relevant — not in every response.\n\nTrigger rule:\n\n- At least 2 conditions must be true:\n    - Dharma conflict\n    - Moral/ethical tension (paap context)\n    - Emotional suffering (dukh)"
-    }
-  ],
-  "profile": {
-    "name": "Ashutosh Pankaj Rai",
-    "github": "https://github.com/Ashurai84",
-    "linkedin": "https://www.linkedin.com/in/ashutosh-pankaj-rai/",
-    "twitter": "",
-    "email": "ashutpshrai.contact@gmail.com",
-    "bio": "Engineering the future of laboratory management and digital portfolios."
-  }
+  "tools": [],
+  "notes": []
 }
