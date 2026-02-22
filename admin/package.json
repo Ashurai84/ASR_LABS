@@ -8,7 +8,7 @@
         "start": "npm run dev",
         "build": "vite build",
         "serve": "node src/server.js",
-        "serve:dev": "nodemon src/server.js"
+        "serve:dev": "nodemon --ignore content/ src/server.js"
     },
     "dependencies": {
         "dotenv": "^16.4.5",
