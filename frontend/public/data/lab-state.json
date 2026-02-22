@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-02-22T10:30:57.698Z",
+    "generated_at": "2026-02-22T10:31:09.780Z",
     "version": "1.1",
     "system_health": "operational"
   },
@@ -34,7 +34,7 @@
       "health": {
         "score": 71,
         "previous_score": 71,
-        "last_calculated_at": "2026-02-22T10:30:57.695Z",
+        "last_calculated_at": "2026-02-22T10:31:09.778Z",
         "breakdown": {
           "activity": 75,
           "delivery": 40,
