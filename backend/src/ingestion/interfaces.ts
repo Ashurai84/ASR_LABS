@@ -23,5 +23,6 @@ export interface IngestionConfig {
     projects: {
         id: string;
         path: string; // Local path to repo
+        adminPath?: string; // Path to admin config directory if separate from repo path
     }[];
 }

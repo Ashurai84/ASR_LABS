@@ -20,17 +20,29 @@ const PROJECTS_ROOT = path.resolve(__dirname, '../../../');
 const ADMIN_PROJECTS_DIR = path.resolve(__dirname, '../../../admin/content/projects');
 
 function getDiscoveredProjects(): IngestionConfig['projects'] {
-    const projects: IngestionConfig['projects'] = [
-        { id: 'asr-lab', path: PROJECTS_ROOT }
-    ];
+    const projects: IngestionConfig['projects'] = [];
 
     if (fs.existsSync(ADMIN_PROJECTS_DIR)) {
         const dirs = fs.readdirSync(ADMIN_PROJECTS_DIR).filter(f => fs.statSync(path.join(ADMIN_PROJECTS_DIR, f)).isDirectory());
         dirs.forEach(id => {
-            if (id === 'asr-lab') return; // avoid duplicate
+            const adminPath = path.join(ADMIN_PROJECTS_DIR, id);
+            let repoPath = adminPath;
+
+            // Simple metadata check for local_path mapping
+            const metaPath = path.join(adminPath, 'project.md');
+            if (fs.existsSync(metaPath)) {
+                const text = fs.readFileSync(metaPath, 'utf8');
+                const match = text.match(/local_path:\s*["']?([^"'\n\r]+)["']?/i);
+                if (match) {
+                    repoPath = path.resolve(adminPath, match[1]);
+                    console.log(`[Discovery] Project ${id} resolved repo path: ${repoPath}`);
+                }
+            }
+
             projects.push({
                 id,
-                path: path.join(ADMIN_PROJECTS_DIR, id)
+                path: repoPath,
+                adminPath: adminPath
             });
         });
     }
@@ -135,10 +147,11 @@ async function main() {
     const adminAdapter = new AdminAdapter();
 
     for (const pConfig of CONFIG.projects) {
-        const meta = await adminAdapter.fetchProjectMetadata(pConfig.path);
+        // Admin adapter now gets the adminPath specifically
+        const meta = await adminAdapter.fetchProjectMetadata(pConfig.adminPath || pConfig.path);
 
-        // Skip projects not explicitly published (unless they are system projects like 'asr-lab')
-        if (pConfig.id !== 'asr-lab' && meta?.published !== 'true') {
+        // Skip projects not explicitly published
+        if (meta?.published !== 'true') {
             console.log(`[Runner] Skipping unpublished project: ${pConfig.id}`);
             continue;
         }

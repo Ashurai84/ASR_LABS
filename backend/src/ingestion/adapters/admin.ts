@@ -71,7 +71,12 @@ export class AdminAdapter implements IngestionSourceAdapter {
             yaml.split('\n').forEach(line => {
                 const [key, ...val] = line.split(':');
                 if (key && val.length) {
-                    data[key.trim().toLowerCase()] = val.join(':').trim().replace(/^["']|["']$/g, '');
+                    let value = val.join(':').trim();
+                    if (value.startsWith('[') && value.endsWith(']')) {
+                        data[key.trim().toLowerCase()] = value.slice(1, -1).split(',').map(v => v.trim().replace(/^["']|["']$/g, ''));
+                    } else {
+                        data[key.trim().toLowerCase()] = value.replace(/^["']|["']$/g, '');
+                    }
                 }
             });
 

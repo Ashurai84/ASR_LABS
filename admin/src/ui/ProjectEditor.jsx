@@ -84,7 +84,7 @@ export const ProjectEditor = ({ project, onSave, onCancel, onDelete }) => {
                 description: data.description || '',
                 published: data.published || 'false'
             });
-            setTagsInput((data.tags || []).join(', '));
+            setTagsInput(Array.isArray(data.tags) ? data.tags.join(', ') : (data.tags || ''));
             setTimelineMarkdown(project.timeline || '');
 
             setCaseStudy({
@@ -97,11 +97,11 @@ export const ProjectEditor = ({ project, onSave, onCancel, onDelete }) => {
                     docs: project.caseStudy?.links?.docs || ''
                 },
                 tech_stack: {
-                    frontend: project.caseStudy?.tech_stack?.frontend?.join(', ') || '',
-                    backend: project.caseStudy?.tech_stack?.backend?.join(', ') || '',
-                    devops: project.caseStudy?.tech_stack?.devops?.join(', ') || ''
+                    frontend: Array.isArray(project.caseStudy?.tech_stack?.frontend) ? project.caseStudy.tech_stack.frontend.join(', ') : '',
+                    backend: Array.isArray(project.caseStudy?.tech_stack?.backend) ? project.caseStudy.tech_stack.backend.join(', ') : '',
+                    devops: Array.isArray(project.caseStudy?.tech_stack?.devops) ? project.caseStudy.tech_stack.devops.join(', ') : ''
                 },
-                contributions: project.caseStudy?.contributions?.join('\n') || '',
+                contributions: Array.isArray(project.caseStudy?.contributions) ? project.caseStudy.contributions.join('\n') : '',
                 images: project.caseStudy?.images || []
             });
 

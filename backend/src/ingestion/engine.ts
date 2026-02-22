@@ -30,8 +30,9 @@ export class IngestionEngine {
 
             for (const adapter of this.adapters) {
                 try {
-                    // fetchSignals might fail for one adapter but others should succeed
-                    const signals = await adapter.fetchSignals(project.path, project.id);
+                    // Use adminPath for admin adapter if available, otherwise fallback to path
+                    const targetPath = (adapter.name === 'admin' && project.adminPath) ? project.adminPath : project.path;
+                    const signals = await adapter.fetchSignals(targetPath, project.id);
                     projectSignals.push(...signals);
                 } catch (e) {
                     console.error(`ERROR: Adapter ${adapter.name} failed for project ${project.id}:`, e);
