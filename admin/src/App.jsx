@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Folder, PenTool, Database, User, Save, Plus, Layout, RefreshCw, CheckCircle2 } from 'lucide-react';
+import { Folder, PenTool, Database, User, Save, Plus, Layout, RefreshCw, CheckCircle2, Menu, X } from 'lucide-react';
 import { ProjectEditor } from './ui/ProjectEditor';
 import { NoteEditor } from './ui/NoteEditor';
 import { ToolsEditor } from './ui/ToolsEditor';
@@ -23,6 +23,7 @@ function App() {
     const [data, setData] = useState({ projects: [], notes: [], tools: [], profile: {} });
     const [loading, setLoading] = useState(true);
     const [isPublishing, setIsPublishing] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     // Editor State
     const [activeFile, setActiveFile] = useState(null); // { type: 'project' | 'note', id: 'filename', ... }
@@ -163,21 +164,43 @@ function App() {
     if (loading) return <div className="min-h-screen bg-zinc-950 flex items-center justify-center text-zinc-600 font-mono text-xs uppercase tracking-widest">Initialising Workspace...</div>;
 
     return (
-        <div className="flex min-h-screen bg-zinc-950 text-zinc-300 font-sans selection:bg-orange-900/40">
+        <div className="flex min-h-screen bg-zinc-950 text-zinc-300 font-sans selection:bg-orange-900/40 lg:overflow-visible overflow-hidden">
+
+            {/* Mobile Top Header */}
+            <div className="md:hidden fixed top-0 inset-x-0 h-14 bg-zinc-950/90 backdrop-blur-xl border-b border-zinc-900 z-50 flex items-center justify-between px-6">
+                <div className="flex items-center gap-2 text-zinc-100 font-bold tracking-tight text-sm">
+                    <Layout className="w-4 h-4 text-orange-500" />
+                    ASR.ADMIN
+                </div>
+                <button
+                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    className="p-2 -mr-2 text-zinc-400 hover:text-white transition-colors"
+                >
+                    {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                </button>
+            </div>
+
+            {/* Overlay when mobile menu is open */}
+            {isMobileMenuOpen && (
+                <div
+                    className="md:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-30"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                />
+            )}
 
             {/* Sidebar (Only if not in focused editor) */}
             {(view !== 'note-editor' && view !== 'editor') && (
-                <nav className="w-64 border-r border-zinc-900 p-4 flex flex-col gap-8 bg-zinc-950">
+                <nav className={`w-64 fixed inset-y-0 left-0 border-r border-zinc-900 p-4 flex-col gap-8 bg-zinc-950 z-40 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] md:translate-x-0 ${isMobileMenuOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'} flex md:static pt-20 md:pt-4 overflow-y-auto`}>
                     <div>
                         <div className="px-3 mb-6 flex items-center gap-2 text-zinc-100 font-bold tracking-tight">
                             <Layout className="w-5 h-5 text-orange-500" />
                             ASR.ADMIN
                         </div>
                         <div className="space-y-1">
-                            <SidebarItem icon={Folder} label="Projects" active={view === 'projects'} onClick={() => setView('projects')} />
-                            <SidebarItem icon={PenTool} label="Notes" active={view === 'notes'} onClick={() => setView('notes')} />
-                            <SidebarItem icon={Database} label="Tools" active={view === 'tools'} onClick={() => setView('tools')} />
-                            <SidebarItem icon={User} label="Profile" active={view === 'profile'} onClick={() => setView('profile')} />
+                            <SidebarItem icon={Folder} label="Projects" active={view === 'projects'} onClick={() => { setView('projects'); setIsMobileMenuOpen(false); }} />
+                            <SidebarItem icon={PenTool} label="Notes" active={view === 'notes'} onClick={() => { setView('notes'); setIsMobileMenuOpen(false); }} />
+                            <SidebarItem icon={Database} label="Tools" active={view === 'tools'} onClick={() => { setView('tools'); setIsMobileMenuOpen(false); }} />
+                            <SidebarItem icon={User} label="Profile" active={view === 'profile'} onClick={() => { setView('profile'); setIsMobileMenuOpen(false); }} />
                         </div>
                     </div>
 
@@ -192,7 +215,7 @@ function App() {
             )}
 
             {/* Main Canvas */}
-            <main className="flex-1 flex flex-col min-w-0">
+            <main className="flex-1 flex flex-col min-w-0 md:ml-0 pt-14 md:pt-0 relative max-w-full">
 
                 {/* View: Project List */}
                 {view === 'projects' && (
