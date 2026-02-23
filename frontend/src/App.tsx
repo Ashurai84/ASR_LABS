@@ -2,7 +2,7 @@ import { useState, useRef, useLayoutEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useLabState } from './hooks/useLabState';
 import { JournalStream } from './components/journal/JournalStream';
-import { Book, PenTool, Database, Github, Linkedin, Mail } from 'lucide-react';
+import { Book, PenTool, Database, Github, Linkedin, Mail, Menu, X } from 'lucide-react';
 import { ToolRegistry } from './components/tools/ToolRegistry';
 import { NotesList } from './components/notes/NotesList';
 import { ProjectDetail } from './components/project/ProjectDetail';
@@ -11,6 +11,7 @@ function App() {
   const { labState, loading, error } = useLabState();
   const [view, setView] = useState<'journal' | 'tools' | 'notes'>('journal');
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Persistent Scroll Registry
   const scrollRegistry = useRef<Record<string, number>>({});
@@ -62,10 +63,23 @@ function App() {
   }
 
   return (
-    <div className="flex min-h-screen bg-black text-zinc-300 font-sans selection:bg-orange-900/30 selection:text-orange-200">
+    <div className="flex min-h-screen bg-black text-zinc-300 font-sans selection:bg-orange-900/30 selection:text-orange-200 lg:overflow-visible overflow-hidden">
 
-      {/* 1. Minimal Sidebar (Fixed) */}
-      <nav className="w-64 fixed inset-y-0 left-0 border-r border-zinc-900/50 p-8 hidden md:flex flex-col justify-between bg-black/60 backdrop-blur-xl z-50">
+      {/* Mobile Top Header */}
+      <div className="md:hidden fixed top-0 inset-x-0 h-14 bg-black/80 backdrop-blur-xl border-b border-zinc-900/50 z-50 flex items-center justify-between px-6">
+        <h1 className="text-sm font-mono tracking-[0.2em] text-zinc-500 uppercase select-none flex items-center gap-2">
+          {labState.profile?.name || 'ASR Lab'} <span className="text-emerald-500/50 italic font-bold">●</span>
+        </h1>
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="p-2 -mr-2 text-zinc-400 hover:text-white transition-colors"
+        >
+          {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
+      </div>
+
+      {/* 1. Sidebar (Fixed - Hidden on Mobile unless Toggled) */}
+      <nav className={`w-64 fixed inset-y-0 left-0 border-r border-zinc-900/50 p-8 flex-col justify-between bg-black/95 md:bg-black/60 backdrop-blur-2xl z-40 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] md:translate-x-0 ${isMobileMenuOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'} md:flex pt-20 md:pt-8 overflow-y-auto`}>
         <div>
           {/* Brand */}
           <div className="mb-12">
@@ -84,7 +98,7 @@ function App() {
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4 }}
-              onClick={() => { setView('journal'); setSelectedProjectId(null); }}
+              onClick={() => { setView('journal'); setSelectedProjectId(null); setIsMobileMenuOpen(false); }}
               className={`w-full text-left px-3 py-2 rounded-md text-[13px] transition-all duration-200 ease-out flex items-center gap-3 font-medium tracking-wide border border-transparent 
                 ${view === 'journal' && !selectedProjectId
                   ? 'text-white bg-[#18181b] shadow-subtle border-[#27272a]'
@@ -107,7 +121,7 @@ function App() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: 0.15 + (i * 0.05) }}
                 key={p.id}
-                onClick={() => enterProject(p.id)}
+                onClick={() => { enterProject(p.id); setIsMobileMenuOpen(false); }}
                 className={`w-full text-left px-3 py-1.5 rounded-md text-[13px] transition-all duration-200 ease-out flex items-center gap-3 group border border-transparent
                   ${selectedProjectId === p.id
                     ? 'text-white bg-[#18181b] shadow-subtle border-[#27272a]'
@@ -128,7 +142,7 @@ function App() {
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4, delay: 0.3 }}
-              onClick={() => { setView('notes'); setSelectedProjectId(null); }}
+              onClick={() => { setView('notes'); setSelectedProjectId(null); setIsMobileMenuOpen(false); }}
               className={`w-full text-left px-3 py-2 rounded-md text-[13px] transition-all duration-200 ease-out flex items-center gap-3 border border-transparent
                 ${view === 'notes' ? 'text-white bg-[#18181b] shadow-subtle border-[#27272a]' : 'text-[#85858b] hover:text-[#ededed] hover:bg-[#18181b]/30'}`}
             >
@@ -139,7 +153,7 @@ function App() {
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4, delay: 0.35 }}
-              onClick={() => { setView('tools'); setSelectedProjectId(null); }}
+              onClick={() => { setView('tools'); setSelectedProjectId(null); setIsMobileMenuOpen(false); }}
               className={`w-full text-left px-3 py-2 rounded-md text-[13px] transition-all duration-200 ease-out flex items-center gap-3 border border-transparent
                 ${view === 'tools' ? 'text-white bg-[#18181b] shadow-subtle border-[#27272a]' : 'text-[#85858b] hover:text-[#ededed] hover:bg-[#18181b]/30'}`}
             >
@@ -192,8 +206,16 @@ function App() {
         </div>
       </nav>
 
+      {/* Overlay when mobile menu is open */}
+      {isMobileMenuOpen && (
+        <div
+          className="md:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-30"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
       {/* 2. Main Canvas (Persistent Container) */}
-      <main className="flex-1 md:ml-64 relative min-h-screen">
+      <main className="flex-1 md:ml-64 relative min-h-screen pt-14 md:pt-0">
         <div
           key={viewKey}
           className={`mx-auto px-6 md:px-12 w-full transition-opacity duration-300 animate-[fadeIn_0.3s_ease-out] ${view === 'tools' ? 'max-w-6xl' : (view === 'journal' && selectedProjectId) ? 'max-w-4xl' : 'max-w-3xl'
