@@ -4,6 +4,7 @@ import { format, isSameDay } from 'date-fns';
 import { MajorEntry, MinorEntry } from './Entry';
 import { GitCommit } from 'lucide-react';
 import { ProjectHeader } from '../project/ProjectHeader';
+import { motion } from 'framer-motion';
 
 interface JournalStreamProps {
     events: TimelineEvent[];
@@ -52,21 +53,66 @@ export const JournalStream: React.FC<JournalStreamProps> = ({ events, projects, 
             {selectedProjectId && currentProject ? (
                 <ProjectHeader project={currentProject} />
             ) : (
-                <div className="pt-4 pb-4 border-b border-[#27272a] animate-fade-in">
-                    <h1 className="text-xl md:text-2xl font-serif text-white tracking-tight leading-tight mb-2">
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="pt-8 pb-10 border-b border-[#27272a]"
+                >
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+                        className="mb-6 w-12 h-12 rounded-xl bg-[#18181b] border border-[#27272a] shadow-subtle flex items-center justify-center overflow-hidden"
+                    >
+                        {/* Animated Terminal Outline SVG */}
+                        <motion.svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-emerald-500/80">
+                            <motion.path
+                                initial={{ pathLength: 0, opacity: 0 }}
+                                animate={{ pathLength: 1, opacity: 1 }}
+                                transition={{ duration: 1.5, ease: "easeInOut", delay: 0.2 }}
+                                d="M4 17l6-6-6-6"
+                            />
+                            <motion.path
+                                initial={{ pathLength: 0, opacity: 0 }}
+                                animate={{ pathLength: 1, opacity: 1 }}
+                                transition={{ duration: 0.5, ease: "easeOut", delay: 1.2 }}
+                                d="M12 19h8"
+                            />
+                        </motion.svg>
+                    </motion.div>
+
+                    <motion.h1
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                        className="text-2xl md:text-3xl font-serif text-white tracking-tight leading-tight mb-3"
+                    >
                         Engineering Log
-                    </h1>
-                    <p className="text-[13px] md:text-[14px] text-[#85858b] max-w-2xl leading-relaxed font-sans">
+                    </motion.h1>
+                    <motion.p
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.4 }}
+                        className="text-[14px] md:text-[15px] text-[#85858b] max-w-2xl leading-relaxed font-sans"
+                    >
                         A living record of architectural decisions, technical failures, and shipped code.
-                    </p>
-                </div>
+                    </motion.p>
+                </motion.div>
             )}
 
             {/* Timeline Stream - Compressed Rhythm */}
             {groupedEvents.length > 0 ? (
-                <div className="relative border-l border-[#27272a] ml-4 md:ml-4 pl-4 md:pl-5 space-y-8 animate-slide-up">
+                <div className="relative border-l border-[#27272a] ml-4 md:ml-4 pl-4 md:pl-5 space-y-8 mt-6">
                     {groupedEvents.map((group, groupIdx) => (
-                        <div key={groupIdx} className="relative group/day">
+                        <motion.div
+                            key={groupIdx}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-10%" }}
+                            transition={{ duration: 0.5, ease: "easeOut" }}
+                            className="relative group/day"
+                        >
                             {/* Day Marker - Centered on Spine */}
                             <div className="absolute left-0 translate-x-[-50%] top-0 flex items-center justify-center h-5 px-2 bg-[#18181b] border border-[#27272a] rounded-md z-10 text-[9px] font-mono text-[#a1a1aa] shadow-subtle uppercase tracking-wider transition-colors duration-300 group-hover/day:border-[#3f3f46] group-hover/day:text-[#ededed]">
                                 {format(group.date, 'MMM d')}
@@ -84,7 +130,7 @@ export const JournalStream: React.FC<JournalStreamProps> = ({ events, projects, 
                                     );
                                 })}
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             ) : (

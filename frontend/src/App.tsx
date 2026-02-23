@@ -1,4 +1,5 @@
 import { useState, useRef, useLayoutEffect } from 'react';
+import { motion } from 'framer-motion';
 import { useLabState } from './hooks/useLabState';
 import { JournalStream } from './components/journal/JournalStream';
 import { Book, PenTool, Database, Github, Linkedin, Mail } from 'lucide-react';
@@ -68,17 +69,21 @@ function App() {
         <div>
           {/* Brand */}
           <div className="mb-12">
-            <h1 className="text-sm font-mono tracking-[0.2em] text-zinc-500 mb-1 uppercase select-none flex items-center gap-2">
-              {labState.profile?.name || 'ASR Lab'} <span className="text-emerald-500/50 italic font-bold">●</span>
+            <h1 className="text-sm font-mono tracking-[0.2em] text-zinc-500 mb-2 uppercase select-none flex items-center justify-between">
+              <span className="leading-snug">{labState.profile?.name || 'ASR Lab'}</span>
+              <span className="text-emerald-500/50 italic font-bold">●</span>
             </h1>
-            <p className="text-[10px] text-zinc-600 font-mono leading-relaxed truncate">
+            <p className="text-[10px] text-zinc-600 font-mono leading-relaxed mt-2">
               {labState.profile?.bio}
             </p>
           </div>
 
           {/* Navigation Links */}
           <div className="space-y-1">
-            <button
+            <motion.button
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4 }}
               onClick={() => { setView('journal'); setSelectedProjectId(null); }}
               className={`w-full text-left px-3 py-2 rounded-md text-[13px] transition-all duration-200 ease-out flex items-center gap-3 font-medium tracking-wide border border-transparent 
                 ${view === 'journal' && !selectedProjectId
@@ -87,10 +92,20 @@ function App() {
             >
               <Book className={`w-4 h-4 transition-opacity duration-200 ${view === 'journal' && !selectedProjectId ? 'opacity-100' : 'opacity-50'}`} />
               Journal
-            </button>
-            <div className="pt-6 pb-2 px-3 text-[10px] font-mono uppercase tracking-[0.2em] text-zinc-600 select-none">Chapters</div>
-            {labState.projects.map(p => (
-              <button
+            </motion.button>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="pt-6 pb-2 px-3 text-[10px] font-mono uppercase tracking-[0.2em] text-zinc-600 select-none"
+            >
+              Chapters
+            </motion.div>
+            {labState.projects.map((p, i) => (
+              <motion.button
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: 0.15 + (i * 0.05) }}
                 key={p.id}
                 onClick={() => enterProject(p.id)}
                 className={`w-full text-left px-3 py-1.5 rounded-md text-[13px] transition-all duration-200 ease-out flex items-center gap-3 group border border-transparent
@@ -103,28 +118,34 @@ function App() {
                     ? 'scale-110 bg-[#ededed]'
                     : p.health.score > 80 ? 'bg-[#22c55e]/50 group-hover:bg-[#22c55e]' : 'bg-[#52525b] group-hover:bg-[#a1a1aa]'}`} />
                 <span className="truncate">{p.name}</span>
-              </button>
+              </motion.button>
             ))}
           </div>
 
           {/* Secondary Links */}
           <div className="mt-8 space-y-1 border-t border-[#27272a] pt-6">
-            <button
+            <motion.button
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
               onClick={() => { setView('notes'); setSelectedProjectId(null); }}
               className={`w-full text-left px-3 py-2 rounded-md text-[13px] transition-all duration-200 ease-out flex items-center gap-3 border border-transparent
                 ${view === 'notes' ? 'text-white bg-[#18181b] shadow-subtle border-[#27272a]' : 'text-[#85858b] hover:text-[#ededed] hover:bg-[#18181b]/30'}`}
             >
               <PenTool className={`w-4 h-4 transition-opacity duration-200 ${view === 'notes' ? 'opacity-100' : 'opacity-40'}`} />
               Notes
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: 0.35 }}
               onClick={() => { setView('tools'); setSelectedProjectId(null); }}
               className={`w-full text-left px-3 py-2 rounded-md text-[13px] transition-all duration-200 ease-out flex items-center gap-3 border border-transparent
                 ${view === 'tools' ? 'text-white bg-[#18181b] shadow-subtle border-[#27272a]' : 'text-[#85858b] hover:text-[#ededed] hover:bg-[#18181b]/30'}`}
             >
               <Database className={`w-4 h-4 transition-opacity duration-200 ${view === 'tools' ? 'opacity-100' : 'opacity-40'}`} />
               Artifacts
-            </button>
+            </motion.button>
           </div>
 
           {/* Vitals / Contact */}

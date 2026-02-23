@@ -344,9 +344,16 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, events })
 
                     {storyEvents.length > 0 ? (
                         <div className="relative border-l border-zinc-800 ml-3 space-y-8 pl-7 py-2">
-                            {storyEvents.map(event => (
-                                <div key={event.id} className="relative group">
-                                    <div className="absolute -left-[31px] top-0.5 p-1.5 bg-[#050505] border border-zinc-800 rounded-full group-hover:border-zinc-700 transition-colors">
+                            {storyEvents.map((event, idx) => (
+                                <motion.div
+                                    key={event.id}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true, margin: "-10%" }}
+                                    transition={{ duration: 0.4, delay: idx * 0.05 }}
+                                    className="relative group"
+                                >
+                                    <div className="absolute -left-[31px] top-0.5 p-1.5 bg-[#050505] border border-zinc-800 rounded-full group-hover:border-zinc-700 transition-colors group-hover:scale-110">
                                         {getEventIcon(event.type)}
                                     </div>
 
@@ -379,7 +386,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, events })
                                             )}
                                         </div>
                                     )}
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
                     ) : (
