@@ -69,11 +69,11 @@ function App() {
         <div>
           {/* Brand */}
           <div className="mb-12">
-            <h1 className="text-sm font-mono tracking-[0.2em] text-zinc-500 mb-2 uppercase select-none flex items-center justify-between">
+            <h1 className="text-sm font-mono tracking-[0.2em] text-zinc-400 mb-2 uppercase select-none flex items-center justify-between">
               <span className="leading-snug">{labState.profile?.name || 'ASR Lab'}</span>
               <span className="text-emerald-500/50 italic font-bold">●</span>
             </h1>
-            <p className="text-[10px] text-zinc-600 font-mono leading-relaxed mt-2">
+            <p className="text-[12px] text-zinc-500 font-sans leading-relaxed mt-2 pr-2">
               {labState.profile?.bio}
             </p>
           </div>
