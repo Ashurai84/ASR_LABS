@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-02-23T05:58:48.454Z",
+    "generated_at": "2026-02-23T06:09:12.877Z",
     "version": "1.1",
     "system_health": "operational"
   },
@@ -33,18 +33,18 @@
       ],
       "health": {
         "score": 78,
-        "previous_score": 51,
-        "last_calculated_at": "2026-02-23T05:58:48.452Z",
+        "previous_score": 78,
+        "last_calculated_at": "2026-02-23T06:09:12.875Z",
         "breakdown": {
           "activity": 100,
           "delivery": 40,
           "stability": 80,
           "decision_velocity": 100
         },
-        "change_reason": "Increased development activity"
+        "change_reason": "Routine update"
       },
       "derived": {
-        "focus_score": 263,
+        "focus_score": 138,
         "activity_level": "high",
         "last_decision_date": "2026-02-16T00:00:00.000Z",
         "last_event_date": "2026-02-23"
@@ -300,7 +300,7 @@
     "github": "https://github.com/Ashurai84",
     "linkedin": "https://www.linkedin.com/in/ashutosh-pankaj-rai/",
     "twitter": "",
-    "email": "ashutpshrai.contact@gmail.com",
+    "email": "ashutoshrai.contact@gmail.com",
     "bio": "Engineering the future of laboratory management and digital portfolios."
   }
 }
