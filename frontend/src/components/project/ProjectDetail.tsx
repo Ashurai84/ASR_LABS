@@ -183,7 +183,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, events })
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.25, ease: 'easeOut' }}
-                className="space-y-10 pb-24 pt-6 md:pt-12"
+                className="space-y-10 pb-24"
             >
                 {/* ── Hero Cover Image ── */}
                 {project.cover_image && (

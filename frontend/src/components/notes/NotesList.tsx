@@ -28,9 +28,9 @@ export const NotesList: React.FC<NotesListProps> = ({ notes = [] }) => {
     }
 
     return (
-        <div className="space-y-4 pb-32 pt-4 md:pt-12 animate-fade-in">
+        <div className="space-y-4 pb-32 animate-fade-in">
             {/* Header */}
-            <div className="pb-4 border-b border-[#27272a]">
+            <div className="pt-4 pb-4 border-b border-[#27272a]">
                 <h1 className="text-xl md:text-2xl font-serif text-[#ffffff] tracking-tight mb-2">
                     Neural Vault
                 </h1>

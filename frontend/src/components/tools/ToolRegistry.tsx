@@ -57,9 +57,9 @@ export const ToolRegistry: React.FC<ToolRegistryProps> = ({ tools = [] }) => {
     }
 
     return (
-        <div className="space-y-8 pb-32 pt-4 md:pt-12 animate-fade-in">
+        <div className="space-y-8 pb-32 animate-fade-in">
             {/* 1. Header Section */}
-            <div className="pb-6 border-b border-[#27272a]">
+            <div className="pt-4 pb-6 border-b border-[#27272a]">
                 <h1 className="text-xl md:text-2xl font-serif text-[#ffffff] tracking-tight mb-2">
                     Artifacts & Tools
                 </h1>
