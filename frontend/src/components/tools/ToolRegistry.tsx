@@ -57,9 +57,9 @@ export const ToolRegistry: React.FC<ToolRegistryProps> = ({ tools = [] }) => {
     }
 
     return (
-        <div className="space-y-8 pb-32 animate-fade-in">
+        <div className="space-y-8 pb-32 pt-4 md:pt-12 animate-fade-in">
             {/* 1. Header Section */}
-            <div className="pt-4 pb-6 border-b border-[#27272a]">
+            <div className="pb-6 border-b border-[#27272a]">
                 <h1 className="text-xl md:text-2xl font-serif text-[#ffffff] tracking-tight mb-2">
                     Artifacts & Tools
                 </h1>
@@ -103,8 +103,8 @@ export const ToolRegistry: React.FC<ToolRegistryProps> = ({ tools = [] }) => {
                                 key={type}
                                 onClick={() => setActiveTypeFilter(type as ToolType | 'ALL')}
                                 className={`text-[10px] font-mono tracking-widest uppercase px-2 py-1 rounded border transition-colors ${activeTypeFilter === type
-                                        ? 'bg-[#ffffff] text-[#000000] border-[#ffffff]'
-                                        : 'bg-[#18181b] text-[#a1a1aa] border-[#27272a] hover:border-[#3f3f46]'
+                                    ? 'bg-[#ffffff] text-[#000000] border-[#ffffff]'
+                                    : 'bg-[#18181b] text-[#a1a1aa] border-[#27272a] hover:border-[#3f3f46]'
                                     }`}
                             >
                                 {type === 'ALL' ? 'ALL TYPES' : type}

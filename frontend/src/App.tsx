@@ -215,7 +215,7 @@ function App() {
       )}
 
       {/* 2. Main Canvas (Persistent Container) */}
-      <main className="flex-1 md:ml-64 relative min-h-screen pt-24 md:pt-12">
+      <main className="flex-1 md:ml-64 relative min-h-screen pt-24 md:pt-0">
         <div
           key={viewKey}
           className={`mx-auto px-6 md:px-12 w-full transition-opacity duration-300 animate-[fadeIn_0.3s_ease-out] ${view === 'tools' ? 'max-w-6xl' : (view === 'journal' && selectedProjectId) ? 'max-w-4xl' : 'max-w-3xl'
