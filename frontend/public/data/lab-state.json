@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-02-24T09:58:36.166Z",
+    "generated_at": "2026-02-24T09:59:13.435Z",
     "version": "1.1",
     "system_health": "operational"
   },
@@ -35,7 +35,7 @@
       "health": {
         "score": 78,
         "previous_score": 78,
-        "last_calculated_at": "2026-02-24T09:58:36.162Z",
+        "last_calculated_at": "2026-02-24T09:59:13.431Z",
         "breakdown": {
           "activity": 100,
           "delivery": 40,
@@ -45,7 +45,7 @@
         "change_reason": "Routine update"
       },
       "derived": {
-        "focus_score": 195,
+        "focus_score": 205,
         "activity_level": "high",
         "last_decision_date": "2026-02-16T00:00:00.000Z",
         "last_event_date": "2026-02-24"
@@ -86,7 +86,7 @@
       "health": {
         "score": 51,
         "previous_score": 51,
-        "last_calculated_at": "2026-02-24T09:58:36.164Z",
+        "last_calculated_at": "2026-02-24T09:59:13.433Z",
         "breakdown": {
           "activity": 50,
           "delivery": 0,
