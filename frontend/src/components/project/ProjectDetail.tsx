@@ -214,9 +214,14 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, events })
                         ))}
                     </div>
 
-                    <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight leading-none">
-                        {project.name}
-                    </h1>
+                    <div className="flex flex-col gap-1.5">
+                        <span className="text-xs font-mono text-zinc-500 tracking-widest uppercase flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/50" /> System Log
+                        </span>
+                        <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight leading-none">
+                            {project.name}
+                        </h1>
+                    </div>
 
                     {project.outcome && (
                         <p className="text-lg text-emerald-400/80 font-sans leading-snug font-medium max-w-2xl">

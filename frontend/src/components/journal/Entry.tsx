@@ -24,8 +24,8 @@ const getEventIcon = (type: string) => {
 export const MajorEntry: React.FC<EntryProps> = ({ event, showProject }) => {
     return (
         <div className="relative py-2 group transition-all duration-300 ease-out hover:translate-x-1">
-            {/* Timeline Connector - Subtle */}
-            <div className="absolute left-0 translate-x-[-50%] top-6 bottom-[-16px] w-px bg-[#27272a] group-last:hidden transition-colors duration-300 group-hover:bg-[#3f3f46]" />
+            {/* Timeline Connector - Subtle Glow */}
+            <div className="absolute left-0 translate-x-[-50%] top-6 bottom-[-16px] w-px bg-zinc-800 group-last:hidden transition-all duration-500 group-hover:bg-zinc-500" />
 
             {/* Icon Marker */}
             <div className="absolute left-0 translate-x-[-50%] top-2 p-1.5 bg-black z-10 box-content rounded-full ring-4 ring-black shadow-subtle group-hover:scale-110 transition-transform duration-300">
@@ -33,7 +33,7 @@ export const MajorEntry: React.FC<EntryProps> = ({ event, showProject }) => {
             </div>
 
             {/* Content Container (Pulled closer to spine) */}
-            <div className="space-y-1.5 pt-0.5 ml-4 p-3 -mt-2 rounded-lg border border-transparent hover:bg-[#18181b] hover:border-[#27272a] hover:shadow-subtle transition-all duration-300 ease-out">
+            <div className="space-y-1.5 pt-0.5 ml-4 p-3 -mt-2 rounded-xl border border-transparent hover:bg-zinc-900/40 hover:border-zinc-700/50 hover:shadow-lg transition-all duration-300 ease-out">
                 <div className="flex flex-col gap-0.5">
                     <div className="flex items-center gap-3">
                         <h3 className="text-[17px] font-bold text-[#ffffff] font-serif tracking-tight leading-snug">
@@ -84,7 +84,7 @@ export const MinorEntry: React.FC<EntryProps> = ({ event, isLastInGroup, showPro
         <div className="relative py-1 group transition-all duration-300 ease-out hover:translate-x-1 cursor-default">
             {/* Timeline Connector */}
             {!isLastInGroup && (
-                <div className="absolute left-0 translate-x-[-50%] top-2 bottom-[-12px] w-px bg-[#27272a] transition-colors duration-300 group-hover:bg-[#3f3f46]" />
+                <div className="absolute left-0 translate-x-[-50%] top-2 bottom-[-12px] w-px bg-zinc-800 transition-all duration-500 group-hover:bg-zinc-500" />
             )}
 
             {/* Icon Marker - Minimal Emoji */}
@@ -93,7 +93,7 @@ export const MinorEntry: React.FC<EntryProps> = ({ event, isLastInGroup, showPro
             </div>
 
             {/* Content Container */}
-            <div className="flex items-baseline gap-3 opacity-70 hover:opacity-100 transition-opacity duration-300 ml-4 p-1.5 rounded-md hover:bg-[#18181b]">
+            <div className="flex items-baseline gap-3 opacity-70 hover:opacity-100 transition-opacity duration-300 ml-4 p-1.5 rounded-lg hover:bg-zinc-900/40">
                 {showProject && (
                     <span className="text-[9px] font-mono text-[#6b7280] uppercase tracking-widest border-r border-[#27272a] pr-2 shrink-0">
                         {event.project_id}

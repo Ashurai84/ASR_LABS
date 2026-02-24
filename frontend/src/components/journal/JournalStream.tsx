@@ -54,50 +54,32 @@ export const JournalStream: React.FC<JournalStreamProps> = ({ events, projects, 
                 <ProjectHeader project={currentProject} />
             ) : (
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="pt-8 pb-10 border-b border-[#27272a]"
+                    className="w-full pt-4 md:pt-6 pb-8 md:pb-10 mb-4 md:mb-6 border-b border-zinc-800/50 relative group"
                 >
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-                        className="mb-6 w-12 h-12 rounded-xl bg-[#18181b] border border-[#27272a] shadow-subtle flex items-center justify-center overflow-hidden"
-                    >
-                        {/* Animated Terminal Outline SVG */}
-                        <motion.svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-emerald-500/80">
-                            <motion.path
-                                initial={{ pathLength: 0, opacity: 0 }}
-                                animate={{ pathLength: 1, opacity: 1 }}
-                                transition={{ duration: 1.5, ease: "easeInOut", delay: 0.2 }}
-                                d="M4 17l6-6-6-6"
-                            />
-                            <motion.path
-                                initial={{ pathLength: 0, opacity: 0 }}
-                                animate={{ pathLength: 1, opacity: 1 }}
-                                transition={{ duration: 0.5, ease: "easeOut", delay: 1.2 }}
-                                d="M12 19h8"
-                            />
-                        </motion.svg>
-                    </motion.div>
+                    <div className="flex flex-col gap-4 relative z-10">
+                        <div className="flex items-center gap-3">
+                            {/* Pulsing Dot */}
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                            </span>
+                            <h1 className="text-sm md:text-base font-mono text-zinc-300 font-semibold tracking-wider uppercase">
+                                ASR Lab Workspace
+                            </h1>
+                        </div>
 
-                    <motion.h1
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.3 }}
-                        className="text-2xl md:text-3xl font-serif text-white tracking-tight leading-tight mb-3"
-                    >
-                        Engineering Log
-                    </motion.h1>
-                    <motion.p
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.4 }}
-                        className="text-[14px] md:text-[15px] text-[#85858b] max-w-2xl leading-relaxed font-sans"
-                    >
-                        A living record of architectural decisions, technical failures, and shipped code.
-                    </motion.p>
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            className="text-[15px] md:text-[16px] text-zinc-400 leading-relaxed font-sans max-w-2xl"
+                        >
+                            A live engineering journal documenting real-time architectural decisions, codebase evolution, and technical learning across all active projects.
+                        </motion.p>
+                    </div>
                 </motion.div>
             )}
 

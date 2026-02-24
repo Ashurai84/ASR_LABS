@@ -99,13 +99,15 @@ function App() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4 }}
               onClick={() => { setView('journal'); setSelectedProjectId(null); setIsMobileMenuOpen(false); }}
-              className={`w-full text-left px-3 py-2 rounded-md text-[13px] transition-all duration-200 ease-out flex items-center gap-3 font-medium tracking-wide border border-transparent 
+              className={`w-full text-left px-3 py-2 rounded-md text-[13px] transition-all duration-200 ease-out flex items-center justify-between font-medium tracking-wide border border-transparent 
                 ${view === 'journal' && !selectedProjectId
-                  ? 'text-white bg-[#18181b] shadow-subtle border-[#27272a]'
-                  : 'text-[#a1a1aa] hover:text-[#ededed] hover:bg-[#18181b]/50'}`}
+                  ? 'text-white bg-zinc-900/80 shadow-md border-zinc-800/80'
+                  : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/40'}`}
             >
-              <Book className={`w-4 h-4 transition-opacity duration-200 ${view === 'journal' && !selectedProjectId ? 'opacity-100' : 'opacity-50'}`} />
-              Journal
+              <div className="flex items-center gap-3">
+                <Book className={`w-4 h-4 transition-opacity duration-200 ${view === 'journal' && !selectedProjectId ? 'opacity-100 text-emerald-500' : 'opacity-50'}`} />
+                Journal
+              </div>
             </motion.button>
             <motion.div
               initial={{ opacity: 0 }}
@@ -122,16 +124,18 @@ function App() {
                 transition={{ duration: 0.3, delay: 0.15 + (i * 0.05) }}
                 key={p.id}
                 onClick={() => { enterProject(p.id); setIsMobileMenuOpen(false); }}
-                className={`w-full text-left px-3 py-1.5 rounded-md text-[13px] transition-all duration-200 ease-out flex items-center gap-3 group border border-transparent
+                className={`w-full text-left px-3 py-1.5 rounded-md text-[13px] transition-all duration-200 ease-out flex items-center justify-between group border border-transparent
                   ${selectedProjectId === p.id
-                    ? 'text-white bg-[#18181b] shadow-subtle border-[#27272a]'
-                    : 'text-[#85858b] hover:text-[#ededed] hover:bg-[#18181b]/30'}`}
+                    ? 'text-emerald-50 font-medium bg-zinc-900/80 shadow-md border-zinc-800/80'
+                    : 'text-zinc-500 hover:text-zinc-300 hover:bg-zinc-900/40'}`}
               >
-                <span className={`w-[6px] h-[6px] rounded-full transition-all duration-300 shadow-glow
-                  ${selectedProjectId === p.id
-                    ? 'scale-110 bg-[#ededed]'
-                    : p.health.score > 80 ? 'bg-[#22c55e]/50 group-hover:bg-[#22c55e]' : 'bg-[#52525b] group-hover:bg-[#a1a1aa]'}`} />
-                <span className="truncate">{p.name}</span>
+                <div className="flex items-center gap-3 truncate">
+                  <span className={`w-[6px] h-[6px] rounded-full transition-all duration-300 shadow-glow shrink-0
+                      ${selectedProjectId === p.id
+                      ? 'scale-125 bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]'
+                      : p.health.score > 80 ? 'bg-[#22c55e]/30 group-hover:bg-[#22c55e]/70' : 'bg-[#52525b] group-hover:bg-[#a1a1aa]'}`} />
+                  <span className="truncate">{p.name}</span>
+                </div>
               </motion.button>
             ))}
           </div>
