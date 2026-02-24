@@ -182,6 +182,12 @@ app.delete('/api/project/:slug', (req, res) => {
         if (fs.existsSync(caseStudyPath)) fs.unlinkSync(caseStudyPath);
 
         res.json({ success: true });
+
+        // Auto-publish to remove ghost data
+        const backendDir = path.resolve(__dirname, '../../backend');
+        exec('npm run ingest', { cwd: backendDir }, (error) => {
+            if (error) console.error(`Ingest on project delete failed: ${error}`);
+        });
     } else {
         res.status(404).json({ error: 'Project not found' });
     }
@@ -205,6 +211,12 @@ app.delete('/api/note/:filename', (req, res) => {
     if (fs.existsSync(filePath)) {
         fs.unlinkSync(filePath);
         res.json({ success: true });
+
+        // Auto-publish to remove ghost data
+        const backendDir = path.resolve(__dirname, '../../backend');
+        exec('npm run ingest', { cwd: backendDir }, (error) => {
+            if (error) console.error(`Ingest on note delete failed: ${error}`);
+        });
     } else {
         res.status(404).json({ error: 'Note not found' });
     }
