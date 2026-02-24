@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-02-24T09:25:30.034Z",
+    "generated_at": "2026-02-24T09:32:59.478Z",
     "version": "1.1",
     "system_health": "operational"
   },
@@ -35,7 +35,7 @@
       "health": {
         "score": 78,
         "previous_score": 78,
-        "last_calculated_at": "2026-02-24T09:25:30.031Z",
+        "last_calculated_at": "2026-02-24T09:32:59.473Z",
         "breakdown": {
           "activity": 100,
           "delivery": 40,
@@ -86,7 +86,7 @@
       "health": {
         "score": 51,
         "previous_score": 51,
-        "last_calculated_at": "2026-02-24T09:25:30.033Z",
+        "last_calculated_at": "2026-02-24T09:32:59.475Z",
         "breakdown": {
           "activity": 50,
           "delivery": 0,
@@ -101,20 +101,20 @@
         "last_decision_date": "2026-02-24T00:00:00.000Z",
         "last_event_date": "2026-02-24T00:00:00.000Z"
       },
-      "cover_image": "https://ibb.co/FqXHxpsB",
+      "cover_image": "https://i.ibb.co/FqXHxpsB/image.png",
       "images": [
         {
-          "url": "https://ibb.co/mrcxgRF0",
+          "url": "https://i.ibb.co/mrcxgRF0/image.png",
           "caption": "login page",
           "type": "screenshot"
         },
         {
-          "url": "https://ibb.co/CsPzNwtm",
+          "url": "https://i.ibb.co/CsPzNwtm/image.png",
           "caption": "",
           "type": "screenshot"
         },
         {
-          "url": "https://ibb.co/gbKB98YD",
+          "url": "https://i.ibb.co/gbKB98YD/image.png",
           "caption": "",
           "type": "screenshot"
         }
