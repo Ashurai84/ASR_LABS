@@ -173,7 +173,11 @@ export const ProjectEditor = ({ project, onSave, onCancel, onDelete }) => {
             cover_image: caseStudy.cover_image,
             my_role: caseStudy.my_role,
             outcome: caseStudy.outcome,
-            links: caseStudy.links,
+            links: {
+                github: meta.github || caseStudy.links?.github || '',
+                demo: meta.demo || caseStudy.links?.demo || '',
+                docs: caseStudy.links?.docs || ''
+            },
             tech_stack: {
                 frontend: caseStudy.tech_stack.frontend.split(',').map(s => s.trim()).filter(Boolean),
                 backend: caseStudy.tech_stack.backend.split(',').map(s => s.trim()).filter(Boolean),

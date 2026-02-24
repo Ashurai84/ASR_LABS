@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-02-24T09:51:58.666Z",
+    "generated_at": "2026-02-24T09:58:36.166Z",
     "version": "1.1",
     "system_health": "operational"
   },
@@ -35,7 +35,7 @@
       "health": {
         "score": 78,
         "previous_score": 78,
-        "last_calculated_at": "2026-02-24T09:51:58.661Z",
+        "last_calculated_at": "2026-02-24T09:58:36.162Z",
         "breakdown": {
           "activity": 100,
           "delivery": 40,
@@ -86,7 +86,7 @@
       "health": {
         "score": 51,
         "previous_score": 51,
-        "last_calculated_at": "2026-02-24T09:51:58.664Z",
+        "last_calculated_at": "2026-02-24T09:58:36.164Z",
         "breakdown": {
           "activity": 50,
           "delivery": 0,
@@ -96,8 +96,8 @@
         "change_reason": "Routine update"
       },
       "derived": {
-        "focus_score": 65,
-        "activity_level": "medium",
+        "focus_score": 85,
+        "activity_level": "high",
         "last_decision_date": "2026-02-24T00:00:00.000Z",
         "last_event_date": "2026-02-24T00:00:00.000Z"
       },
@@ -139,8 +139,8 @@
         ]
       },
       "links": {
-        "github": "",
-        "demo": "",
+        "github": "https://github.com/Ashurai84/Sugarsense",
+        "demo": "https://sugarsense-8hbjhcxti-ashurai84s-projects.vercel.app/",
         "docs": ""
       },
       "outcome": "Enabled secure, user-specific diabetes data management through authenticated APIs, delivered as a working prototype under hackathon constraints."
