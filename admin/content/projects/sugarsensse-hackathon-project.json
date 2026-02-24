@@ -4,7 +4,7 @@
   "outcome": "Enabled secure, user-specific diabetes data management through authenticated APIs, delivered as a working prototype under hackathon constraints.",
   "links": {
     "github": "https://github.com/Ashurai84/Sugarsense",
-    "demo": "https://sugarsense-8hbjhcxti-ashurai84s-projects.vercel.app/",
+    "demo": "https://sugarsense-topaz.vercel.app/",
     "docs": ""
   },
   "tech_stack": {
