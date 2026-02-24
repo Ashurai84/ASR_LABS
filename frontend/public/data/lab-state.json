@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-02-24T10:01:09.906Z",
+    "generated_at": "2026-02-24T10:01:46.791Z",
     "version": "1.1",
     "system_health": "operational"
   },
@@ -35,7 +35,7 @@
       "health": {
         "score": 78,
         "previous_score": 78,
-        "last_calculated_at": "2026-02-24T10:01:09.901Z",
+        "last_calculated_at": "2026-02-24T10:01:46.787Z",
         "breakdown": {
           "activity": 100,
           "delivery": 40,
@@ -86,7 +86,7 @@
       "health": {
         "score": 51,
         "previous_score": 51,
-        "last_calculated_at": "2026-02-24T10:01:09.903Z",
+        "last_calculated_at": "2026-02-24T10:01:46.789Z",
         "breakdown": {
           "activity": 50,
           "delivery": 0,
