@@ -106,8 +106,13 @@ function App() {
             >
               <div className="flex items-center gap-3">
                 <Book className={`w-4 h-4 transition-opacity duration-200 ${view === 'journal' && !selectedProjectId ? 'opacity-100 text-emerald-500' : 'opacity-50'}`} />
-                Journal
+                Global Journal
               </div>
+              {view === 'journal' && !selectedProjectId && (
+                <span className="text-[9px] font-mono text-zinc-400 bg-zinc-800 px-2 py-0.5 rounded-full">
+                  {Object.keys(labState.timeline_events).length}
+                </span>
+              )}
             </motion.button>
             <motion.div
               initial={{ opacity: 0 }}

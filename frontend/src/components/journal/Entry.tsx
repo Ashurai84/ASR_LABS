@@ -25,10 +25,10 @@ export const MajorEntry: React.FC<EntryProps> = ({ event, showProject }) => {
     return (
         <div className="relative py-2 group transition-all duration-300 ease-out hover:translate-x-1">
             {/* Timeline Connector - Subtle Glow */}
-            <div className="absolute left-0 translate-x-[-50%] top-6 bottom-[-16px] w-px bg-zinc-800 group-last:hidden transition-all duration-500 group-hover:bg-zinc-500" />
+            <div className="absolute left-0 translate-x-[-50%] top-6 bottom-[-16px] w-px bg-zinc-800 group-last:hidden transition-all duration-500 group-hover:bg-emerald-500/40 group-hover:shadow-[0_0_12px_rgba(16,185,129,0.4)]" />
 
             {/* Icon Marker */}
-            <div className="absolute left-0 translate-x-[-50%] top-2 p-1.5 bg-black z-10 box-content rounded-full ring-4 ring-black shadow-subtle group-hover:scale-110 transition-transform duration-300">
+            <div className="absolute left-0 translate-x-[-50%] top-2 p-1.5 bg-black z-10 box-content rounded-full ring-4 ring-black shadow-subtle group-hover:scale-110 group-hover:ring-emerald-500/10 transition-all duration-300">
                 {getEventIcon(event.type)}
             </div>
 
@@ -84,11 +84,11 @@ export const MinorEntry: React.FC<EntryProps> = ({ event, isLastInGroup, showPro
         <div className="relative py-1 group transition-all duration-300 ease-out hover:translate-x-1 cursor-default">
             {/* Timeline Connector */}
             {!isLastInGroup && (
-                <div className="absolute left-0 translate-x-[-50%] top-2 bottom-[-12px] w-px bg-zinc-800 transition-all duration-500 group-hover:bg-zinc-500" />
+                <div className="absolute left-0 translate-x-[-50%] top-2 bottom-[-12px] w-px bg-zinc-800 transition-all duration-500 group-hover:bg-emerald-500/40 group-hover:shadow-[0_0_12px_rgba(16,185,129,0.4)]" />
             )}
 
             {/* Icon Marker - Minimal Emoji */}
-            <div className="absolute left-0 translate-x-[-50%] top-1.5 p-1 bg-black z-10 box-content rounded-full ring-4 ring-black leading-none shadow-subtle group-hover:scale-110 transition-transform duration-300">
+            <div className="absolute left-0 translate-x-[-50%] top-1.5 p-1 bg-black z-10 box-content rounded-full ring-4 ring-black leading-none shadow-subtle group-hover:scale-110 group-hover:ring-emerald-500/10 transition-all duration-300">
                 {getEventIcon(event.type)}
             </div>
 

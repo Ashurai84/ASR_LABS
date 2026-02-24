@@ -54,19 +54,22 @@ export const JournalStream: React.FC<JournalStreamProps> = ({ events, projects, 
                 <ProjectHeader project={currentProject} />
             ) : (
                 <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, scale: 0.98, y: 10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="w-full pt-4 md:pt-6 pb-8 md:pb-10 mb-4 md:mb-6 border-b border-zinc-800/50 relative group"
+                    className="bg-zinc-900/30 w-full rounded-xl px-6 py-5 md:py-6 border border-zinc-800/50 mb-10 mt-2 md:mt-4 relative overflow-hidden group shadow-subtle"
                 >
-                    <div className="flex flex-col gap-4 relative z-10">
-                        <div className="flex items-center gap-3">
+                    {/* Background subtle glow */}
+                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+
+                    <div className="flex flex-col gap-3 relative z-10">
+                        <div className="flex items-center gap-2.5">
                             {/* Pulsing Dot */}
                             <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                             </span>
-                            <h1 className="text-sm md:text-base font-mono text-zinc-300 font-semibold tracking-wider uppercase">
+                            <h1 className="text-xs md:text-sm font-mono text-zinc-300 font-semibold tracking-wider uppercase">
                                 ASR Lab Workspace
                             </h1>
                         </div>
@@ -74,8 +77,8 @@ export const JournalStream: React.FC<JournalStreamProps> = ({ events, projects, 
                         <motion.p
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
-                            className="text-[15px] md:text-[16px] text-zinc-400 leading-relaxed font-sans max-w-2xl"
+                            transition={{ duration: 0.6, delay: 0.3 }}
+                            className="text-[14px] md:text-[15px] text-zinc-400 leading-relaxed font-sans max-w-2xl"
                         >
                             A live engineering journal documenting real-time architectural decisions, codebase evolution, and technical learning across all active projects.
                         </motion.p>
