@@ -1,0 +1,45 @@
+{
+  "cover_image": "https://ibb.co/FqXHxpsB",
+  "my_role": "Backend & database-management (Full-stack support)",
+  "outcome": "Enabled secure, user-specific diabetes data management through authenticated APIs, delivered as a working prototype under hackathon constraints.",
+  "links": {
+    "github": "",
+    "demo": "",
+    "docs": ""
+  },
+  "tech_stack": {
+    "frontend": [
+      "react",
+      "html",
+      "tailwind"
+    ],
+    "backend": [
+      "firebase"
+    ],
+    "devops": [
+      "Vercel"
+    ]
+  },
+  "contributions": [
+    "Implemented authentication to protect user-specific records",
+    "Integrated external APIs using documentation-driven approach",
+    "Supported end-to-end deployment and live demo readiness"
+  ],
+  "images": [
+    {
+      "url": "https://ibb.co/mrcxgRF0",
+      "caption": "login page",
+      "type": "screenshot"
+    },
+    {
+      "url": "https://ibb.co/CsPzNwtm",
+      "caption": "",
+      "type": "screenshot"
+    },
+    {
+      "url": "https://ibb.co/gbKB98YD",
+      "caption": "",
+      "type": "screenshot"
+    }
+  ]
+}

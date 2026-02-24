@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-02-24T06:24:05.106Z",
+    "generated_at": "2026-02-24T09:24:11.480Z",
     "version": "1.1",
     "system_health": "operational"
   },
@@ -35,7 +35,7 @@
       "health": {
         "score": 78,
         "previous_score": 78,
-        "last_calculated_at": "2026-02-24T06:24:05.103Z",
+        "last_calculated_at": "2026-02-24T09:24:11.473Z",
         "breakdown": {
           "activity": 100,
           "delivery": 40,
@@ -62,18 +62,104 @@
         "demo": "",
         "docs": ""
       }
+    },
+    {
+      "id": "sugarsensse-hackathon-project",
+      "name": "SugarSense",
+      "description": "SugarSense is a full-stack diabetes management platform designed to help users track health data and access personalized insights.",
+      "status": "paused",
+      "repository_url": "https://github.com/Ashurai84/Sugarsense",
+      "tags": [
+        "firebase",
+        "react",
+        "python",
+        "restApi",
+        "deployment",
+        "database-driven workflows"
+      ],
+      "timeline_event_ids": [
+        "5d9cc2ea-53d5-56c8-a08d-82b552456871",
+        "ca1a9f59-5d50-59f1-90f5-28986fc3a032",
+        "61ae69c6-aace-51a6-81c7-608e61841cff",
+        "3170081c-f7a6-5f18-8786-dcb60cc1c39e"
+      ],
+      "health": {
+        "score": 51,
+        "previous_score": 51,
+        "last_calculated_at": "2026-02-24T09:24:11.477Z",
+        "breakdown": {
+          "activity": 50,
+          "delivery": 0,
+          "stability": 80,
+          "decision_velocity": 100
+        },
+        "change_reason": "Routine update"
+      },
+      "derived": {
+        "focus_score": 45,
+        "activity_level": "medium",
+        "last_decision_date": "2026-02-24T00:00:00.000Z",
+        "last_event_date": "2026-02-24T00:00:00.000Z"
+      },
+      "cover_image": "https://ibb.co/FqXHxpsB",
+      "images": [
+        {
+          "url": "https://ibb.co/mrcxgRF0",
+          "caption": "login page",
+          "type": "screenshot"
+        },
+        {
+          "url": "https://ibb.co/CsPzNwtm",
+          "caption": "",
+          "type": "screenshot"
+        },
+        {
+          "url": "https://ibb.co/gbKB98YD",
+          "caption": "",
+          "type": "screenshot"
+        }
+      ],
+      "my_role": "Backend & database-management (Full-stack support)",
+      "contributions": [
+        "Implemented authentication to protect user-specific records",
+        "Integrated external APIs using documentation-driven approach",
+        "Supported end-to-end deployment and live demo readiness"
+      ],
+      "tech_stack": {
+        "frontend": [
+          "react",
+          "html",
+          "tailwind"
+        ],
+        "backend": [
+          "firebase"
+        ],
+        "devops": [
+          "Vercel"
+        ]
+      },
+      "links": {
+        "github": "",
+        "demo": "",
+        "docs": ""
+      },
+      "outcome": "Enabled secure, user-specific diabetes data management through authenticated APIs, delivered as a working prototype under hackathon constraints."
     }
   ],
   "timeline_index": [
     "c58a33a2-a0c7-557b-80d5-4f29bc136ce2",
+    "5d9cc2ea-53d5-56c8-a08d-82b552456871",
+    "ca1a9f59-5d50-59f1-90f5-28986fc3a032",
     "1dd2c6eb-b853-5098-aadd-315dc8be7eb2",
     "1d01da85-d8e7-5908-93b0-0c07079a6bbc",
     "a6393b7d-d8ad-5c33-a6a9-a7d75483518c",
+    "61ae69c6-aace-51a6-81c7-608e61841cff",
     "f5ca935f-6080-5002-a7dc-055306c21728",
     "51a764b4-7efb-53e7-9b0d-82553a30a715",
     "7d304b6f-aac5-5bfe-864a-bf4a897b8435",
     "160f61e1-031b-51e0-b758-387753fc8590",
-    "7f5db261-d9df-5edf-b552-4e3eabaa3ada"
+    "7f5db261-d9df-5edf-b552-4e3eabaa3ada",
+    "3170081c-f7a6-5f18-8786-dcb60cc1c39e"
   ],
   "timeline_events": {
     "51a764b4-7efb-53e7-9b0d-82553a30a715": {
@@ -277,6 +363,80 @@
       "derived": {
         "summary_text": "5 commits on 2026-02-16",
         "impact_score": 5
+      }
+    },
+    "5d9cc2ea-53d5-56c8-a08d-82b552456871": {
+      "id": "5d9cc2ea-53d5-56c8-a08d-82b552456871",
+      "project_id": "sugarsensse-hackathon-project",
+      "type": "decision",
+      "date": "2026-02-24T00:00:00.000Z",
+      "title": "Paused active development; keeping SugarSense as demo overview",
+      "details": {
+        "description": "Active feature development is paused. The project is being maintained as a demo overview to showcase current UX, core flows, and concept validation. Focus is now on presentation quality and stable demo experience instead of production integration."
+      },
+      "source": "manual",
+      "derived": {
+        "summary_text": "Active feature development is paused. The project is being maintained as a demo overview to showcase current UX, core flows, and concept validation. Focus is now on presentation quality and stable demo experience instead of production integration.",
+        "impact_score": 50
+      }
+    },
+    "ca1a9f59-5d50-59f1-90f5-28986fc3a032": {
+      "id": "ca1a9f59-5d50-59f1-90f5-28986fc3a032",
+      "project_id": "sugarsensse-hackathon-project",
+      "type": "pulse",
+      "date": "2026-02-24",
+      "title": "Active Day: 1 commits",
+      "source": "system",
+      "details": {
+        "commit_count": 1,
+        "lines_changed": 0,
+        "messages": [
+          "Add demo mode account flow and simplify hero logo; update README status"
+        ]
+      },
+      "derived": {
+        "summary_text": "1 commits on 2026-02-24",
+        "impact_score": 1
+      }
+    },
+    "61ae69c6-aace-51a6-81c7-608e61841cff": {
+      "id": "61ae69c6-aace-51a6-81c7-608e61841cff",
+      "project_id": "sugarsensse-hackathon-project",
+      "type": "pulse",
+      "date": "2026-02-21",
+      "title": "Active Day: 2 commits",
+      "source": "system",
+      "details": {
+        "commit_count": 2,
+        "lines_changed": 0,
+        "messages": [
+          "Remove 3D Product Viewer from README\n\nRemoved the 3D Product Viewer feature from the Diabetes-Friendly Store section.",
+          "Update live demo link in README.md"
+        ]
+      },
+      "derived": {
+        "summary_text": "2 commits on 2026-02-21",
+        "impact_score": 2
+      }
+    },
+    "3170081c-f7a6-5f18-8786-dcb60cc1c39e": {
+      "id": "3170081c-f7a6-5f18-8786-dcb60cc1c39e",
+      "project_id": "sugarsensse-hackathon-project",
+      "type": "pulse",
+      "date": "2025-12-01",
+      "title": "Active Day: 2 commits",
+      "source": "system",
+      "details": {
+        "commit_count": 2,
+        "lines_changed": 0,
+        "messages": [
+          "Add complete SugarSense project files",
+          "first commit"
+        ]
+      },
+      "derived": {
+        "summary_text": "2 commits on 2025-12-01",
+        "impact_score": 2
       }
     }
   },
