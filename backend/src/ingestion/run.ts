@@ -91,12 +91,15 @@ async function main() {
         projectPulses[p.projectId].push(p);
     }
 
+    const validManualEventIds = new Set<string>();
+
     // TODO: Convert 'significant' raw signals to Timeline Events (Decisions, Ships)
     // Timeline events are separate from Pulses (Architecture Section 4.1)
     // For each project, iterate raw manual signals
     for (const signal of allSignals) {
         if (signal.source === 'manual' || signal.source === 'deploy') {
             const eventId = signal.id || uuidv5(`${signal.projectId}-${signal.timestamp}`, TIMELINE_NAMESPACE);
+            validManualEventIds.add(eventId);
             if (!timelineEvents[eventId]) {
                 timelineEvents[eventId] = {
                     id: eventId,
@@ -111,7 +114,18 @@ async function main() {
                         impact_score: 50 // default, compute logic later
                     }
                 };
+            } else {
+                timelineEvents[eventId].title = signal.data.title || 'Untitled Event';
+                timelineEvents[eventId].details = signal.data.details || {};
+                timelineEvents[eventId].derived.summary_text = signal.data.details?.description || '';
             }
+        }
+    }
+
+    // Clean up stale manual events
+    for (const eventId of Object.keys(timelineEvents)) {
+        if ((timelineEvents[eventId].source === 'manual' || timelineEvents[eventId].source === 'deploy') && !validManualEventIds.has(eventId)) {
+            delete timelineEvents[eventId];
         }
     }
 
