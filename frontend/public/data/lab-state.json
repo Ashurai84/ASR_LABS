@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-03-06T11:16:02.004Z",
+    "generated_at": "2026-03-06T11:16:15.934Z",
     "version": "1.1",
     "system_health": "operational"
   },
   "derived": {
-    "current_focus_project_id": null,
+    "current_focus_project_id": "asr-lab",
     "global_health": 100
   },
   "projects": [
@@ -22,6 +22,7 @@
         "lab"
       ],
       "timeline_event_ids": [
+        "daf21b14-f8a5-5082-ba16-d8a3994b6b6b",
         "c58a33a2-a0c7-557b-80d5-4f29bc136ce2",
         "1dd2c6eb-b853-5098-aadd-315dc8be7eb2",
         "1d01da85-d8e7-5908-93b0-0c07079a6bbc",
@@ -30,22 +31,22 @@
         "7f5db261-d9df-5edf-b552-4e3eabaa3ada"
       ],
       "health": {
-        "score": 61,
+        "score": 68,
         "previous_score": 61,
-        "last_calculated_at": "2026-03-06T11:16:02.000Z",
+        "last_calculated_at": "2026-03-06T11:16:15.931Z",
         "breakdown": {
-          "activity": 75,
+          "activity": 100,
           "delivery": 20,
           "stability": 80,
           "decision_velocity": 80
         },
-        "change_reason": "Routine update"
+        "change_reason": "Increased development activity"
       },
       "derived": {
-        "focus_score": 0,
-        "activity_level": "idle",
+        "focus_score": 45,
+        "activity_level": "medium",
         "last_decision_date": "2026-02-15T00:00:00.000Z",
-        "last_event_date": "2026-02-24"
+        "last_event_date": "2026-03-06"
       },
       "images": [],
       "contributions": [],
@@ -83,7 +84,7 @@
       "health": {
         "score": 51,
         "previous_score": 51,
-        "last_calculated_at": "2026-03-06T11:16:02.001Z",
+        "last_calculated_at": "2026-03-06T11:16:15.933Z",
         "breakdown": {
           "activity": 50,
           "delivery": 0,
@@ -144,6 +145,7 @@
     }
   ],
   "timeline_index": [
+    "daf21b14-f8a5-5082-ba16-d8a3994b6b6b",
     "5d9cc2ea-53d5-56c8-a08d-82b552456871",
     "c58a33a2-a0c7-557b-80d5-4f29bc136ce2",
     "ca1a9f59-5d50-59f1-90f5-28986fc3a032",
@@ -382,6 +384,25 @@
       "derived": {
         "summary_text": "2 commits on 2025-12-01",
         "impact_score": 2
+      }
+    },
+    "daf21b14-f8a5-5082-ba16-d8a3994b6b6b": {
+      "id": "daf21b14-f8a5-5082-ba16-d8a3994b6b6b",
+      "project_id": "asr-lab",
+      "type": "pulse",
+      "date": "2026-03-06",
+      "title": "Active Day: 1 commits",
+      "source": "system",
+      "details": {
+        "commit_count": 1,
+        "lines_changed": 0,
+        "messages": [
+          "fix(ingestion): clean up stale manual events from timeline history"
+        ]
+      },
+      "derived": {
+        "summary_text": "1 commits on 2026-03-06",
+        "impact_score": 1
       }
     }
   },
