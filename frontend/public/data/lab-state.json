@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-03-06T11:16:15.934Z",
+    "generated_at": "2026-03-07T00:58:57.364Z",
     "version": "1.1",
     "system_health": "operational"
   },
   "derived": {
-    "current_focus_project_id": "asr-lab",
+    "current_focus_project_id": null,
     "global_health": 100
   },
   "projects": [
@@ -31,20 +31,20 @@
         "7f5db261-d9df-5edf-b552-4e3eabaa3ada"
       ],
       "health": {
-        "score": 68,
-        "previous_score": 61,
-        "last_calculated_at": "2026-03-06T11:16:15.931Z",
+        "score": 61,
+        "previous_score": 68,
+        "last_calculated_at": "2026-03-07T00:58:57.361Z",
         "breakdown": {
-          "activity": 100,
+          "activity": 75,
           "delivery": 20,
           "stability": 80,
           "decision_velocity": 80
         },
-        "change_reason": "Increased development activity"
+        "change_reason": "Decreased activity"
       },
       "derived": {
-        "focus_score": 45,
-        "activity_level": "medium",
+        "focus_score": 5,
+        "activity_level": "idle",
         "last_decision_date": "2026-02-15T00:00:00.000Z",
         "last_event_date": "2026-03-06"
       },
@@ -84,7 +84,7 @@
       "health": {
         "score": 51,
         "previous_score": 51,
-        "last_calculated_at": "2026-03-06T11:16:15.933Z",
+        "last_calculated_at": "2026-03-07T00:58:57.362Z",
         "breakdown": {
           "activity": 50,
           "delivery": 0,
