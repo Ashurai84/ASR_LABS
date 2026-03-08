@@ -1,11 +1,11 @@
 {
   "meta": {
-    "generated_at": "2026-03-08T19:43:54.931Z",
+    "generated_at": "2026-03-08T19:58:04.281Z",
     "version": "1.1",
     "system_health": "operational"
   },
   "derived": {
-    "current_focus_project_id": "asr-lab",
+    "current_focus_project_id": null,
     "global_health": 100
   },
   "projects": [
@@ -33,19 +33,19 @@
       ],
       "health": {
         "score": 61,
-        "previous_score": 51,
-        "last_calculated_at": "2026-03-08T19:43:54.927Z",
+        "previous_score": 61,
+        "last_calculated_at": "2026-03-08T19:58:04.278Z",
         "breakdown": {
           "activity": 75,
           "delivery": 20,
           "stability": 80,
           "decision_velocity": 80
         },
-        "change_reason": "Increased development activity"
+        "change_reason": "Routine update"
       },
       "derived": {
-        "focus_score": 63,
-        "activity_level": "medium",
+        "focus_score": 8,
+        "activity_level": "idle",
         "last_decision_date": "2026-02-15T00:00:00.000Z",
         "last_event_date": "2026-03-08"
       },
@@ -85,7 +85,7 @@
       "health": {
         "score": 51,
         "previous_score": 51,
-        "last_calculated_at": "2026-03-08T19:43:54.929Z",
+        "last_calculated_at": "2026-03-08T19:58:04.279Z",
         "breakdown": {
           "activity": 50,
           "delivery": 0,
@@ -325,10 +325,10 @@
       "project_id": "asr-lab",
       "type": "pulse",
       "date": "2026-02-21",
-      "title": "Active Day: 18 commits",
+      "title": "Active Day: 17 commits",
       "source": "system",
       "details": {
-        "commit_count": 18,
+        "commit_count": 17,
         "lines_changed": 0,
         "messages": [
           "fix(frontend): handle case where tags are incorrectly persisted as a string array",
@@ -347,12 +347,11 @@
           "style(frontend): elegantly restructure tool cards",
           "style(frontend): elegantly restructure tool cards",
           "style(frontend): elegantly restructure tool cards",
-          "style(frontend): elegantly restructure tool cards",
           "style(frontend): elegantly restructure tool cards"
         ]
       },
       "derived": {
-        "summary_text": "18 commits on 2026-02-21",
+        "summary_text": "17 commits on 2026-02-21",
         "impact_score": 10
       }
     },
@@ -458,6 +457,12 @@
     }
   ],
   "notes": [
+    {
+      "id": "dhwani-ai",
+      "title": "Dhwani.ai",
+      "date": "2026-03-08",
+      "content": "## Banking That Listens to Bharat\n\nDhwani.ai is an AI-powered voice banking assistant that speaks Indian languages — Hindi, Tamil, Telugu, Bengali, Marathi, and English. No menus. No typing. Just speak.\n\n---\n\n## The Problem\n\n- **700+ million Indians** prefer voice over typing\n- Rural bank customers struggle with English-only interfaces\n- Call centers can't scale to handle regional languages\n- Elderly users find app navigation frustrating\n\n---\n\n## The Solution\n\nA voice-first banking assistant where users speak naturally in their language and receive instant voice responses. Say \"Mujhe loan chahiye\" in Hindi or \"எனக்கு கடன் வேண்டும்\" in Tamil — Dhwani understands.\n\n---\n\n## How It Works\n\n```\n🎤 User speaks\n    ↓\n🔊 Sarvam STT transcribes (saarika:v2.5)\n    ↓\n🔒 PII auto-redacted (Aadhaar, phone, email)\n    ↓\n🧠 Groq AI processes (Llama 3.3 70B)\n    ↓\n🗣️ Sarvam TTS responds (bulbul:v3)\n    ↓\n🎧 User hears natural voice response\n```\n\n---\n\n## What Makes It Special\n\n| Feature | Why It Matters |\n|---------|----------------|\n| **6 Indian Languages** | Real multilingual — Hindi, Tamil, Telugu, Bengali, Marathi, English |\n| **Sub-4 second responses** | Groq's speed makes it feel like talking to a human |\n| **Privacy-first** | Aadhaar, phone numbers auto-masked before AI sees them |\n| **Compliance-ready** | All conversations logged, sensitive queries flagged for human review |\n| **Voice-only UX** | No typing needed — accessibility for all literacy levels |\n\n---\n\n## Tech Stack\n\n- **Voice AI**: Sarvam AI — India's best speech models\n- **LLM**: Groq AI — Llama 3.3 70B at insane inference speed\n- **Backend**: Python 3.11+, FastAPI, SQLite\n- **Security**: PII redaction, audit trails, human review flagging\n\n---\n\n## Use Cases\n\n1. **Bank Call Centers** — Automate customer queries with AI that speaks their language\n2. **Mobile Banking** — Voice-enabled banking for users who prefer speaking over typing\n3. **Branch Kiosks** — Self-service voice assistants at bank branches\n4. **Rural Outreach** — Banking access for users with limited literacy\n\n---\n\n## Sample Interactions\n\n| Language | User Says | AI Understands |\n|----------|-----------|----------------|\n| Hindi | \"Mujhe home loan chahiye\" | Home loan inquiry |\n| Tamil | \"எனக்கு கடன் வேண்டும்\" | Loan information request |\n| Telugu | \"నాకు బ్యాలెన్స్ చెక్ చేయాలి\" | Balance check |\n| Bengali | \"আমার অ্যাকাউন্ট খুলতে চাই\" | Account opening |\n| Marathi | \"मला FD rates हवे आहेत\" | FD rate inquiry |\n\n---\n\n## Performance Specs\n\n| Parameter | Value | Purpose |\n|-----------|-------|---------|\n| STT Timeout | 8 sec | Prevents hanging on bad audio |\n| AI Timeout | 3.5 sec | Fast fallback to human agent |\n| TTS Speed | 1.25x | Natural, brisk conversation |\n| Max Tokens | 400 | Concise, relevant responses |\n\n---\n\n## Links\n\n- **GitHub**: https://github.com/Ashurai84/Dhwani.ai\n\n\n---\n\n## Built\n\nMarch 9, 2026 — Rapid prototype demonstrating voice-first banking UX for Indian languages. One evening build."
+    },
     {
       "id": "karmic",
       "title": "KARMIC",
