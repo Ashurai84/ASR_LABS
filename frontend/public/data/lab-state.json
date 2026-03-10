@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-03-09T01:03:20.490Z",
+    "generated_at": "2026-03-10T00:58:11.879Z",
     "version": "1.1",
     "system_health": "operational"
   },
@@ -32,20 +32,20 @@
         "7f5db261-d9df-5edf-b552-4e3eabaa3ada"
       ],
       "health": {
-        "score": 61,
+        "score": 53,
         "previous_score": 61,
-        "last_calculated_at": "2026-03-09T01:03:20.487Z",
+        "last_calculated_at": "2026-03-10T00:58:11.876Z",
         "breakdown": {
-          "activity": 75,
+          "activity": 50,
           "delivery": 20,
           "stability": 80,
           "decision_velocity": 80
         },
-        "change_reason": "Routine update"
+        "change_reason": "Decreased activity"
       },
       "derived": {
-        "focus_score": 13,
-        "activity_level": "low",
+        "focus_score": 9,
+        "activity_level": "idle",
         "last_decision_date": "2026-02-15T00:00:00.000Z",
         "last_event_date": "2026-03-08"
       },
@@ -83,16 +83,16 @@
         "3170081c-f7a6-5f18-8786-dcb60cc1c39e"
       ],
       "health": {
-        "score": 51,
+        "score": 36,
         "previous_score": 51,
-        "last_calculated_at": "2026-03-09T01:03:20.488Z",
+        "last_calculated_at": "2026-03-10T00:58:11.877Z",
         "breakdown": {
-          "activity": 50,
+          "activity": 0,
           "delivery": 0,
           "stability": 80,
           "decision_velocity": 100
         },
-        "change_reason": "Routine update"
+        "change_reason": "Decreased activity"
       },
       "derived": {
         "focus_score": 0,
