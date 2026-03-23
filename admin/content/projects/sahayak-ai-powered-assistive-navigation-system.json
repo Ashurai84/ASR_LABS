@@ -1,0 +1,64 @@
+{
+  "cover_image": "https://capsule-render.vercel.app/api?type=waving&color=gradient&height=250&section=header&text=Sahayak&fontSize=80&fontAlignY=35&desc=AI-Powered%20Assistive%20Navigation&descAlignY=55&descAlign=50",
+  "my_role": "Co-Creator & Full Stack Engineer",
+  "outcome": "Won the \"Best Innovation Award\" by successfully delivering a working, low-latency prototype of a \"virtual eye\" navigation assistant. The application empowers visually impaired users to navigate urban environments independently and safely by executing real-time AI computer vision directly on their mobile edge devices without relying on slow server roundtrips.",
+  "links": {
+    "github": "https://github.com/Ashurai84/Sahayak-AI-Powered-Assistive-Navigation-System",
+    "demo": "https://project-silk-nine-39.vercel.app/",
+    "docs": ""
+  },
+  "tech_stack": {
+    "frontend": [
+      "React 18",
+      "TypeScript",
+      "TailwindCSS",
+      "Vite",
+      "TensorFlow.js",
+      "Leaflet",
+      "Web Speech API"
+    ],
+    "backend": [
+      "PostgreSQ",
+      "Realtime DB",
+      "MapmyIndia API",
+      "Twilio",
+      "google gemini engine"
+    ],
+    "devops": [
+      "Vercel",
+      "Git",
+      "GitHub"
+    ]
+  },
+  "contributions": [
+    "Engineered a Voice-First interface using Web Speech API for 100% hands-free",
+    "Integrated TensorFlow.js (COCO-SSD) to perform offline, real-time object detection"
+  ],
+  "images": [
+    {
+      "url": "https://i.ibb.co/0vGs73W/Screenshot-2026-03-23-at-10-30-49-AM.png",
+      "caption": "main page ",
+      "type": "screenshot"
+    },
+    {
+      "url": "https://i.ibb.co/HTNy3b9f/Screenshot-2026-03-23-at-10-30-40-AM.png",
+      "caption": "setting page ",
+      "type": "screenshot"
+    },
+    {
+      "url": "https://i.ibb.co/M5hbw9hH/Screenshot-2026-03-23-at-10-30-34-AM.png",
+      "caption": "SOS page ",
+      "type": "screenshot"
+    },
+    {
+      "url": "https://i.ibb.co/9Hm3x81X/Screenshot-2026-03-23-at-10-30-55-AM.png",
+      "caption": "Location page ",
+      "type": "screenshot"
+    },
+    {
+      "url": "https://i.ibb.co/yFPyxPDg/Screenshot-2026-03-23-at-10-32-47-AM.png",
+      "caption": "Camera detection ",
+      "type": "screenshot"
+    }
+  ]
+}

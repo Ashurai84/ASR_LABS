@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-03-23T02:38:28.547Z",
+    "generated_at": "2026-03-23T05:18:26.514Z",
     "version": "1.1",
     "system_health": "operational"
   },
@@ -35,7 +35,7 @@
       "health": {
         "score": 47,
         "previous_score": 47,
-        "last_calculated_at": "2026-03-23T02:38:28.543Z",
+        "last_calculated_at": "2026-03-23T05:18:26.510Z",
         "breakdown": {
           "activity": 50,
           "delivery": 20,
@@ -64,6 +64,110 @@
       }
     },
     {
+      "id": "sahayak-ai-powered-assistive-navigation-system",
+      "name": "Sahayak-AI-Powered-Assistive-Navigation-System",
+      "description": "Core project mission and technical overview... Sahayak (meaning \"Helper\" in Hindi) is a next-generation mobility and navigation assistant designed exclusively for the visually impaired. Relying securely on real-time computer vision and voice commands, Sahayak acts as a \"virtual eye\"—solving the very real danger of navigating unpredictable urban Indian environments. By fusing Edge Computing (AI) with High-Precision Maps, it promotes true independence.",
+      "status": "archived",
+      "repository_url": "https://github.com/Ashurai84/Sahayak-AI-Powered-Assistive-Navigation-System",
+      "tags": [
+        "React 18",
+        "TypeScript",
+        "TailwindCSS",
+        "Vite",
+        "TensorFlow.js",
+        "Leaflet",
+        "Supabase",
+        "Web Speech API"
+      ],
+      "timeline_event_ids": [
+        "16c62721-1b5c-57a7-ac99-e158616750c3",
+        "f9265299-349a-5ea3-a744-ed5f24fb473f",
+        "9f2c2376-6d2d-5ff3-bf3e-b15fb706863b",
+        "fa2f572b-1117-5dc6-9693-09ad9d97e455",
+        "16f5e85f-87f7-5982-803b-358a818266af"
+      ],
+      "health": {
+        "score": 41,
+        "previous_score": 41,
+        "last_calculated_at": "2026-03-23T05:18:26.512Z",
+        "breakdown": {
+          "activity": 50,
+          "delivery": 0,
+          "stability": 80,
+          "decision_velocity": 50
+        },
+        "change_reason": "Routine update"
+      },
+      "derived": {
+        "focus_score": 10,
+        "activity_level": "idle",
+        "last_decision_date": "2026-02-09T00:00:00.000Z",
+        "last_event_date": "2026-08-02T00:00:00.000Z"
+      },
+      "cover_image": "https://capsule-render.vercel.app/api?type=waving&color=gradient&height=250&section=header&text=Sahayak&fontSize=80&fontAlignY=35&desc=AI-Powered%20Assistive%20Navigation&descAlignY=55&descAlign=50",
+      "images": [
+        {
+          "url": "https://i.ibb.co/0vGs73W/Screenshot-2026-03-23-at-10-30-49-AM.png",
+          "caption": "main page ",
+          "type": "screenshot"
+        },
+        {
+          "url": "https://i.ibb.co/HTNy3b9f/Screenshot-2026-03-23-at-10-30-40-AM.png",
+          "caption": "setting page ",
+          "type": "screenshot"
+        },
+        {
+          "url": "https://i.ibb.co/M5hbw9hH/Screenshot-2026-03-23-at-10-30-34-AM.png",
+          "caption": "SOS page ",
+          "type": "screenshot"
+        },
+        {
+          "url": "https://i.ibb.co/9Hm3x81X/Screenshot-2026-03-23-at-10-30-55-AM.png",
+          "caption": "Location page ",
+          "type": "screenshot"
+        },
+        {
+          "url": "https://i.ibb.co/yFPyxPDg/Screenshot-2026-03-23-at-10-32-47-AM.png",
+          "caption": "Camera detection ",
+          "type": "screenshot"
+        }
+      ],
+      "my_role": "Co-Creator & Full Stack Engineer",
+      "contributions": [
+        "Engineered a Voice-First interface using Web Speech API for 100% hands-free",
+        "Integrated TensorFlow.js (COCO-SSD) to perform offline, real-time object detection"
+      ],
+      "tech_stack": {
+        "frontend": [
+          "React 18",
+          "TypeScript",
+          "TailwindCSS",
+          "Vite",
+          "TensorFlow.js",
+          "Leaflet",
+          "Web Speech API"
+        ],
+        "backend": [
+          "PostgreSQ",
+          "Realtime DB",
+          "MapmyIndia API",
+          "Twilio",
+          "google gemini engine"
+        ],
+        "devops": [
+          "Vercel",
+          "Git",
+          "GitHub"
+        ]
+      },
+      "links": {
+        "github": "https://github.com/Ashurai84/Sahayak-AI-Powered-Assistive-Navigation-System",
+        "demo": "https://project-silk-nine-39.vercel.app/",
+        "docs": ""
+      },
+      "outcome": "Won the \"Best Innovation Award\" by successfully delivering a working, low-latency prototype of a \"virtual eye\" navigation assistant. The application empowers visually impaired users to navigate urban environments independently and safely by executing real-time AI computer vision directly on their mobile edge devices without relying on slow server roundtrips."
+    },
+    {
       "id": "sugarsensse-hackathon-project",
       "name": "SugarSense",
       "description": "SugarSense is a full-stack diabetes management platform designed to help users track health data and access personalized insights.",
@@ -86,7 +190,7 @@
       "health": {
         "score": 32,
         "previous_score": 32,
-        "last_calculated_at": "2026-03-23T02:38:28.544Z",
+        "last_calculated_at": "2026-03-23T05:18:26.512Z",
         "breakdown": {
           "activity": 0,
           "delivery": 0,
@@ -147,6 +251,8 @@
     }
   ],
   "timeline_index": [
+    "16c62721-1b5c-57a7-ac99-e158616750c3",
+    "f9265299-349a-5ea3-a744-ed5f24fb473f",
     "c7183e38-91de-5c7e-8b67-8d86870702ed",
     "0959b17f-9571-571d-84f1-d02781ddcae0",
     "daf21b14-f8a5-5082-ba16-d8a3994b6b6b",
@@ -158,6 +264,9 @@
     "a6393b7d-d8ad-5c33-a6a9-a7d75483518c",
     "61ae69c6-aace-51a6-81c7-608e61841cff",
     "160f61e1-031b-51e0-b758-387753fc8590",
+    "9f2c2376-6d2d-5ff3-bf3e-b15fb706863b",
+    "fa2f572b-1117-5dc6-9693-09ad9d97e455",
+    "16f5e85f-87f7-5982-803b-358a818266af",
     "7f5db261-d9df-5edf-b552-4e3eabaa3ada",
     "3170081c-f7a6-5f18-8786-dcb60cc1c39e"
   ],
@@ -436,6 +545,95 @@
       },
       "derived": {
         "summary_text": "1 commits on 2026-03-19",
+        "impact_score": 1
+      }
+    },
+    "9f2c2376-6d2d-5ff3-bf3e-b15fb706863b": {
+      "id": "9f2c2376-6d2d-5ff3-bf3e-b15fb706863b",
+      "project_id": "sahayak-ai-powered-assistive-navigation-system",
+      "type": "decision",
+      "date": "2026-02-09T00:00:00.000Z",
+      "title": "Shifted AI Inference to the Edge (Browser)",
+      "details": {
+        "description": "Navigating urban environments requires split-second hazard alerts. Relying on a backend API for computer vision would introduce dangerous latency (network roundtrips). We decided to run the coco-ssd model directly on the user's device using TensorFlow.js in the browser.\n\n> Outcome: Achieved near-zero latency for object detection and auditory warnings, keeping users safe offline or on poor network connections."
+      },
+      "source": "manual",
+      "derived": {
+        "summary_text": "Navigating urban environments requires split-second hazard alerts. Relying on a backend API for computer vision would introduce dangerous latency (network roundtrips). We decided to run the coco-ssd model directly on the user's device using TensorFlow.js in the browser.\n\n> Outcome: Achieved near-zero latency for object detection and auditory warnings, keeping users safe offline or on poor network connections.",
+        "impact_score": 50
+      }
+    },
+    "16c62721-1b5c-57a7-ac99-e158616750c3": {
+      "id": "16c62721-1b5c-57a7-ac99-e158616750c3",
+      "project_id": "sahayak-ai-powered-assistive-navigation-system",
+      "type": "milestone",
+      "date": "2026-08-02T00:00:00.000Z",
+      "title": "Won Best Innovation Award",
+      "details": {
+        "description": "Successfully delivered a working prototype of a voice-guided, complete assistive navigation system for the visually impaired. Integrated TensorFlow.js for in-browser, offline hazard detection and MapmyIndia for exact hyper-local routing\n\n> Outcome: Proved that low-latency AI inference at the mobile edge is a viable, life-saving solution for real-time pedestrian navigation, resulting in the Best Innovation Award."
+      },
+      "source": "manual",
+      "derived": {
+        "summary_text": "Successfully delivered a working prototype of a voice-guided, complete assistive navigation system for the visually impaired. Integrated TensorFlow.js for in-browser, offline hazard detection and MapmyIndia for exact hyper-local routing\n\n> Outcome: Proved that low-latency AI inference at the mobile edge is a viable, life-saving solution for real-time pedestrian navigation, resulting in the Best Innovation Award.",
+        "impact_score": 50
+      }
+    },
+    "f9265299-349a-5ea3-a744-ed5f24fb473f": {
+      "id": "f9265299-349a-5ea3-a744-ed5f24fb473f",
+      "project_id": "sahayak-ai-powered-assistive-navigation-system",
+      "type": "pulse",
+      "date": "2026-03-22",
+      "title": "Active Day: 2 commits",
+      "source": "system",
+      "details": {
+        "commit_count": 2,
+        "lines_changed": 0,
+        "messages": [
+          "Fix typing SVG formatting and add live demo application visual walkthrough",
+          "Migrate to showcase mode: Remove source code and update README with stunning visuals"
+        ]
+      },
+      "derived": {
+        "summary_text": "2 commits on 2026-03-22",
+        "impact_score": 2
+      }
+    },
+    "fa2f572b-1117-5dc6-9693-09ad9d97e455": {
+      "id": "fa2f572b-1117-5dc6-9693-09ad9d97e455",
+      "project_id": "sahayak-ai-powered-assistive-navigation-system",
+      "type": "pulse",
+      "date": "2026-02-08",
+      "title": "Active Day: 2 commits",
+      "source": "system",
+      "details": {
+        "commit_count": 2,
+        "lines_changed": 0,
+        "messages": [
+          "feat: enhance object detection with distance estimation and optimize navigation map",
+          "Initial full project commit"
+        ]
+      },
+      "derived": {
+        "summary_text": "2 commits on 2026-02-08",
+        "impact_score": 2
+      }
+    },
+    "16f5e85f-87f7-5982-803b-358a818266af": {
+      "id": "16f5e85f-87f7-5982-803b-358a818266af",
+      "project_id": "sahayak-ai-powered-assistive-navigation-system",
+      "type": "pulse",
+      "date": "2026-02-07",
+      "title": "Active Day: 1 commits",
+      "source": "system",
+      "details": {
+        "commit_count": 1,
+        "lines_changed": 0,
+        "messages": [
+          "Initial commit"
+        ]
+      },
+      "derived": {
+        "summary_text": "1 commits on 2026-02-07",
         "impact_score": 1
       }
     }
