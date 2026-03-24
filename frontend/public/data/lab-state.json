@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-03-23T05:18:44.608Z",
+    "generated_at": "2026-03-24T01:00:33.336Z",
     "version": "1.1",
     "system_health": "operational"
   },
@@ -36,7 +36,7 @@
       "health": {
         "score": 47,
         "previous_score": 47,
-        "last_calculated_at": "2026-03-23T05:18:44.605Z",
+        "last_calculated_at": "2026-03-24T01:00:33.332Z",
         "breakdown": {
           "activity": 50,
           "delivery": 20,
@@ -46,8 +46,8 @@
         "change_reason": "Routine update"
       },
       "derived": {
-        "focus_score": 12,
-        "activity_level": "low",
+        "focus_score": 7,
+        "activity_level": "idle",
         "last_decision_date": "2026-02-15T00:00:00.000Z",
         "last_event_date": "2026-03-23"
       },
@@ -91,7 +91,7 @@
       "health": {
         "score": 41,
         "previous_score": 41,
-        "last_calculated_at": "2026-03-23T05:18:44.606Z",
+        "last_calculated_at": "2026-03-24T01:00:33.333Z",
         "breakdown": {
           "activity": 50,
           "delivery": 0,
@@ -101,7 +101,7 @@
         "change_reason": "Routine update"
       },
       "derived": {
-        "focus_score": 20,
+        "focus_score": 12,
         "activity_level": "low",
         "last_decision_date": "2026-02-09T00:00:00.000Z",
         "last_event_date": "2026-08-02T00:00:00.000Z"
@@ -192,7 +192,7 @@
       "health": {
         "score": 32,
         "previous_score": 32,
-        "last_calculated_at": "2026-03-23T05:18:44.607Z",
+        "last_calculated_at": "2026-03-24T01:00:33.334Z",
         "breakdown": {
           "activity": 0,
           "delivery": 0,
