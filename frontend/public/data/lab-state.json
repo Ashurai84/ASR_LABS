@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-03-26T02:42:18.340Z",
+    "generated_at": "2026-03-27T01:10:36.479Z",
     "version": "1.1",
     "system_health": "operational"
   },
@@ -36,7 +36,7 @@
       "health": {
         "score": 47,
         "previous_score": 47,
-        "last_calculated_at": "2026-03-26T02:42:18.336Z",
+        "last_calculated_at": "2026-03-27T01:10:36.476Z",
         "breakdown": {
           "activity": 50,
           "delivery": 20,
@@ -46,7 +46,7 @@
         "change_reason": "Routine update"
       },
       "derived": {
-        "focus_score": 3,
+        "focus_score": 2,
         "activity_level": "idle",
         "last_decision_date": "2026-02-15T00:00:00.000Z",
         "last_event_date": "2026-03-23"
@@ -91,7 +91,7 @@
       "health": {
         "score": 41,
         "previous_score": 41,
-        "last_calculated_at": "2026-03-26T02:42:18.338Z",
+        "last_calculated_at": "2026-03-27T01:10:36.477Z",
         "breakdown": {
           "activity": 50,
           "delivery": 0,
@@ -101,7 +101,7 @@
         "change_reason": "Routine update"
       },
       "derived": {
-        "focus_score": 7,
+        "focus_score": 5,
         "activity_level": "idle",
         "last_decision_date": "2026-02-09T00:00:00.000Z",
         "last_event_date": "2026-08-02T00:00:00.000Z"
@@ -190,14 +190,14 @@
         "3170081c-f7a6-5f18-8786-dcb60cc1c39e"
       ],
       "health": {
-        "score": 32,
+        "score": 26,
         "previous_score": 32,
-        "last_calculated_at": "2026-03-26T02:42:18.338Z",
+        "last_calculated_at": "2026-03-27T01:10:36.478Z",
         "breakdown": {
           "activity": 0,
           "delivery": 0,
           "stability": 80,
-          "decision_velocity": 80
+          "decision_velocity": 50
         },
         "change_reason": "Routine update"
       },
