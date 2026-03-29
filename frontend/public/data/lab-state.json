@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-03-28T02:34:00.552Z",
+    "generated_at": "2026-03-29T01:13:48.279Z",
     "version": "1.1",
     "system_health": "operational"
   },
@@ -36,7 +36,7 @@
       "health": {
         "score": 47,
         "previous_score": 47,
-        "last_calculated_at": "2026-03-28T02:34:00.546Z",
+        "last_calculated_at": "2026-03-29T01:13:48.275Z",
         "breakdown": {
           "activity": 50,
           "delivery": 20,
@@ -46,7 +46,7 @@
         "change_reason": "Routine update"
       },
       "derived": {
-        "focus_score": 2,
+        "focus_score": 1,
         "activity_level": "idle",
         "last_decision_date": "2026-02-15T00:00:00.000Z",
         "last_event_date": "2026-03-23"
@@ -91,7 +91,7 @@
       "health": {
         "score": 41,
         "previous_score": 41,
-        "last_calculated_at": "2026-03-28T02:34:00.549Z",
+        "last_calculated_at": "2026-03-29T01:13:48.277Z",
         "breakdown": {
           "activity": 50,
           "delivery": 0,
@@ -101,7 +101,7 @@
         "change_reason": "Routine update"
       },
       "derived": {
-        "focus_score": 5,
+        "focus_score": 1,
         "activity_level": "idle",
         "last_decision_date": "2026-02-09T00:00:00.000Z",
         "last_event_date": "2026-08-02T00:00:00.000Z"
@@ -192,7 +192,7 @@
       "health": {
         "score": 26,
         "previous_score": 26,
-        "last_calculated_at": "2026-03-28T02:34:00.550Z",
+        "last_calculated_at": "2026-03-29T01:13:48.277Z",
         "breakdown": {
           "activity": 0,
           "delivery": 0,
