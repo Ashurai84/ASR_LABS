@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-04-10T02:52:59.664Z",
+    "generated_at": "2026-04-11T01:09:29.470Z",
     "version": "1.1",
     "system_health": "operational"
   },
@@ -36,7 +36,7 @@
       "health": {
         "score": 32,
         "previous_score": 32,
-        "last_calculated_at": "2026-04-10T02:52:59.659Z",
+        "last_calculated_at": "2026-04-11T01:09:29.467Z",
         "breakdown": {
           "activity": 0,
           "delivery": 20,
@@ -89,14 +89,14 @@
         "16f5e85f-87f7-5982-803b-358a818266af"
       ],
       "health": {
-        "score": 26,
+        "score": 20,
         "previous_score": 26,
-        "last_calculated_at": "2026-04-10T02:52:59.661Z",
+        "last_calculated_at": "2026-04-11T01:09:29.468Z",
         "breakdown": {
           "activity": 0,
           "delivery": 0,
           "stability": 80,
-          "decision_velocity": 50
+          "decision_velocity": 20
         },
         "change_reason": "Routine update"
       },
@@ -192,7 +192,7 @@
       "health": {
         "score": 26,
         "previous_score": 26,
-        "last_calculated_at": "2026-04-10T02:52:59.662Z",
+        "last_calculated_at": "2026-04-11T01:09:29.469Z",
         "breakdown": {
           "activity": 0,
           "delivery": 0,
