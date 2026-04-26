@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-04-25T02:47:59.313Z",
+    "generated_at": "2026-04-26T01:23:58.921Z",
     "version": "1.1",
     "system_health": "operational"
   },
@@ -36,7 +36,7 @@
       "health": {
         "score": 26,
         "previous_score": 26,
-        "last_calculated_at": "2026-04-25T02:47:59.310Z",
+        "last_calculated_at": "2026-04-26T01:23:58.918Z",
         "breakdown": {
           "activity": 0,
           "delivery": 20,
@@ -91,7 +91,7 @@
       "health": {
         "score": 20,
         "previous_score": 20,
-        "last_calculated_at": "2026-04-25T02:47:59.311Z",
+        "last_calculated_at": "2026-04-26T01:23:58.919Z",
         "breakdown": {
           "activity": 0,
           "delivery": 0,
@@ -190,14 +190,14 @@
         "3170081c-f7a6-5f18-8786-dcb60cc1c39e"
       ],
       "health": {
-        "score": 26,
+        "score": 20,
         "previous_score": 26,
-        "last_calculated_at": "2026-04-25T02:47:59.312Z",
+        "last_calculated_at": "2026-04-26T01:23:58.920Z",
         "breakdown": {
           "activity": 0,
           "delivery": 0,
           "stability": 80,
-          "decision_velocity": 50
+          "decision_velocity": 20
         },
         "change_reason": "Routine update"
       },
