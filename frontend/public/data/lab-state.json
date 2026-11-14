@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-11-13T05:46:40.260Z",
+    "generated_at": "2026-11-14T03:48:10.695Z",
     "version": "1.1",
     "system_health": "operational"
   },
@@ -36,7 +36,7 @@
       "health": {
         "score": 26,
         "previous_score": 26,
-        "last_calculated_at": "2026-11-13T05:46:40.256Z",
+        "last_calculated_at": "2026-11-14T03:48:10.693Z",
         "breakdown": {
           "activity": 0,
           "delivery": 20,
@@ -91,7 +91,7 @@
       "health": {
         "score": 20,
         "previous_score": 20,
-        "last_calculated_at": "2026-11-13T05:46:40.258Z",
+        "last_calculated_at": "2026-11-14T03:48:10.694Z",
         "breakdown": {
           "activity": 0,
           "delivery": 0,
@@ -192,7 +192,7 @@
       "health": {
         "score": 20,
         "previous_score": 20,
-        "last_calculated_at": "2026-11-13T05:46:40.259Z",
+        "last_calculated_at": "2026-11-14T03:48:10.694Z",
         "breakdown": {
           "activity": 0,
           "delivery": 0,
